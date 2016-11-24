@@ -6,7 +6,6 @@ $( document ).on('turbolinks:load', function() {
 	var context = canvas.getContext('2d');
 	// snap = 20; 
 
-
 // CLEARING
       document.getElementById('clear').addEventListener('click', function() {
         context.beginPath();
@@ -410,7 +409,7 @@ $('#z-img').on('click', function(){
 		};
 	};
 
-
+fabric.Object.prototype.hasControls = false;
 
 
 // SNAPPING
