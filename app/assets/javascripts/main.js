@@ -2,10 +2,20 @@ $( document ).on('turbolinks:load', function() {
 	  console.log("It works on each visit!")
 
 	// create a wrapper around native canvas element (with id="c")
-	var canvas = new fabric.Canvas('c');
+	var canvas = new fabric.Canvas('canvas');
+
+	var imgElement = document.getElementById('a-img');
+	var imgInstance = new fabric.Image(imgElement, {
+	  left: 5,
+	  top: 350
+	});
+
+$('#a-img').on('click', function(){
+  canvas.add(imgInstance);
+})
 
 	// create a rectangle object
-	var rectA = new fabric.Rect({
+	var a = new fabric.Rect({
 	  left: 100,
 	  top: 100,
 	  fill: 'red',
