@@ -1,7 +1,7 @@
 $( document ).on('turbolinks:load', function() {
 	  console.log("It works on each visit!")
 
-	// create a wrapper around native canvas element (with id="c")
+	// create a wrapper around native canvas element (with id="canvas")
 	var canvas = new fabric.Canvas('canvas');
 
 	var aElement = document.getElementById('a-img');
@@ -217,43 +217,43 @@ $('#z-img').on('click', function(){
 
 
 
-
-	// create a rectangle object
-	var a = new fabric.Rect({
-	  left: 100,
-	  top: 100,
-	  fill: 'red',
-	  width: 20,
-	  height: 20
-	});
-
-	rectA.toObject = function () {
+	aInstance.toObject = function () {
 		return {
 			letter: "A",
 			left: this.left
 		};
 	};
 
-	// create a rectangle object
-	var rectB = new fabric.Rect({
-	  left: 200,
-	  top: 200,
-	  fill: 'green',
-	  width: 20,
-	  height: 20
-	});
+	bInstance.toObject = function () {
+		return {
+			letter: "B",
+			left: this.left
+		};
+	};
 
-	rectB.toObject = function () {
+	cInstance.toObject = function () {
+		return {
+			letter: "B",
+			left: this.left
+		};
+	};
+
+	dInstance.toObject = function () {
+		return {
+			letter: "B",
+			left: this.left
+		};
+	};
+
+	eInstance.toObject = function () {
 		return {
 			letter: "B",
 			left: this.left
 		};
 	};
 	
-	// "add" rectangle onto canvas
-	canvas.add(rectA, rectB);
 
-	rectA.on('selected', newAjax);
+	aInstance.on('selected', newAjax);
 
 
 function newAjax(event) {
