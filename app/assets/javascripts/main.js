@@ -3,14 +3,21 @@ $( document ).on('turbolinks:load', function() {
 
 	// create a wrapper around native canvas element (with id="canvas")
 	var canvas = new fabric.Canvas('canvas');
-	var context = canvas.getContext('2d'),
-	snap = 20; 
+	var context = canvas.getContext('2d');
+	// snap = 20; 
+
+
+// CLEARING
+      document.getElementById('clear').addEventListener('click', function() {
+        context.clearRect(0, 0, canvas.width, canvas.height);
+        context.beginPath();
+      }, false);
+
+      
+
 
 	var aElement = document.getElementById('a-img');
-	var aInstance = new fabric.Image(aElement, {
-	  left: 5,
-	  top: 350
-	});
+
 	var bElement = document.getElementById('b-img');
 	var bInstance = new fabric.Image(bElement, {
 	  left: 5,
@@ -137,9 +144,8 @@ $( document ).on('turbolinks:load', function() {
 	  top: 350
 	});
 
-
-$('#a-img').on('click', function(){
-	canvas.add(aInstance);
+var aInstance = $('#a-img').on('click', function(){
+	context.drawImage(aElement, 10, 10);
 })
 $('#b-img').on('click', function(){
 	canvas.add(bInstance);
@@ -399,20 +405,6 @@ $('#z-img').on('click', function(){
 			left: this.left
 		};
 	};
-
-// CLEARING
-
-function clearCanvas(canvas) {
-	var ctx = cnv.getContext('2d'); 
-	ctx.beginPath();
-	
-}
-
-// document.getElementById('clear').addEventListener('click', function() {
-//   context.beginPath();
-//   context.clearRect(0, 0, canvas.width, canvas.height);
-// }, false);
-
 
 
 
