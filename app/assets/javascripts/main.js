@@ -13,214 +13,114 @@ $( document ).on('turbolinks:load', function() {
         context.beginPath();
       }, false);
 
-      
+
 
 
 	var aElement = document.getElementById('a-img');
-
 	var bElement = document.getElementById('b-img');
-	var bInstance = new fabric.Image(bElement, {
-	  left: 5,
-	  top: 350
-	});
 	var cElement = document.getElementById('c-img');
-	var cInstance = new fabric.Image(cElement, {
-	  left: 5,
-	  top: 350
-	});
 	var dElement = document.getElementById('d-img');
-	var dInstance = new fabric.Image(dElement, {
-	  left: 5,
-	  top: 350
-	});	
 	var eElement = document.getElementById('e-img');
-	var eInstance = new fabric.Image(eElement, {
-	  left: 5,
-	  top: 350
-	});
 	var fElement = document.getElementById('f-img');
-	var fInstance = new fabric.Image(fElement, {
-	  left: 5,
-	  top: 350
-	});
 	var gElement = document.getElementById('g-img');
-	var gInstance = new fabric.Image(gElement, {
-	  left: 5,
-	  top: 350
-	});
 	var hElement = document.getElementById('h-img');
-	var hInstance = new fabric.Image(hElement, {
-	  left: 5,
-	  top: 350
-	});
 	var iElement = document.getElementById('i-img');
-	var iInstance = new fabric.Image(iElement, {
-	  left: 5,
-	  top: 350
-	});
 	var jElement = document.getElementById('j-img');
-	var jInstance = new fabric.Image(jElement, {
-	  left: 5,
-	  top: 350
-	});
 	var kElement = document.getElementById('k-img');
-	var kInstance = new fabric.Image(kElement, {
-	  left: 5,
-	  top: 350
-	});
 	var lElement = document.getElementById('l-img');
-	var lInstance = new fabric.Image(lElement, {
-	  left: 5,
-	  top: 350
-	});
-		var mElement = document.getElementById('m-img');
-	var mInstance = new fabric.Image(mElement, {
-	  left: 5,
-	  top: 350
-	});
+	var mElement = document.getElementById('m-img');
 	var nElement = document.getElementById('n-img');
-	var nInstance = new fabric.Image(nElement, {
-	  left: 5,
-	  top: 350
-	});
 	var oElement = document.getElementById('o-img');
-	var oInstance = new fabric.Image(oElement, {
-	  left: 5,
-	  top: 350
-	});
 	var pElement = document.getElementById('p-img');
-	var pInstance = new fabric.Image(pElement, {
-	  left: 5,
-	  top: 350
-	});
 	var qElement = document.getElementById('q-img');
-	var qInstance = new fabric.Image(qElement, {
-	  left: 5,
-	  top: 350
-	});
 	var rElement = document.getElementById('r-img');
-	var rInstance = new fabric.Image(rElement, {
-	  left: 5,
-	  top: 350
-	});
 	var sElement = document.getElementById('s-img');
-	var sInstance = new fabric.Image(sElement, {
-	  left: 5,
-	  top: 350
-	});
 	var tElement = document.getElementById('t-img');
-	var tInstance = new fabric.Image(tElement, {
-	  left: 5,
-	  top: 350
-	});
 	var uElement = document.getElementById('u-img');
-	var uInstance = new fabric.Image(uElement, {
-	  left: 5,
-	  top: 350
-	});
 	var vElement = document.getElementById('v-img');
-	var vInstance = new fabric.Image(vElement, {
-	  left: 5,
-	  top: 350
-	});
 	var wElement = document.getElementById('w-img');
-	var wInstance = new fabric.Image(wElement, {
-	  left: 5,
-	  top: 350
-	});
 	var xElement = document.getElementById('x-img');
-	var xInstance = new fabric.Image(xElement, {
-	  left: 5,
-	  top: 350
-	});
 	var yElement = document.getElementById('y-img');
-	var yInstance = new fabric.Image(yElement, {
-	  left: 5,
-	  top: 350
-	});
 	var zElement = document.getElementById('z-img');
-	var zInstance = new fabric.Image(zElement, {
-	  left: 5,
-	  top: 350
-	});
+
 
 var aInstance = $('#a-img').on('click', function(){
 	context.drawImage(aElement, 10, 10);
 })
-$('#b-img').on('click', function(){
-	canvas.add(bInstance);
+var bInstance = $('#b-img').on('click', function(){
+	context.drawImage(bElement, 10, 10);
 })
-$('#c-img').on('click', function(){
-	canvas.add(cInstance);
+var cInstance = $('#c-img').on('click', function(){
+	context.drawImage(cElement, 10, 10);
 })
-$('#d-img').on('click', function(){
-  canvas.add(dInstance);
+var dInstance = $('#d-img').on('click', function(){
+  context.drawImage(dElement, 10, 10);
 })
-$('#e-img').on('click', function(){
-  canvas.add(eInstance);
+var eInstance = $('#e-img').on('click', function(){
+  context.drawImage(eElement, 10, 10);
 })
-$('#f-img').on('click', function(){
-  canvas.add(fInstance);
+var fInstance = $('#f-img').on('click', function(){
+  context.drawImage(fElement, 10, 10);
 })
-$('#g-img').on('click', function(){
-  canvas.add(gInstance);
+var gInstance = $('#g-img').on('click', function(){
+  context.drawImage(gElement, 10, 10);
 })
-$('#h-img').on('click', function(){
-  canvas.add(hInstance);
+var hInstance = $('#h-img').on('click', function(){
+  context.drawImage(hElement, 10, 10);
 })
-$('#i-img').on('click', function(){
-  canvas.add(iInstance);
+var iInstance = $('#i-img').on('click', function(){
+  context.drawImage(iElement, 10, 10);
 })
-$('#j-img').on('click', function(){
-  canvas.add(jInstance);
+var jInstance = $('#j-img').on('click', function(){
+  context.drawImage(jElement, 10, 10);
 })
-$('#k-img').on('click', function(){
-  canvas.add(kInstance);
+var kInstance = $('#k-img').on('click', function(){
+  context.drawImage(kElement, 10, 10);
 })
-$('#l-img').on('click', function(){
-  canvas.add(lInstance);
+var lInstance = $('#l-img').on('click', function(){
+  context.drawImage(lElement, 10, 10);
 })
-$('#m-img').on('click', function(){
-  canvas.add(mInstance);
+var mInstance = $('#m-img').on('click', function(){
+  context.drawImage(mElement, 10, 10);
 })
-$('#n-img').on('click', function(){
-  canvas.add(nInstance);
+var nInstance = $('#n-img').on('click', function(){
+  context.drawImage(nElement, 10, 10);
 })
-$('#o-img').on('click', function(){
-  canvas.add(oInstance);
+var oInstance = $('#o-img').on('click', function(){
+  context.drawImage(oElement, 10, 10);
 })
-$('#p-img').on('click', function(){
-  canvas.add(pInstance);
+var pInstance = $('#p-img').on('click', function(){
+  context.drawImage(pElement, 10, 10);
 })
-$('#q-img').on('click', function(){
-  canvas.add(qInstance);
+var qInstance = $('#q-img').on('click', function(){
+  context.drawImage(qElement, 10, 10);
 })
-$('#r-img').on('click', function(){
-  canvas.add(rInstance);
+var rInstance = $('#r-img').on('click', function(){
+  context.drawImage(rElement, 10, 10);
 })
-$('#s-img').on('click', function(){
-  canvas.add(sInstance);
+var sInstance = $('#s-img').on('click', function(){
+  context.drawImage(sElement, 10, 10);
 })
-$('#t-img').on('click', function(){
-  canvas.add(tInstance);
+var tInstance = $('#t-img').on('click', function(){
+  context.drawImage(tElement, 10, 10);
 })
-$('#u-img').on('click', function(){
-  canvas.add(uInstance);
+var uInstance = $('#u-img').on('click', function(){
+  context.drawImage(uElement, 10, 10);
 })
-$('#v-img').on('click', function(){
-  canvas.add(vInstance);
+var vInstance = $('#v-img').on('click', function(){
+  context.drawImage(vElement, 10, 10);
 })
-$('#w-img').on('click', function(){
-  canvas.add(wInstance);
+var wInstance = $('#w-img').on('click', function(){
+  context.drawImage(wElement, 10, 10);
 })
-$('#x-img').on('click', function(){
-  canvas.add(xInstance);
+var xInstance = $('#x-img').on('click', function(){
+  context.drawImage(xElement, 10, 10);
 })
-$('#y-img').on('click', function(){
-  canvas.add(yInstance);
+var yInstance = $('#y-img').on('click', function(){
+  context.drawImage(yElement, 10, 10);
 })
-$('#z-img').on('click', function(){
-  canvas.add(zInstance);
+var zInstance = $('#z-img').on('click', function(){
+  context.drawImage(zElement, 10, 10);
 })
 
 
