@@ -1,5 +1,5 @@
 $( document ).on('turbolinks:load', function() {
-	  console.log("It works on each visit!")
+	console.log("It works on each visit!")
 
 	// create a wrapper around native canvas element (with id="canvas")
 	var canvas = new fabric.Canvas('canvas');
