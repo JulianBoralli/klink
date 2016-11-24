@@ -3,11 +3,22 @@ $( document ).on('turbolinks:load', function() {
 
 	// create a wrapper around native canvas element (with id="canvas")
 	var canvas = new fabric.Canvas('canvas');
+	// prevent object from resizing
+	fabric.Object.prototype.hasControls = false;
 
 	var aElement = document.getElementById('a-img');
 	var aInstance = new fabric.Image(aElement, {
 	  left: 5,
 	  top: 350
+
+
+	// create a rectangle object
+	// var rectA = new fabric.Rect({
+	//   left: 100,
+	//   top: 100,
+	//   fill: 'red',
+	//   width: 20,
+	//   height: 20
 	});
 	var bElement = document.getElementById('b-img');
 	var bInstance = new fabric.Image(bElement, {
@@ -245,12 +256,12 @@ $('#z-img').on('click', function(){
 		};
 	};
 
-	eInstance.toObject = function () {
-		return {
-			letter: "B",
-			left: this.left
-		};
-	};
+// 	rectB.toObject = function () {
+// 		return {
+// 			letter: "B",
+// 			left: this.left
+// 		};
+// 	};
 	
 
 	aInstance.on('selected', newAjax);
