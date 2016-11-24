@@ -233,27 +233,199 @@ $('#z-img').on('click', function(){
 
 	cInstance.toObject = function () {
 		return {
-			letter: "B",
+			letter: "C",
 			left: this.left
 		};
 	};
 
 	dInstance.toObject = function () {
 		return {
-			letter: "B",
+			letter: "D",
 			left: this.left
 		};
 	};
 
 	eInstance.toObject = function () {
 		return {
-			letter: "B",
+			letter: "E",
+			left: this.left
+		};
+	};
+
+	fInstance.toObject = function () {
+		return {
+			letter: "F",
 			left: this.left
 		};
 	};
 	
+	gInstance.toObject = function () {
+		return {
+			letter: "G",
+			left: this.left
+		};
+	};
+
+	hInstance.toObject = function () {
+		return {
+			letter: "H",
+			left: this.left
+		};
+	};
+
+	iInstance.toObject = function () {
+		return {
+			letter: "I",
+			left: this.left
+		};
+	};
+
+	jInstance.toObject = function () {
+		return {
+			letter: "J",
+			left: this.left
+		};
+	};
+
+	kInstance.toObject = function () {
+		return {
+			letter: "K",
+			left: this.left
+		};
+	};
+
+	lInstance.toObject = function () {
+		return {
+			letter: "L",
+			left: this.left
+		};
+	};
+
+	mInstance.toObject = function () {
+		return {
+			letter: "M",
+			left: this.left
+		};
+	};
+
+	nInstance.toObject = function () {
+		return {
+			letter: "N",
+			left: this.left
+		};
+	};
+
+	oInstance.toObject = function () {
+		return {
+			letter: "O",
+			left: this.left
+		};
+	};
+
+	pInstance.toObject = function () {
+		return {
+			letter: "P",
+			left: this.left
+		};
+	};
+
+	qInstance.toObject = function () {
+		return {
+			letter: "Q",
+			left: this.left
+		};
+	};
+
+	rInstance.toObject = function () {
+		return {
+			letter: "R",
+			left: this.left
+		};
+	};
+
+	sInstance.toObject = function () {
+		return {
+			letter: "S",
+			left: this.left
+		};
+	};
+
+	tInstance.toObject = function () {
+		return {
+			letter: "T",
+			left: this.left
+		};
+	};
+
+	uInstance.toObject = function () {
+		return {
+			letter: "U",
+			left: this.left
+		};
+	};
+
+	vInstance.toObject = function () {
+		return {
+			letter: "V",
+			left: this.left
+		};
+	};
+
+	wInstance.toObject = function () {
+		return {
+			letter: "W",
+			left: this.left
+		};
+	};
+
+	xInstance.toObject = function () {
+		return {
+			letter: "X",
+			left: this.left
+		};
+	};
+
+	yInstance.toObject = function () {
+		return {
+			letter: "Y",
+			left: this.left
+		};
+	};
+
+	zInstance.toObject = function () {
+		return {
+			letter: "Z",
+			left: this.left
+		};
+	};
+
 
 	aInstance.on('selected', newAjax);
+	bInstance.on('selected', newAjax);
+	cInstance.on('selected', newAjax);
+	dInstance.on('selected', newAjax);
+	eInstance.on('selected', newAjax);
+	fInstance.on('selected', newAjax);
+	gInstance.on('selected', newAjax);
+	hInstance.on('selected', newAjax);
+	iInstance.on('selected', newAjax);
+	jInstance.on('selected', newAjax);
+	kInstance.on('selected', newAjax);
+	lInstance.on('selected', newAjax);
+	mInstance.on('selected', newAjax);
+	nInstance.on('selected', newAjax);
+	oInstance.on('selected', newAjax);
+	pInstance.on('selected', newAjax);
+	qInstance.on('selected', newAjax);
+	rInstance.on('selected', newAjax);
+	sInstance.on('selected', newAjax);
+	tInstance.on('selected', newAjax);
+	uInstance.on('selected', newAjax);
+	vInstance.on('selected', newAjax);
+	wInstance.on('selected', newAjax);
+	xInstance.on('selected', newAjax);
+	yInstance.on('selected', newAjax);
+	zInstance.on('selected', newAjax);
 
 
 function newAjax(event) {
