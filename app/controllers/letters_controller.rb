@@ -7,12 +7,8 @@ class LettersController < ApplicationController
 	def show
 
 		p "GOT IT!!!"
-		letters = JSON.parse(params["array"])
-		word = ""
-		letters.each do |letter|
-			word << letter["letter"] + " " + letter["left"].to_s 
- 		end
 
+ 		word = Letter.join_letters(params["array"])
 		p "*"*60
 		p word
 		render json: word.to_json
