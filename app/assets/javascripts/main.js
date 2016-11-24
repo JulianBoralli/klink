@@ -2,7 +2,8 @@ $( document ).on('turbolinks:load', function() {
 	  console.log("It works on each visit!")
 
 	// create a wrapper around native canvas element (with id="canvas")
-	var canvas = new fabric.Canvas('canvas'),
+	var canvas = new fabric.Canvas('canvas');
+	var context = canvas.getContext('2d'),
 	snap = 20; 
 
 	var aElement = document.getElementById('a-img');
@@ -399,6 +400,11 @@ $('#z-img').on('click', function(){
 		};
 	};
 
+// CLEARING
+
+document.getElementById('clear').addEventListener('click', function() {
+  context.clearRect(0, 0, canvas.width, canvas.height);
+}, false);
 
 
 
