@@ -3,6 +3,8 @@ $( document ).on('turbolinks:load', function() {
 
 	// create a wrapper around native canvas element (with id="canvas")
 	var canvas = new fabric.Canvas('canvas');
+	// part of drawing image on the canvas
+	var ctx = canvas.getContext("2d");
 
 	// prevent object from resizing
 	fabric.Object.prototype.hasControls = false;
@@ -12,27 +14,29 @@ $( document ).on('turbolinks:load', function() {
 	$("body").on("click", "img", function(e){
 		e.preventDefault();
 		var letterImage = new fabric.Image(e.target);
-
 		canvas.add(letterImage);
 
 	// ability to find index of images
    	var image = $(".palette").find(e.target);
    	var letterId = image.attr("id");
+   	var imageGrab = document.getElementById(letterId)
+
+
 		var returnLetterAsObject = letterImage.toObject = (function(){
 			return {
 				letter: letterId,
-				left: letterImage.left	
+				left: letterImage.left
 			};
 		})();
-
+		console.log(returnLetterAsObject)
 	});
 
 
 
-// aInstance.on('selected', newAjax);
+
+// letterImage.on('selected', newAjax);
 function newAjax(event) {
 	
-
 	var letters = canvas._objects;
 
 	var action = "/letters/show";
