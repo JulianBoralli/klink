@@ -14,8 +14,6 @@ $( document ).on('turbolinks:load', function() {
       }, false);
 
 
-
-
 	var aElement = document.getElementById('a-img');
 	var bElement = document.getElementById('b-img');
 	var cElement = document.getElementById('c-img');
@@ -45,82 +43,82 @@ $( document ).on('turbolinks:load', function() {
 
 
 var aInstance = $('#a-img').on('click', function(){
-	context.drawImage(aElement, 10, 10);
+	context.drawImage(aElement, 10, 10, 60, 60);
 })
 var bInstance = $('#b-img').on('click', function(){
-	context.drawImage(bElement, 10, 10);
+	context.drawImage(bElement, 10, 10, 60, 60);
 })
 var cInstance = $('#c-img').on('click', function(){
-	context.drawImage(cElement, 10, 10);
+	context.drawImage(cElement, 10, 10, 60, 60);
 })
 var dInstance = $('#d-img').on('click', function(){
-  context.drawImage(dElement, 10, 10);
+  context.drawImage(dElement, 10, 10, 60, 60);
 })
 var eInstance = $('#e-img').on('click', function(){
-  context.drawImage(eElement, 10, 10);
+  context.drawImage(eElement, 10, 10, 60, 60);
 })
 var fInstance = $('#f-img').on('click', function(){
-  context.drawImage(fElement, 10, 10);
+  context.drawImage(fElement, 10, 10, 60, 60);
 })
 var gInstance = $('#g-img').on('click', function(){
-  context.drawImage(gElement, 10, 10);
+  context.drawImage(gElement, 10, 10, 60, 60);
 })
 var hInstance = $('#h-img').on('click', function(){
-  context.drawImage(hElement, 10, 10);
+  context.drawImage(hElement, 10, 10, 60, 60);
 })
 var iInstance = $('#i-img').on('click', function(){
-  context.drawImage(iElement, 10, 10);
+  context.drawImage(iElement, 10, 10, 60, 60);
 })
 var jInstance = $('#j-img').on('click', function(){
-  context.drawImage(jElement, 10, 10);
+  context.drawImage(jElement, 10, 10, 60, 60);
 })
 var kInstance = $('#k-img').on('click', function(){
-  context.drawImage(kElement, 10, 10);
+  context.drawImage(kElement, 10, 10, 60, 60);
 })
 var lInstance = $('#l-img').on('click', function(){
-  context.drawImage(lElement, 10, 10);
+  context.drawImage(lElement, 10, 10, 60, 60);
 })
 var mInstance = $('#m-img').on('click', function(){
-  context.drawImage(mElement, 10, 10);
+  context.drawImage(mElement, 10, 10, 60, 60);
 })
 var nInstance = $('#n-img').on('click', function(){
-  context.drawImage(nElement, 10, 10);
+  context.drawImage(nElement, 10, 10, 60, 60);
 })
 var oInstance = $('#o-img').on('click', function(){
-  context.drawImage(oElement, 10, 10);
+  context.drawImage(oElement, 10, 10, 60, 60);
 })
 var pInstance = $('#p-img').on('click', function(){
-  context.drawImage(pElement, 10, 10);
+  context.drawImage(pElement, 10, 10, 60, 60);
 })
 var qInstance = $('#q-img').on('click', function(){
-  context.drawImage(qElement, 10, 10);
+  context.drawImage(qElement, 10, 10, 60, 60);
 })
 var rInstance = $('#r-img').on('click', function(){
-  context.drawImage(rElement, 10, 10);
+  context.drawImage(rElement, 10, 10, 60, 60);
 })
 var sInstance = $('#s-img').on('click', function(){
-  context.drawImage(sElement, 10, 10);
+  context.drawImage(sElement, 10, 10, 60, 60);
 })
 var tInstance = $('#t-img').on('click', function(){
-  context.drawImage(tElement, 10, 10);
+  context.drawImage(tElement, 10, 10, 60, 60);
 })
 var uInstance = $('#u-img').on('click', function(){
-  context.drawImage(uElement, 10, 10);
+  context.drawImage(uElement, 10, 10, 60, 60);
 })
 var vInstance = $('#v-img').on('click', function(){
-  context.drawImage(vElement, 10, 10);
+  context.drawImage(vElement, 10, 10, 60, 60);
 })
 var wInstance = $('#w-img').on('click', function(){
-  context.drawImage(wElement, 10, 10);
+  context.drawImage(wElement, 10, 10, 60, 60);
 })
 var xInstance = $('#x-img').on('click', function(){
-  context.drawImage(xElement, 10, 10);
+  context.drawImage(xElement, 10, 10, 60, 60);
 })
 var yInstance = $('#y-img').on('click', function(){
-  context.drawImage(yElement, 10, 10);
+  context.drawImage(yElement, 10, 10, 60, 60);
 })
 var zInstance = $('#z-img').on('click', function(){
-  context.drawImage(zElement, 10, 10);
+  context.drawImage(zElement, 10, 10, 60, 60);
 })
 
 
