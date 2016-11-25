@@ -9,6 +9,12 @@ $( document ).on('turbolinks:load', function() {
 	// prevent object from resizing
 	fabric.Object.prototype.hasControls = false;
 
+		// CLEAR
+	      document.getElementById('clear').addEventListener('click', function() {
+        context.beginPath();
+        context.clearRect(0, 0, canvas.width, canvas.height);
+      }, false);
+
 
   // ability to click on letter multiple times
 	$("body").on("click", ".palette", function(e){

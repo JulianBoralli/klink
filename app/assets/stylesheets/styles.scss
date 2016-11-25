@@ -1,13 +1,20 @@
 .container {
-  width: 800px;
+  width: 100vw;
   min-width: 375px;
   min-height: 667px;
 }
 
-#canvas {
-  border: 1px solid #000000;
+canvas {
+  border: 1px black solid;
+}
+
+.palette {
+  margin: auto;
+  margin-top: 2%;
+  text-align: center;
 }
 
 .letter {
-  width: 7vw;
+  margin: auto;
+  width: 7.2vw;
 }
