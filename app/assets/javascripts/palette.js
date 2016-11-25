@@ -42,7 +42,7 @@ function generatePalette(canvasPlay, canvasPalette) {
 	var searchElement = document.getElementById('search-img');
 
 	var searchButton = new fabric.Image(searchElement, {
-	  left: 950,
+	  left: 750,
 	  top: 10,
 	  width: 100,
 	  height: 100
@@ -62,7 +62,7 @@ function generatePalette(canvasPlay, canvasPalette) {
 	var clearElement = document.getElementById('clear-img');
 
 	var clearButton = new fabric.Image(clearElement, {
-	  left: 1200,
+	  left: 880,
 	  top: 10,
 	  width: 100,
 	  height: 100
