@@ -1,7 +1,9 @@
 $( document ).on('turbolinks:load', function() {
 	
-	var canvas = new fabric.Canvas('canvas');
+	var canvasPlay = new fabric.Canvas('canvas-play');
 
-	generateAlphabet(canvas);
+	var canvasPalette = new fabric.Canvas('canvas-palette');
+
+	generatePalette(canvasPalette);
 
 });
