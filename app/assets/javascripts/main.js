@@ -9,15 +9,11 @@ $( document ).on('turbolinks:load', function() {
 	// prevent object from resizing
 	fabric.Object.prototype.hasControls = false;
 
-		// CLEAR
-	     ÷
-        // ctx.beginPath();
-        // ctx.clearRect(0, 0, canvas.width, canvas.height);
-      // }, false);
-
-      
-
-
+	// clear button
+	var clearButtonListener = $('#clear').on('click', function() {
+		ctx.clearRect(0, 0, canvas.width, canvas.height);
+		canvas.clear().renderAll();
+	})
 
   // ability to click on letter multiple times
 	$("body").on("click", ".palette", function(e){
@@ -69,7 +65,7 @@ function newAjax(event) {
  	var jsonLetters = JSON.stringify(letters);
 	var data = {array: jsonLetters};	
  	// console.log(jsonLetters)
-	console.log(data);
+	// console.log(data);
 	$.ajax({
 		url: action,
 		method: method,
