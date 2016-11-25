@@ -4,10 +4,10 @@
   min-height: 667px;
 }
 
-#canvas {
+canvas {
   border: 1px solid #000000;
+  padding-bottom: 10px;
+  display: inline;
+  float: left;
 }
 
-.letter {
-  width: 7vw;
-}

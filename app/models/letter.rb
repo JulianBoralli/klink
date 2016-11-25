@@ -7,7 +7,6 @@ class Letter < ApplicationRecord
 
 
 
-
 private
 
 	def self.sort_letters(letter_array)
