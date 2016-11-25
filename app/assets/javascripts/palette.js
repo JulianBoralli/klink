@@ -1,8 +1,8 @@
 function generatePalette(canvasPlay, canvasPalette) {
-	
+
 	var letterImages = $('#letter-images').children();
 
-	$.each(letterImages, function(i, el) { 
+	$.each(letterImages, function(i, el) {
 
 		var letter = new fabric.Image(el, {
 		  char: String.fromCharCode(65 + i),
@@ -26,12 +26,13 @@ function generatePalette(canvasPlay, canvasPalette) {
 
 		letter.on('selected', function() {
 		  console.log(this.char);
-		  
+
 			if (this.canvas.lowerCanvasEl.id === "canvas-palette") {
 				var clone = fabric.util.object.clone(this);
 	    	clone.lockMovementX = false;
 				clone.lockMovementY = false;
-	    	canvasPlay.add(clone); 
+	    	canvasPlay.add(clone);
+				canvasPalette.deactivateAll().renderAll();
 			}
 		});
 
@@ -55,7 +56,7 @@ function generatePalette(canvasPlay, canvasPalette) {
 
 	searchButton.on('selected', function() {
 	  console.log('clear');
-    searchAjax(event, canvasPlay); 
+    searchAjax(event, canvasPlay);
 	});
 
 	var clearElement = document.getElementById('clear-img');
@@ -74,14 +75,13 @@ function generatePalette(canvasPlay, canvasPalette) {
 
 	clearButton.on('selected', function() {
 	  console.log('clear');
-    canvasPlay.clear(); 
+    canvasPlay.clear();
 	});
 
 
 	canvasPalette.add(searchButton, clearButton);
 
 	canvasPalette.selection = false;
-
 };
 
 function searchAjax(event, canvasPlay) {
@@ -91,7 +91,7 @@ function searchAjax(event, canvasPlay) {
 
 	var action = "/letters/show";
 	var method = "GET";
-	
+
  	var jsonLetters = JSON.stringify(letters);
 	var data = {array: jsonLetters};
 	console.log(data);
@@ -105,7 +105,7 @@ function searchAjax(event, canvasPlay) {
 		console.log(response)
 		// $('#coordinates').empty();
 		// $('#coordinates').append(response);
-		
+
 	})
 	.fail(function(error) {
 		console.log(error);
@@ -113,4 +113,3 @@ function searchAjax(event, canvasPlay) {
 	});
 
 };
-
