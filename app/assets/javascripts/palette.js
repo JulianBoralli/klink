@@ -1,4 +1,4 @@
-function generatePalette(canvas) {
+function generatePalette(canvasPlay, canvasPalette) {
 	
 	var letterImages = $('#letter-images').children();
 
@@ -24,13 +24,18 @@ function generatePalette(canvas) {
 			};
 		};
 
-
 		letter.on('selected', function() {
 		  console.log(this.char);
+		  
+			if (this.canvas.lowerCanvasEl.id === "canvas-palette") {
+				var clone = fabric.util.object.clone(this);
+	    	clone.lockMovementX = false;
+				clone.lockMovementY = false;
+	    	canvasPlay.add(clone); 
+			}
 		});
 
-
-		canvas.add(letter);
+		canvasPalette.add(letter);
 
 	});
 
@@ -48,6 +53,11 @@ function generatePalette(canvas) {
 	searchButton.lockScalingX = searchButton.lockScalingY = true;
 	searchButton.lockRotation = true;
 
+	searchButton.on('selected', function() {
+	  console.log('clear');
+    searchAjax(event, canvasPlay); 
+	});
+
 	var clearElement = document.getElementById('clear-img');
 
 	var clearButton = new fabric.Image(clearElement, {
@@ -62,13 +72,47 @@ function generatePalette(canvas) {
 	clearButton.lockScalingX = clearButton.lockScalingY = true;
 	clearButton.lockRotation = true;
 
-	canvas.add(searchButton, clearButton);
+	clearButton.on('selected', function() {
+	  console.log('clear');
+    canvasPlay.clear(); 
+	});
 
-	canvas.selection = false;
-	// canvasPalette.item(0).selectable = false;
+
+	canvasPalette.add(searchButton, clearButton);
+
+	canvasPalette.selection = false;
 
 };
 
+function searchAjax(event, canvasPlay) {
+	console.log(canvasPlay);
+
+	var letters = canvasPlay._objects;
+
+	var action = "/letters/show";
+	var method = "GET";
+	
+ 	var jsonLetters = JSON.stringify(letters);
+	var data = {array: jsonLetters};
+	console.log(data);
+	$.ajax({
+		url: action,
+		method: method,
+		data: data,
+		dataType: 'json'
+	})
+	.done(function(response) {
+		console.log(response)
+		// $('#coordinates').empty();
+		// $('#coordinates').append(response);
+		
+	})
+	.fail(function(error) {
+		console.log(error);
+		alert(error.status);
+	});
+
+};
 
 
 	// for (var i = 0; i < 26; i++) {

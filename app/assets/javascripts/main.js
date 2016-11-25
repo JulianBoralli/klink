@@ -4,9 +4,8 @@ $( document ).on('turbolinks:load', function() {
 
 	var canvasPalette = new fabric.Canvas('canvas-palette');
 
-	generatePalette(canvasPalette);
+	generatePalette(canvasPlay, canvasPalette);
 
-	canvasPalette.selection = false;
-	canvasPalette.item(0).selectable = false;
+	canvasPalette.selectable = true;
 
 });
