@@ -82,7 +82,21 @@ function generatePalette(canvasPlay, canvasPalette) {
 	canvasPalette.add(searchButton, clearButton);
 
 	canvasPalette.selection = false;
+
+
+	var trashCanElement = document.getElementById('trashcan-img');
+	var	trashCan = new fabric.Image(trashCanElement, {
+		left: 1320,
+		top: 450,
+		width: 100,
+		height: 100
+	});
+	canvasPlay.add(trashCan);
+	trashCan.selectable = false
+
 };
+
+
 
 function searchAjax(event, canvasPlay) {
 	console.log(canvasPlay);
