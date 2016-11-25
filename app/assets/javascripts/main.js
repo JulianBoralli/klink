@@ -11,39 +11,55 @@ $( document ).on('turbolinks:load', function() {
 
 
   // ability to click on letter multiple times
-	$("body").on("click", "img", function(e){
+	$("body").on("click", ".palette", function(e){
 		e.preventDefault();
-		var letterImage = new fabric.Image(e.target);
-		canvas.add(letterImage);
-
-	// ability to find index of images
+		//ability to find index of images
    	var image = $(".palette").find(e.target);
    	var letterId = image.attr("id");
-   	var imageGrab = document.getElementById(letterId)
+		// console.log(letterId)
+		var letterElement = document.getElementById(letterId)
+		// console.log(letterElement)
+		var letterImage = new fabric.Image(letterElement, {
+			left: 5,
+			top: 350
+		});
 
-
-		var returnLetterAsObject = letterImage.toObject = (function(){
+		canvas.add(letterImage);
+		console.log(letterImage)
+		letterElement.toObject = (function(){
 			return {
 				letter: letterId,
 				left: letterImage.left
 			};
 		})();
-		console.log(returnLetterAsObject)
-	});
 
+// console.log("something")
+// 
+	letterImage.on('selected', newAjax);
 
+// console.log(letterImage)
 
-
-// letterImage.on('selected', newAjax);
 function newAjax(event) {
 	
 	var letters = canvas._objects;
+			letters.toObject = (function(){
+			return {
+				letter: letterId,
+				left: letterImage.left
+			};
+		})();
+	console.log(letters)
+
+
+
+
 
 	var action = "/letters/show";
 	var method = "GET";
 	
  	var jsonLetters = JSON.stringify(letters);
-	var data = {array: jsonLetters};
+	var data = {array: jsonLetters};	
+ 	// console.log(jsonLetters)
 	console.log(data);
 	$.ajax({
 		url: action,
@@ -52,17 +68,16 @@ function newAjax(event) {
 		dataType: 'json'
 	})
 	.done(function(response) {
-		console.log(response)
+		// console.log(response)
 		$('#coordinates').empty();
 		$('#coordinates').append(response);
 		
-	})
-	.fail(function(error) {
-		console.log(error);
-		alert(error.status);
+	// })
+	// .fail(function(error) {
+	// 	// console.log(error);
+	// 	alert(error.status);
 	});
-
-};
-
+}
+});
 
 });
