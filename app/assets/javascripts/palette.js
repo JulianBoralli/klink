@@ -1,7 +1,7 @@
 function generatePalette(canvasPlay, canvasPalette) {
 	
 	var letterImages = $('#letter-images').children();
-	var percentage = 0.05; // current work
+	var percentage = 0.05;
 
 	$.each(letterImages, function(i, el) { 
 
@@ -30,6 +30,8 @@ function generatePalette(canvasPlay, canvasPalette) {
 		  // Trigger API call for text2Speech individual letter
 			if (this.canvas.lowerCanvasEl.id === "canvas-palette") {
 				var clone = fabric.util.object.clone(this);
+				clone.width = 60;
+				clone.height = 85;
 	    	clone.lockMovementX = false;
 				clone.lockMovementY = false;
 	    	canvasPlay.add(clone); 
