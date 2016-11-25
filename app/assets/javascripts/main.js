@@ -1,5 +1,7 @@
 $( document ).on('turbolinks:load', function() {
    
+
+   // extract into responsiveCanvas file
   var ResponsiveCanvas = fabric.util.createClass(fabric.Canvas, {
     getPointer: function () {
         this.calcOffset();
@@ -69,11 +71,11 @@ $( document ).on('turbolinks:load', function() {
 
 	generatePalette(canvasPlay, canvasPalette);
 
-  canvasPlay.setDimensions({width: '90vw', height: '60vh'}, {
+  canvasPlay.setDimensions({width: '98vw', height: '60vh'}, {
     cssOnly: true
   });
 
-  canvasPalette.setDimensions({width: '90vw', height: '20vh'}, {
+  canvasPalette.setDimensions({width: '98vw', height: '20vh'}, {
     cssOnly: true
   });
 

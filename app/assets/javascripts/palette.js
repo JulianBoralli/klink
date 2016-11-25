@@ -1,6 +1,7 @@
 function generatePalette(canvasPlay, canvasPalette) {
 	
 	var letterImages = $('#letter-images').children();
+	var percentage = 0.05; // current work
 
 	$.each(letterImages, function(i, el) { 
 
@@ -8,8 +9,8 @@ function generatePalette(canvasPlay, canvasPalette) {
 		  char: String.fromCharCode(65 + i),
 		  left: i >= 13 ? ((50 * (i - 13)) + (5 * (i - 13))) : ((50 * i) + (5 * i)),
 		  top: i >= 13 ? 70 : 10,
-		  width: 50,
-		  height: 50
+		  width: canvasPalette.width*percentage,
+		  height: canvasPalette.width*percentage
 		});
 
 		letter.lockMovementX = true;
@@ -44,8 +45,8 @@ function generatePalette(canvasPlay, canvasPalette) {
 	var searchButton = new fabric.Image(searchElement, {
 	  left: 750,
 	  top: 10,
-	  width: 100,
-	  height: 100
+		width: canvasPalette.width*(percentage*2),
+		height: canvasPalette.width*(percentage*2)
 	});
 
 	searchButton.lockMovementX = true;
@@ -64,8 +65,8 @@ function generatePalette(canvasPlay, canvasPalette) {
 	var clearButton = new fabric.Image(clearElement, {
 	  left: 880,
 	  top: 10,
-	  width: 100,
-	  height: 100
+		width: canvasPalette.width*(percentage*2),
+		height: canvasPalette.width*(percentage*2)
 	});
 
 	clearButton.lockMovementX = true;
