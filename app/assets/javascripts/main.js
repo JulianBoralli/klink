@@ -6,4 +6,7 @@ $( document ).on('turbolinks:load', function() {
 
 	generatePalette(canvasPalette);
 
+	canvasPalette.selection = false;
+	canvasPalette.item(0).selectable = false;
+
 });

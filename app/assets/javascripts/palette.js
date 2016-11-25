@@ -5,11 +5,17 @@ function generatePalette(canvas) {
 	$.each(letterImages, function(i, el) { 
 
 		var letter = new fabric.Image(el, {
+		  char: String.fromCharCode(65 + i),
 		  left: i >= 13 ? ((50 * (i - 13)) + (5 * (i - 13))) : ((50 * i) + (5 * i)),
 		  top: i >= 13 ? 70 : 10,
 		  width: 50,
 		  height: 50
 		});
+
+		letter.lockMovementX = true;
+		letter.lockMovementY = true;
+		letter.lockScalingX = letter.lockScalingY = true;
+		letter.lockRotation = true;
 
 		letter.toObject = function () {
 			return {
@@ -17,6 +23,12 @@ function generatePalette(canvas) {
 				left: this.left
 			};
 		};
+
+
+		letter.on('selected', function() {
+		  console.log(this.char);
+		});
+
 
 		canvas.add(letter);
 
@@ -31,6 +43,11 @@ function generatePalette(canvas) {
 	  height: 100
 	});
 
+	searchButton.lockMovementX = true;
+	searchButton.lockMovementY = true;
+	searchButton.lockScalingX = searchButton.lockScalingY = true;
+	searchButton.lockRotation = true;
+
 	var clearElement = document.getElementById('clear-img');
 
 	var clearButton = new fabric.Image(clearElement, {
@@ -40,8 +57,15 @@ function generatePalette(canvas) {
 	  height: 100
 	});
 
+	clearButton.lockMovementX = true;
+	clearButton.lockMovementY = true;
+	clearButton.lockScalingX = clearButton.lockScalingY = true;
+	clearButton.lockRotation = true;
 
 	canvas.add(searchButton, clearButton);
+
+	canvas.selection = false;
+	// canvasPalette.item(0).selectable = false;
 
 };
 
