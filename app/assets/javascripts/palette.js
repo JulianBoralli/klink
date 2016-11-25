@@ -26,7 +26,7 @@ function generatePalette(canvasPlay, canvasPalette) {
 
 		letter.on('selected', function() {
 		  console.log(this.char);
-		  
+		  // Trigger API call for text2Speech individual letter
 			if (this.canvas.lowerCanvasEl.id === "canvas-palette") {
 				var clone = fabric.util.object.clone(this);
 	    	clone.lockMovementX = false;
@@ -54,7 +54,8 @@ function generatePalette(canvasPlay, canvasPalette) {
 	searchButton.lockRotation = true;
 
 	searchButton.on('selected', function() {
-	  console.log('clear');
+	  console.log('search');
+	  // Ajax json data of all letters inside canvasPlay [{}, {}]
     searchAjax(event, canvasPlay); 
 	});
 
@@ -103,6 +104,8 @@ function searchAjax(event, canvasPlay) {
 	})
 	.done(function(response) {
 		console.log(response)
+		// function to call the APIs with response
+
 		// $('#coordinates').empty();
 		// $('#coordinates').append(response);
 		
