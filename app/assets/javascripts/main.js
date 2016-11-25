@@ -10,10 +10,13 @@ $( document ).on('turbolinks:load', function() {
 	fabric.Object.prototype.hasControls = false;
 
 		// CLEAR
-	      document.getElementById('clear').addEventListener('click', function() {
-        ctx.beginPath();
-        ctx.clearRect(0, 0, canvas.width, canvas.height);
-      }, false);
+	     ÷
+        // ctx.beginPath();
+        // ctx.clearRect(0, 0, canvas.width, canvas.height);
+      // }, false);
+
+      
+
 
 
   // ability to click on letter multiple times

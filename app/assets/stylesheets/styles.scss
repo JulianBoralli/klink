@@ -1,11 +1,23 @@
+body {
+  background-color: #464EF2;
+}
+
 .container {
   width: 100vw;
   min-width: 375px;
   min-height: 667px;
 }
 
+.game-title {
+  color: #F9D834;
+}
+
+#clear {
+  margin-bottom: 2%;
+}
+
 canvas {
-  border: 1px black solid;
+  border: 5px white solid;
 }
 
 .palette {
@@ -17,4 +29,5 @@ canvas {
 .letter {
   margin: auto;
   width: 7.2vw;
+  border: 2px solid white;
 }
