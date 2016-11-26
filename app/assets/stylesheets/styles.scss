@@ -16,5 +16,19 @@ canvas {
   display: inline;
 }
 
+.drawing-options {
+  margin-top: 3%;
+}
+
+#drawing-mode-options {
+  display: inline-block;
+}
+
+#drawing-mode {
+  display: inline-block;
+  vertical-align: top;
+  margin-top: 30px;
+  margin-right: 2%;
+}
 
 

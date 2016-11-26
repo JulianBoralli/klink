@@ -1,20 +1,23 @@
 $( document ).on('turbolinks:load', function() {
 
     var canvasDraw = new fabric.Canvas('canvas-draw');
-    var drawingModeEl = document.getElementById('drawing-mode'),
+    var drawingModeEl = document.getElementById('drawing-mode-btn'),
           drawingOptionsEl = document.getElementById('drawing-mode-options'),
           drawingColorEl = document.getElementById('drawing-color'),
           drawingLineWidthEl = document.getElementById('drawing-line-width'),
           drawingShadowWidth = document.getElementById('drawing-shadow-width');
     
-      drawingModeEl.onclick = function() {
-        canvasDraw.isDrawingMode = !canvasDraw.isDrawingMode;
-        if (canvasDraw.isDrawingMode) {
-          drawingModeEl.innerHTML = 'Stop drawing';
-          drawingOptionsEl.style.display = '';
-        }
-  
-      };
+        drawingModeEl.onclick = function() {
+          canvasDraw.isDrawingMode = !canvasDraw.isDrawingMode;
+          if (canvasDraw.isDrawingMode) {
+            drawingModeEl.innerHTML = 'stop drawing';
+            drawingOptionsEl.style.display = '';
+          }
+          else {
+            drawingModeEl.innerHTML = 'Draw!';
+            drawingOptionsEl.style.display = '';
+          }
+        };
     
       canvasDraw.on('path:created', function() {
         updateComplexity();

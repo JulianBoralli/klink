@@ -2,9 +2,12 @@
 
     <canvas id="canvas-draw" height="200" width="800"></canvas>
 
-        <li style="margin-top:10px;">
-          <button id="drawing-mode" class="btn btn-info">Draw!</button>
-          <div style="display: none;" id="drawing-mode-options">
+      <div class="drawing-options">
+          <div id="drawing-mode">
+            <button id="drawing-mode-btn" class="btn btn-info">Draw!</button>
+          </div>
+
+          <div id="drawing-mode-options">
             <label for="drawing-mode-selector">Mode:</label>
             <select id="drawing-mode-selector">
               <option>Pencil</option>
@@ -16,4 +19,4 @@
             <label for="drawing-shadow-width">Shadow:</label>
             <input type="range" value="0" min="0" max="50" id="drawing-shadow-width"><br>
           </div>
-        </li>
+      </div>
