@@ -5,10 +5,10 @@
     <%= csrf_meta_tags %>
 
      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css">
-     <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.8/css/materialize.min.css"> -->
     <%= javascript_include_tag 'https://code.responsivevoice.org/responsivevoice.js', 'data-turbolinks-track': 'reload' %>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.8/css/materialize.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.8/js/materialize.min.js"></script>
     <%= javascript_include_tag 'http://cdnjs.cloudflare.com/ajax/libs/fabric.js/1.7.0/fabric.min.js', 'data-turbolinks-track': 'reload' %>
-    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.8/js/materialize.min.js"></script> -->
 
 
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
@@ -16,6 +16,7 @@
   </head>
 
   <body>
+    <%= render '/layouts/header' %>
     <%= yield %>
   </body>
 </html>
