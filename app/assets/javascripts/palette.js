@@ -2,6 +2,7 @@ function generatePalette(canvasPlay, canvasPalette) {
 
 	var letterImages = $('#letter-images').children();
 	var percentage = 0.05;
+	canvasPalette.renderAll();
 
 	$.each(letterImages, function(i, el) {
 
@@ -55,6 +56,7 @@ function generatePalette(canvasPlay, canvasPalette) {
 		});
 
 		canvasPalette.add(letter);
+		canvasPalette.renderAll();
 
 	});
 
@@ -293,12 +295,9 @@ canvasPlay.on('object:moving', function (options) {
 
 	canvasPalette.add(searchButton, clearButton, trashCan);
 
-	canvasPalette.selection = false;
 
-	// canvasPlay.forEachObject(function(object){ object.hasControls = false; });
-
+// letter wiggle
 	canvasPlay.hoverCursor = 'pointer';
-
 	function animate(e, dir) {
 	if (e.target) {
 		fabric.util.animate({
@@ -325,10 +324,12 @@ canvasPlay.on('object:moving', function (options) {
 				e.target.setCoords();
 			}
 		});
+		}
 	}
-}
-canvasPlay.on('mouse:down', function(e) { animate(e, 0); });
-canvasPlay.on('mouse:up', function(e) { animate(e, 0); });
+	canvasPlay.on('mouse:down', function(e) { animate(e); });
+	canvasPlay.on('mouse:up', function(e) { animate(e); });
+	canvasPalette.selection = false;
+	canvasPlay.selection = false;
 
 	};
 
