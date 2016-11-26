@@ -244,9 +244,6 @@ canvasPlay.on('object:moving', function (options) {
 	searchButton.lockRotation = true;
 
 	searchButton.on('selected', function() {
-	  console.log('clear');
-    searchAjax(event, canvasPlay);
-
 	  console.log('search');
 	  // Ajax json data of all letters inside canvasPlay [{}, {}]
     searchAjax(event, canvasPlay);
@@ -338,7 +335,7 @@ canvasPlay.on('object:moving', function (options) {
 function searchAjax(event, canvasPlay) {
 	console.log(canvasPlay);
 
-	var letters = canvasPlay._objects;
+	var letters = canvasPlay._objects.filter(function(el) { return el.char !== undefined });
 
 	var action = "/letters/show";
 	var method = "GET";
@@ -356,10 +353,12 @@ function searchAjax(event, canvasPlay) {
 		console.log(response)
 		var textSpeak = JSON.stringify(response[1])
 		// function to call the APIs with response
-
-		$("#image-result").append("<img src="+response[0]+"/>");
+		
 		responsiveVoice.speak("You spelled " + textSpeak, "UK English Female");
-		$('#image-result').addClass('animated bounceInDown')
+		$("#image-result").append("<img src=" + "\"" + response[0] + "\"" + "id=" + textSpeak + " />");
+		var stickerElement = document.getElementById(response[1]);
+
+		addSticker(stickerElement, canvasPlay);
 
 	})
 	.fail(function(error) {
@@ -367,4 +366,20 @@ function searchAjax(event, canvasPlay) {
 		responsiveVoice.speak("Oh no!", "UK English Female");
 		alert(error.status);
 	});
+};
+
+
+function addSticker(stickerElement, canvasPlay) {
+
+
+	var sticker = new fabric.Image(stickerElement, {
+	  left: 910,
+	  top: 25,
+		width: 100,
+		height: 100
+	});
+
+
+	canvasPlay.add(sticker);
+	canvasPlay.renderAll();
 };
