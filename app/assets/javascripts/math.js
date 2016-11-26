@@ -1,5 +1,7 @@
 $( document ).on('turbolinks:load', function() {
-var game = new Phaser.Game(500, 500, Phaser.CANVAS, "", {
+   $(function(){
+     if($('body').is('.math-game')){
+       var game = new Phaser.Game(500, 500, Phaser.auto, 'math', {
     preload: onPreload,
     create: onCreate
   });
@@ -97,4 +99,7 @@ var game = new Phaser.Game(500, 500, Phaser.CANVAS, "", {
     randomSum = game.rnd.between(0,2);
     questionText.text = sumsArray[Math.min(Math.round((score-100)/400)+1,4)][randomSum][game.rnd.between(0,sumsArray[Math.min(Math.round((score-100)/400)+1,4)][randomSum].length-1)];
   }
+
+     }
+  });
 });
