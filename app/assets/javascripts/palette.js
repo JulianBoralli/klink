@@ -103,15 +103,15 @@ function searchAjax(event, canvasPlay) {
 		dataType: 'json'
 	})
 	.done(function(response) {
-		console.log(response[1])
+		console.log(response)
 		var textSpeak = JSON.stringify(response[1])
-		console.log(textSpeak);
 		// function to call the APIs with response
 		$("#image-result").append("<img src="+response[0]+"/>");
 		responsiveVoice.speak("You spelled " + textSpeak, "UK English Female");
 	})
 	.fail(function(error) {
 		console.log(error);
+		responsiveVoice.speak("Oh no!", "UK English Female");
 		alert(error.status);
 	});
 };
