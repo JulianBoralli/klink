@@ -32,6 +32,20 @@ function generatePalette(canvasPlay, canvasPalette) {
 	    	clone.lockMovementX = false;
 				clone.lockMovementY = false;
 	    	canvasPlay.add(clone);
+
+
+				clone.animate('height', 100,  {
+				  onChange: canvasPlay.renderAll.bind(canvasPlay),
+				  duration: 800,
+				  easing: fabric.util.ease.easeOutBounce
+				});
+
+				clone.animate('width', 100,  {
+					onChange: canvasPlay.renderAll.bind(canvasPlay),
+					duration: 800,
+					easing: fabric.util.ease.easeOutQuad
+				});
+
 				canvasPalette.deactivateAll().renderAll();
 			}
 		});
@@ -39,6 +53,19 @@ function generatePalette(canvasPlay, canvasPalette) {
 		canvasPalette.add(letter);
 
 	});
+
+	canvasPlay.on ("object:moving", function (event) {
+    var el = event.target;
+
+    el.left = el.left < el.getBoundingRectWidth() / 2 ? el.getBoundingRectWidth() / 6 : el.left;
+  	el.top = el.top < el.getBoundingRectHeight () / 2 ? el.getBoundingRectHeight() / 6 : el.top;
+
+  	var right = el.left + el.getBoundingRectWidth() / 2;
+    var bottom = el.top + el.getBoundingRectHeight() / 2;
+
+    el.left = right > canvasPlay.width - el.getBoundingRectWidth() / 2 ? canvasPlay.width - el.getBoundingRectWidth() / 1 : el.left;
+    el.top = bottom > canvasPlay.height - el.getBoundingRectHeight() / 2 ? canvasPlay.height - el.getBoundingRectHeight() / 1 : el.top;
+    });
 
 	var searchElement = document.getElementById('search-img');
 
