@@ -35,6 +35,7 @@ function generatePalette(canvasPlay, canvasPalette) {
 	    	clone.lockMovementX = false;
 				clone.lockMovementY = false;
 	    	canvasPlay.add(clone); 
+	    	canvasPalette.deactivateAll().renderAll();
 			}
 		});
 
