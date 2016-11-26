@@ -108,6 +108,7 @@ function searchAjax(event, canvasPlay) {
 		// function to call the APIs with response
 		$("#image-result").append("<img src="+response[0]+"/>");
 		responsiveVoice.speak("You spelled " + textSpeak, "UK English Female");
+		$('#image-result').addClass('animated bounceInDown')
 	})
 	.fail(function(error) {
 		console.log(error);
