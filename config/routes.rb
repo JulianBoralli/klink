@@ -8,5 +8,7 @@ Rails.application.routes.draw do
 	get '/letters/show' => 'letters#show'
 
 	get '/write' => 'writings#index'
+	
+  get '/drawings' => 'drawings#index'
 
 end

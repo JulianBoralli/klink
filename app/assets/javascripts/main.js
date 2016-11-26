@@ -1,5 +1,7 @@
 $( document ).on('turbolinks:load', function() {
 
+
+  // Read
   var canvasPlay = new ResponsiveCanvas('canvas-play');
 
 	var canvasPalette = new ResponsiveCanvas('canvas-palette');
@@ -17,5 +19,17 @@ $( document ).on('turbolinks:load', function() {
   });
 
 	canvasPalette.selectable = true;
+
+
+  // Draw
+  // var canvasDraw = new ResponsiveCanvas('canvas-draw', {
+  //   isDrawingMode: true
+  // });
+
+  // generateDrawing(canvasDraw);
+
+  // canvasDraw.setDimensions({width: '98vw', height: '40vw'}, {
+  // cssOnly: true
+  // });
 
 });
