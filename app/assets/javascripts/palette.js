@@ -82,12 +82,6 @@ function generatePalette(canvasPlay, canvasPalette) {
     canvasPlay.clear(); 
 	});
 
-
-	canvasPalette.add(searchButton, clearButton);
-
-	canvasPalette.selection = false;
-
-
 	var trashCanElement = document.getElementById('trashcan-img');
 	var	trashCan = new fabric.Image(trashCanElement, {
 		left: 825,
@@ -95,7 +89,6 @@ function generatePalette(canvasPlay, canvasPalette) {
 		width: canvasPalette.width*(percentage*1.6),
 		height: canvasPalette.width*(percentage*1.6)
 	});
-	canvasPalette.add(trashCan);
 	// trashCan.selectable = false
 
 	trashCan.lockMovementX = true;
@@ -108,6 +101,9 @@ function generatePalette(canvasPlay, canvasPalette) {
 		canvasPalette.deactivateAll().renderAll();
 	});
 
+	canvasPalette.add(searchButton, clearButton, trashCan);
+
+	canvasPalette.selection = false;
 
 };
 
