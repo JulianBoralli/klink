@@ -10,13 +10,13 @@ class LettersController < ApplicationController
 
  		word = Letter.join_letters(params["array"])
     p "*"*60
-    # p @result = ImageApiHelper.fetch_image(word)
-    p @result = ImageApiHelper.pixabay(word)
+    p @result = ImageApiHelper.fetch_image(word)
+    # p @result = ImageApiHelper.pixabay(word)
 		p word
 
     if Obscenity.profane?(word)
       word = "whoopsies"
-      @result = ImageApiHelper.pixabay("mistake")
+      @result = ImageApiHelper.fetch_image("mistake")
     end
 
     @results = [@result, word]
