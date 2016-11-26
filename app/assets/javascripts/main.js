@@ -1,8 +1,6 @@
 $( document ).on('turbolinks:load', function() {
 
-  console.log("Ullo")
-
-  var canvasPlay new ResponsiveCanvas('canvas-play');
+  var canvasPlay = new ResponsiveCanvas('canvas-play');
 
 	var canvasPalette = new ResponsiveCanvas('canvas-palette');
 
