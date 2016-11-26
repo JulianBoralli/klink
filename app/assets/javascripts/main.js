@@ -8,11 +8,11 @@ $( document ).on('turbolinks:load', function() {
 
 	generatePalette(canvasPlay, canvasPalette);
 
-  canvasPlay.setDimensions({width: '98vw', height: '60vh'}, {
+  canvasPlay.setDimensions({width: '98vw', height: '40vw'}, {
     cssOnly: true
   });
 
-  canvasPalette.setDimensions({width: '98vw', height: '20vh'}, {
+  canvasPalette.setDimensions({width: '98vw', height: '13vw'}, {
     cssOnly: true
   });
 
