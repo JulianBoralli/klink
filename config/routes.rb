@@ -8,4 +8,6 @@ Rails.application.routes.draw do
 
 	get '/letters/show' => 'letters#show'
 
+  get '/math' => 'math#index'
+
 end
