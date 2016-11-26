@@ -1,8 +1,8 @@
 function generatePalette(canvasPlay, canvasPalette) {
-	
+
 	var letterImages = $('#letter-images').children();
 
-	$.each(letterImages, function(i, el) { 
+	$.each(letterImages, function(i, el) {
 
 		var letter = new fabric.Image(el, {
 		  char: String.fromCharCode(65 + i),
@@ -31,7 +31,7 @@ function generatePalette(canvasPlay, canvasPalette) {
 				var clone = fabric.util.object.clone(this);
 	    	clone.lockMovementX = false;
 				clone.lockMovementY = false;
-	    	canvasPlay.add(clone); 
+	    	canvasPlay.add(clone);
 			}
 		});
 
@@ -56,7 +56,7 @@ function generatePalette(canvasPlay, canvasPalette) {
 	searchButton.on('selected', function() {
 	  console.log('search');
 	  // Ajax json data of all letters inside canvasPlay [{}, {}]
-    searchAjax(event, canvasPlay); 
+    searchAjax(event, canvasPlay);
 	});
 
 	var clearElement = document.getElementById('clear-img');
@@ -75,7 +75,7 @@ function generatePalette(canvasPlay, canvasPalette) {
 
 	clearButton.on('selected', function() {
 	  console.log('clear');
-    canvasPlay.clear(); 
+    canvasPlay.clear();
 	});
 
 
@@ -92,7 +92,7 @@ function searchAjax(event, canvasPlay) {
 
 	var action = "/letters/show";
 	var method = "GET";
-	
+
  	var jsonLetters = JSON.stringify(letters);
 	var data = {array: jsonLetters};
 	console.log(data);
@@ -105,10 +105,10 @@ function searchAjax(event, canvasPlay) {
 	.done(function(response) {
 		console.log(response)
 		// function to call the APIs with response
-
+		$("#image-result").append("<img src='" +response+ "'/>");
 		// $('#coordinates').empty();
 		// $('#coordinates').append(response);
-		
+
 	})
 	.fail(function(error) {
 		console.log(error);
