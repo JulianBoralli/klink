@@ -33,7 +33,7 @@ function generatePalette(canvasPlay, canvasPalette) {
 				clone.lockMovementY = false;
 	    	canvasPlay.add(clone);
 
-
+				// animation on adding the block
 				clone.animate('height', 100,  {
 				  onChange: canvasPlay.renderAll.bind(canvasPlay),
 				  duration: 800,
@@ -47,13 +47,14 @@ function generatePalette(canvasPlay, canvasPalette) {
 				});
 
 				canvasPalette.deactivateAll().renderAll();
-			}
+			};
 		});
 
 		canvasPalette.add(letter);
 
 	});
 
+// to bound the canvas so the elements won't disappear
 	canvasPlay.on ("object:moving", function (event) {
     var el = event.target;
 
@@ -66,6 +67,12 @@ function generatePalette(canvasPlay, canvasPalette) {
     el.left = right > canvasPlay.width - el.getBoundingRectWidth() / 2 ? canvasPlay.width - el.getBoundingRectWidth() / 1 : el.left;
     el.top = bottom > canvasPlay.height - el.getBoundingRectHeight() / 2 ? canvasPlay.height - el.getBoundingRectHeight() / 1 : el.top;
     });
+
+
+	canvasPlay.on('object:selected', function(o){
+		var activeObj = o.target;
+		activeObj.set({'borderColor': 'red'});
+	});
 
 	var searchElement = document.getElementById('search-img');
 
@@ -111,6 +118,7 @@ function generatePalette(canvasPlay, canvasPalette) {
 	canvasPalette.selection = false;
 
 
+	// trash can to delete single character
 	var trashCanElement = document.getElementById('trashcan-img');
 	var	trashCan = new fabric.Image(trashCanElement, {
 		left: 1320,
@@ -119,7 +127,6 @@ function generatePalette(canvasPlay, canvasPalette) {
 		height: 100
 	});
 	canvasPalette.add(trashCan);
-	// trashCan.selectable = false
 
 	trashCan.lockMovementX = true;
 	trashCan.lockMovementY = true;
@@ -132,7 +139,6 @@ function generatePalette(canvasPlay, canvasPalette) {
 	});
 
 };
-
 
 
 function searchAjax(event, canvasPlay) {
