@@ -2,6 +2,7 @@ function generatePalette(canvasPlay, canvasPalette) {
 
 	var letterImages = $('#letter-images').children();
 	var percentage = 0.05;
+	canvasPalette.renderAll();
 
 	$.each(letterImages, function(i, el) {
 
@@ -37,11 +38,8 @@ function generatePalette(canvasPlay, canvasPalette) {
 				clone.lockMovementY = false;
 
 
-
-
-
 				// animation on adding the block
-				clone.animate('height', 100,  {
+				clone.animate('height', 100, {
 				  onChange: canvasPlay.renderAll.bind(canvasPlay),
 				  duration: 1000,
 				  easing: fabric.util.ease.easeOutBounce
@@ -54,12 +52,11 @@ function generatePalette(canvasPlay, canvasPalette) {
 				});
 	    	canvasPlay.add(clone);
 	    	canvasPalette.deactivateAll().renderAll();
-
-
 			}
 		});
 
 		canvasPalette.add(letter);
+		canvasPalette.renderAll();
 
 	});
 
@@ -78,7 +75,6 @@ function generatePalette(canvasPlay, canvasPalette) {
 	});
 
 	// active object has red border
-	// overlapping changes opacity
 	canvasPlay.on({
 	'object:selected': borders
 });
@@ -286,7 +282,6 @@ canvasPlay.on('object:moving', function (options) {
 
 
 	});
-	// trashCan.selectable = false
 
 	trashCan.lockMovementX = true;
 	trashCan.lockMovementY = true;
@@ -300,30 +295,44 @@ canvasPlay.on('object:moving', function (options) {
 
 	canvasPalette.add(searchButton, clearButton, trashCan);
 
+
+// letter wiggle
+	canvasPlay.hoverCursor = 'pointer';
+	function animate(e, dir) {
+	if (e.target) {
+		fabric.util.animate({
+			startValue: e.target.get('scaleY'),
+			endValue: e.target.get('scaleY') + (dir ? 0 : -3 ),
+			duration: 100,
+			onChange: function(value) {
+				e.target.setAngle(value);
+				canvasPlay.renderAll();
+			},
+			onComplete: function() {
+				e.target.setCoords();
+			}
+		});
+		fabric.util.animate({
+			startValue: e.target.get('scaleX'),
+			endValue: e.target.get('scaleX') + (dir ?  3 : 0  ),
+			duration: 100,
+			onChange: function(value) {
+				e.target.scale(value);
+				canvasPlay.renderAll();
+			},
+			onComplete: function() {
+				e.target.setCoords();
+			}
+		});
+		}
+	}
+	canvasPlay.on('mouse:down', function(e) { animate(e); });
+	canvasPlay.on('mouse:up', function(e) { animate(e); });
 	canvasPalette.selection = false;
+	canvasPlay.selection = false;
 
+	};
 
-	// trash can to delete single character
-	var trashCanElement = document.getElementById('trashcan-img');
-	var	trashCan = new fabric.Image(trashCanElement, {
-		left: 1320,
-		top: 10,
-		width: 100,
-		height: 100
-	});
-	canvasPalette.add(trashCan);
-
-	trashCan.lockMovementX = true;
-	trashCan.lockMovementY = true;
-	trashCan.lockUniScaling = true;
-	trashCan.lockRotation = true;
-	trashCan.on('selected', function(){
-		var activeObject = canvasPlay.getActiveObject();
-		canvasPlay.remove(activeObject);
-		canvasPalette.deactivateAll().renderAll();
-	});
-
-};
 
 
 function searchAjax(event, canvasPlay) {
