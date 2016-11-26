@@ -92,8 +92,13 @@ function generatePalette(canvasPlay, canvasPalette) {
 		height: 100
 	});
 	canvasPlay.add(trashCan);
-	trashCan.selectable = false
+	// trashCan.selectable = false
 
+	trashCan.on("")
+	trashCan.lockMovementX = true;
+	trashCan.lockMovementY = true;
+	trashCan.lockUniScaling = true;
+	trashCan.lockRotation = true;
 };
 
 
