@@ -54,25 +54,42 @@ function generatePalette(canvasPlay, canvasPalette) {
 
 	});
 
-// to bound the canvas so the elements won't disappear
+	// to bound the canvas so the elements won't disappear
 	canvasPlay.on ("object:moving", function (event) {
-    var el = event.target;
+		var el = event.target;
 
-    el.left = el.left < el.getBoundingRectWidth() / 2 ? el.getBoundingRectWidth() / 6 : el.left;
-  	el.top = el.top < el.getBoundingRectHeight () / 2 ? el.getBoundingRectHeight() / 6 : el.top;
+		el.left = el.left < el.getBoundingRectWidth() / 2 ? el.getBoundingRectWidth() / 6 : el.left;
+		el.top = el.top < el.getBoundingRectHeight () / 2 ? el.getBoundingRectHeight() / 6 : el.top;
 
-  	var right = el.left + el.getBoundingRectWidth() / 2;
-    var bottom = el.top + el.getBoundingRectHeight() / 2;
+		var right = el.left + el.getBoundingRectWidth() / 2;
+		var bottom = el.top + el.getBoundingRectHeight() / 2;
 
-    el.left = right > canvasPlay.width - el.getBoundingRectWidth() / 2 ? canvasPlay.width - el.getBoundingRectWidth() / 1 : el.left;
-    el.top = bottom > canvasPlay.height - el.getBoundingRectHeight() / 2 ? canvasPlay.height - el.getBoundingRectHeight() / 1 : el.top;
-    });
-
-
-	canvasPlay.on('object:selected', function(o){
-		var activeObj = o.target;
-		activeObj.set({'borderColor': 'red'});
+		el.left = right > canvasPlay.width - el.getBoundingRectWidth() / 2 ? canvasPlay.width - el.getBoundingRectWidth() / 1 : el.left;
+		el.top = bottom > canvasPlay.height - el.getBoundingRectHeight() / 2 ? canvasPlay.height - el.getBoundingRectHeight() / 1 : el.top;
 	});
+
+	// active object has red border
+	// overlapping changes opacity
+	canvasPlay.on({
+	'object:moving': onChange,
+	'object:scaling': onChange,
+	'object:rotating': onChange,
+	'object:selected': borders
+});
+
+function borders(object){
+	var activeObject = object.target;
+	activeObject.set({'borderColor': 'red'});
+};
+
+function onChange(options) {
+	options.target.setCoords();
+	canvasPlay.forEachObject(function(obj) {
+		if (obj === options.target) return;
+		obj.setOpacity(options.target.intersectsWithObject(obj) ? 0.4 : 1);
+	});
+}
+
 
 	var searchElement = document.getElementById('search-img');
 
