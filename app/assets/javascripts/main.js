@@ -1,76 +1,21 @@
 $( document ).on('turbolinks:load', function() {
-	  console.log("It works on each visit!")
 
-	// create a wrapper around native canvas element (with id="c")
-	var canvas = new fabric.Canvas('c');
+  var canvasPlay = new ResponsiveCanvas('canvas-play');
 
-	// create a rectangle object
-	var rectA = new fabric.Rect({
-	  left: 100,
-	  top: 100,
-	  fill: 'red',
-	  width: 20,
-	  height: 20
-	});
+	var canvasPalette = new ResponsiveCanvas('canvas-palette');
 
-	rectA.toObject = function () {
-		return {
-			letter: "A",
-			left: this.left
-		};
-	};
+	fabric.Object.prototype.hasControls = false;
 
-	// create a rectangle object
-	var rectB = new fabric.Rect({
-	  left: 200,
-	  top: 200,
-	  fill: 'green',
-	  width: 20,
-	  height: 20
-	});
+	generatePalette(canvasPlay, canvasPalette);
 
-	rectB.toObject = function () {
-		return {
-			letter: "B",
-			left: this.left
-		};
-	};
-	
-	// "add" rectangle onto canvas
-	canvas.add(rectA, rectB);
+  canvasPlay.setDimensions({width: '98vw', height: '40vw'}, {
+    cssOnly: true
+  });
 
-	rectA.on('selected', newAjax);
+  canvasPalette.setDimensions({width: '98vw', height: '13vw'}, {
+    cssOnly: true
+  });
 
-
-function newAjax(event) {
-	
-
-	var letters = canvas._objects;
-
-	var action = "/letters/show";
-	var method = "GET";
-	
- 	var jsonLetters = JSON.stringify(letters);
-	var data = {array: jsonLetters};
-	console.log(data);
-	$.ajax({
-		url: action,
-		method: method,
-		data: data,
-		dataType: 'json'
-	})
-	.done(function(response) {
-		console.log(response)
-		$('#coordinates').empty();
-		$('#coordinates').append(response);
-		
-	})
-	.fail(function(error) {
-		console.log(error);
-		alert(error.status);
-	});
-
-};
-
+	canvasPalette.selectable = true;
 
 });
