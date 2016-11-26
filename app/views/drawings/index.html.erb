@@ -1,3 +1,15 @@
-<h1>Letters Game Page!</h1>
+<h1>Drawing Game Page!</h1>
 
-    <canvas id="canvas-draw" height="130" width="1000"></canvas>
+    <canvas id="canvas-draw" height="200" width="800"></canvas>
+
+        <li style="margin-top:10px;">
+          <button id="drawing-mode" class="btn btn-info">Enter drawing mode</button>
+          <div style="display: none;" id="drawing-mode-options">
+            <label for="drawing-line-width">Line width:</label>
+            <input type="range" value="30" min="0" max="150" id="drawing-line-width"><br>
+            <label for="drawing-color">Line color:</label>
+            <input type="color" value="#005E7A" id="drawing-color"><br>
+            <label for="drawing-shadow-width">Line shadow width:</label>
+            <input type="range" value="0" min="0" max="50" id="drawing-shadow-width"><br>
+          </div>
+        </li>

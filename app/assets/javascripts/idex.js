@@ -1,11 +1,17 @@
-$( document ).on('turbolinks:load', function() {
+function generateDrawing() {
 
-var canvasDraw = new fabric.Canvas('canvas-draw');
-var drawingModeEl = document.getElementById('drawing-mode'),
-      drawingOptionsEl = document.getElementById('drawing-mode-options'),
-      drawingColorEl = document.getElementById('drawing-color'),
-      drawingLineWidthEl = document.getElementById('drawing-line-width'),
-      drawingShadowWidth = document.getElementById('drawing-shadow-width');
+  fabric.Object.prototype.transparentCorners = false;
+
+  var drawingModeEl = $('drawing-mode'),
+      drawingOptionsEl = $('drawing-mode-options'),
+      drawingColorEl = $('drawing-color'),
+      drawingShadowColorEl = $('drawing-shadow-color'),
+      drawingLineWidthEl = $('drawing-line-width'),
+      drawingShadowWidth = $('drawing-shadow-width'),
+      drawingShadowOffset = $('drawing-shadow-offset'),
+      clearEl = $('clear-canvas');
+
+  clearEl.onclick = function() { canvas.clear() };
 
   drawingModeEl.onclick = function() {
     canvasDraw.isDrawingMode = !canvasDraw.isDrawingMode;
@@ -19,15 +25,11 @@ var drawingModeEl = document.getElementById('drawing-mode'),
     }
   };
 
-  canvasDraw.on('path:created', function() {
-    updateComplexity();
-  });
-
   if (fabric.PatternBrush) {
     var vLinePatternBrush = new fabric.PatternBrush(canvasDraw);
     vLinePatternBrush.getPatternSrc = function() {
 
-      var patternCanvas = fabric.document.createElement('cavas');
+      var patternCanvas = fabric.document.createElement('canvasDraw');
       patternCanvas.width = patternCanvas.height = 10;
       var ctx = patternCanvas.getContext('2d');
 
@@ -42,10 +44,10 @@ var drawingModeEl = document.getElementById('drawing-mode'),
       return patternCanvas;
     };
 
-    var hLinePatternBrush = new fabric.PatternBrush(canvas);
+    var hLinePatternBrush = new fabric.PatternBrush(canvasDraw);
     hLinePatternBrush.getPatternSrc = function() {
 
-      var patternCanvas = fabric.document.createElement('canvas');
+      var patternCanvas = fabric.document.createElement('canvasDraw');
       patternCanvas.width = patternCanvas.height = 10;
       var ctx = patternCanvas.getContext('2d');
 
@@ -60,12 +62,12 @@ var drawingModeEl = document.getElementById('drawing-mode'),
       return patternCanvas;
     };
 
-    var squarePatternBrush = new fabric.PatternBrush(canvas);
+    var squarePatternBrush = new fabric.PatternBrush(canvasDraw);
     squarePatternBrush.getPatternSrc = function() {
 
       var squareWidth = 10, squareDistance = 2;
 
-      var patternCanvas = fabric.document.createElement('canvas');
+      var patternCanvas = fabric.document.createElement('canvasDraw');
       patternCanvas.width = patternCanvas.height = squareWidth + squareDistance;
       var ctx = patternCanvas.getContext('2d');
 
@@ -75,11 +77,11 @@ var drawingModeEl = document.getElementById('drawing-mode'),
       return patternCanvas;
     };
 
-    var diamondPatternBrush = new fabric.PatternBrush(canvas);
+    var diamondPatternBrush = new fabric.PatternBrush(canvasDraw);
     diamondPatternBrush.getPatternSrc = function() {
 
       var squareWidth = 10, squareDistance = 5;
-      var patternCanvas = fabric.document.createElement('canvas');
+      var patternCanvas = fabric.document.createElement('canvasDraw');
       var rect = new fabric.Rect({
         width: squareWidth,
         height: squareWidth,
@@ -101,58 +103,47 @@ var drawingModeEl = document.getElementById('drawing-mode'),
     var img = new Image();
     img.src = '../assets/honey_im_subtle.png';
 
-    var texturePatternBrush = new fabric.PatternBrush(canvas);
+    var texturePatternBrush = new fabric.PatternBrush(canvasDraw);
     texturePatternBrush.source = img;
   }
 
-  document.getElementById('drawing-mode-selector').addEventListener('change', function() {
+  $('drawing-mode-selector').onchange = function() {
 
     if (this.value === 'hline') {
-      canvas.freeDrawingBrush = vLinePatternBrush;
+      canvasDraw.freeDrawingBrush = vLinePatternBrush;
     }
     else if (this.value === 'vline') {
-      canvas.freeDrawingBrush = hLinePatternBrush;
+      canvasDraw.freeDrawingBrush = hLinePatternBrush;
     }
     else if (this.value === 'square') {
-      canvas.freeDrawingBrush = squarePatternBrush;
+      canvasDraw.freeDrawingBrush = squarePatternBrush;
     }
     else if (this.value === 'diamond') {
-      canvas.freeDrawingBrush = diamondPatternBrush;
+      canvasDraw.freeDrawingBrush = diamondPatternBrush;
     }
     else if (this.value === 'texture') {
-      canvas.freeDrawingBrush = texturePatternBrush;
+      canvasDraw.freeDrawingBrush = texturePatternBrush;
     }
     else {
-      canvas.freeDrawingBrush = new fabric[this.value + 'Brush'](canvas);
+      canvasDraw.freeDrawingBrush = new fabric[this.value + 'Brush'](canvasDraw);
     }
 
-    if (canvas.freeDrawingBrush) {
-      canvas.freeDrawingBrush.color = drawingColorEl.value;
-      canvas.freeDrawingBrush.width = parseInt(drawingLineWidthEl.value, 10) || 1;
-      canvas.freeDrawingBrush.shadowBlur = parseInt(drawingShadowWidth.value, 10) || 0;
+    if (canvasDraw.freeDrawingBrush) {
+      canvasDraw.freeDrawingBrush.color = drawingColorEl.value;
+      canvasDraw.freeDrawingBrush.width = parseInt(drawingLineWidthEl.value, 10) || 1;
     }
-  });
+  };
 
   drawingColorEl.onchange = function() {
-    canvas.freeDrawingBrush.color = drawingColorEl.value;
+    canvasDraw.freeDrawingBrush.color = this.value;
   };
   drawingLineWidthEl.onchange = function() {
-    canvas.freeDrawingBrush.width = parseInt(drawingLineWidthEl.value, 10) || 1;
-  };
-  drawingShadowWidth.onchange = function() {
-    canvas.freeDrawingBrush.shadowBlur = parseInt(drawingShadowWidth.value, 10) || 0;
+    canvasDraw.freeDrawingBrush.width = parseInt(this.value, 10) || 1;
+    this.previousSibling.innerHTML = this.value;
   };
 
-  if (canvas.freeDrawingBrush) {
-    canvas.freeDrawingBrush.color = drawingColorEl.value;
-    canvas.freeDrawingBrush.width = parseInt(drawingLineWidthEl.value, 10) || 1;
-    canvas.freeDrawingBrush.shadowBlur = 0;
+  if (canvasDraw.freeDrawingBrush) {
+    canvasDraw.freeDrawingBrush.color = drawingColorEl.value;
+    canvasDraw.freeDrawingBrush.width = parseInt(drawingLineWidthEl.value, 10) || 1;
   }
-
-  document.getElementById('canvas-background-picker').addEventListener('change', function() {
-    canvas.backgroundColor = this.value;
-    canvas.renderAll();
-  });
-
-
-});
+};
