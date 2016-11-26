@@ -87,18 +87,23 @@ function generatePalette(canvasPlay, canvasPalette) {
 	var trashCanElement = document.getElementById('trashcan-img');
 	var	trashCan = new fabric.Image(trashCanElement, {
 		left: 1320,
-		top: 450,
+		top: 10,
 		width: 100,
 		height: 100
 	});
-	canvasPlay.add(trashCan);
+	canvasPalette.add(trashCan);
 	// trashCan.selectable = false
 
-	trashCan.on("")
 	trashCan.lockMovementX = true;
 	trashCan.lockMovementY = true;
 	trashCan.lockUniScaling = true;
 	trashCan.lockRotation = true;
+	trashCan.on('selected', function(){
+		var activeObject = canvasPlay.getActiveObject();
+		canvasPlay.remove(activeObject);
+		canvasPalette.deactivateAll().renderAll();
+	});
+
 };
 
 
