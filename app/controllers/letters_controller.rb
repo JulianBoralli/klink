@@ -9,12 +9,11 @@ class LettersController < ApplicationController
 		p "GOT IT!!!"
 
  		word = Letter.join_letters(params["array"])
-
+    p "*"*60
     p @result = ImageApiHelper.fetch_image(word)
-
-		p "*"*60
 		p word
-		render json:@result
+    @results = [@result, word]
+		render json: @results.to_json
 	end
 
 end
