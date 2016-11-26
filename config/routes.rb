@@ -7,6 +7,6 @@ Rails.application.routes.draw do
 
 	get '/letters/show' => 'letters#show'
 
-  get '/draw' => 'draw#index'
+  get '/draw' => 'drawings#index'
 
 end
