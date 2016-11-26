@@ -46,9 +46,9 @@ function generatePalette(canvasPlay, canvasPalette) {
 
 	var searchButton = new fabric.Image(searchElement, {
 	  left: 750,
-	  top: 10,
-		width: canvasPalette.width*(percentage*2),
-		height: canvasPalette.width*(percentage*2)
+	  top: 25,
+		width: canvasPalette.width*(percentage*1.6),
+		height: canvasPalette.width*(percentage*1.6)
 	});
 
 	searchButton.lockMovementX = true;
@@ -65,10 +65,10 @@ function generatePalette(canvasPlay, canvasPalette) {
 	var clearElement = document.getElementById('clear-img');
 
 	var clearButton = new fabric.Image(clearElement, {
-	  left: 880,
-	  top: 10,
-		width: canvasPalette.width*(percentage*2),
-		height: canvasPalette.width*(percentage*2)
+	  left: 910,
+	  top: 25,
+		width: canvasPalette.width*(percentage*1.6),
+		height: canvasPalette.width*(percentage*1.6)
 	});
 
 	clearButton.lockMovementX = true;
@@ -86,16 +86,27 @@ function generatePalette(canvasPlay, canvasPalette) {
 
 	canvasPalette.selection = false;
 
+
 	var trashCanElement = document.getElementById('trashcan-img');
 	var	trashCan = new fabric.Image(trashCanElement, {
-		left: 1320,
-		top: 450,
-		width: 100,
-		height: 100
+		left: 825,
+		top: 25,
+		width: canvasPalette.width*(percentage*1.6),
+		height: canvasPalette.width*(percentage*1.6)
+	});
+	canvasPalette.add(trashCan);
+	// trashCan.selectable = false
+
+	trashCan.lockMovementX = true;
+	trashCan.lockMovementY = true;
+	trashCan.lockUniScaling = true;
+	trashCan.lockRotation = true;
+	trashCan.on('selected', function(){
+		var activeObject = canvasPlay.getActiveObject();
+		canvasPlay.remove(activeObject);
+		canvasPalette.deactivateAll().renderAll();
 	});
 
-	canvasPlay.add(trashCan);
-	trashCan.selectable = false
 
 };
 
