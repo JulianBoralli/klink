@@ -7,7 +7,7 @@ function generatePalette(canvasPlay, canvasPalette) {
 
 		var letter = new fabric.Image(el, {
 		  char: String.fromCharCode(65 + i),
-		  left: i >= 13 ? ((50 * (i - 11.4)) + (5 * (i - 12))) : ((50 * (i + 1.5)) + (5 * (i + 2))),
+		  left: i >= 13 ? ((50 * (i - 11.1)) + (5 * (i - 10))) : ((50 * (i + 2)) + (5 * (i + 2))),
 		  top: i >= 13 ? 70 : 10,
 		  width: canvasPalette.width*percentage,
 		  height: canvasPalette.width*percentage
@@ -46,7 +46,7 @@ function generatePalette(canvasPlay, canvasPalette) {
 	var searchElement = document.getElementById('search-img');
 
 	var searchButton = new fabric.Image(searchElement, {
-	  left: 815,
+	  left: 910,
 	  top: 25,
 		width: canvasPalette.width*(percentage*1.6),
 		height: canvasPalette.width*(percentage*1.6)
@@ -66,7 +66,7 @@ function generatePalette(canvasPlay, canvasPalette) {
 	var clearElement = document.getElementById('clear-img');
 
 	var clearButton = new fabric.Image(clearElement, {
-	  left: 910,
+	  left: 10,
 	  top: 25,
 		width: canvasPalette.width*(percentage*1.6),
 		height: canvasPalette.width*(percentage*1.6)
@@ -84,7 +84,7 @@ function generatePalette(canvasPlay, canvasPalette) {
 
 	var trashCanElement = document.getElementById('trashcan-img');
 	var	trashCan = new fabric.Image(trashCanElement, {
-		left: 0,
+		left: 820,
 		top: 25,
 		width: canvasPalette.width*(percentage*1.6),
 		height: canvasPalette.width*(percentage*1.6)
