@@ -1,7 +1,11 @@
-$( document ).on('turbolinks:load', function() {
-   $(function(){
-     if($('body').is('.math-game')){
-       var game = new Phaser.Game(500, 500, Phaser.auto, 'math', {
+function mathGame(){
+  // $(function(){
+  //   if($('body').is('.mathgame')){
+  //     playGame();
+  //   }
+  // });
+// var playGame = function(){
+var game = new Phaser.Game(500, 500, Phaser.auto, 'math', {
     preload: onPreload,
     create: onCreate
   });
@@ -99,7 +103,5 @@ $( document ).on('turbolinks:load', function() {
     randomSum = game.rnd.between(0,2);
     questionText.text = sumsArray[Math.min(Math.round((score-100)/400)+1,4)][randomSum][game.rnd.between(0,sumsArray[Math.min(Math.round((score-100)/400)+1,4)][randomSum].length-1)];
   }
-
-     }
-  });
-});
+  }
+// }

@@ -1,5 +1,8 @@
 $( document ).on('turbolinks:load', function() {
 
+   $(function(){
+    if($('body').is('.readgame')){
+
   var canvasPlay = new ResponsiveCanvas('canvas-play');
 
 	var canvasPalette = new ResponsiveCanvas('canvas-palette');
@@ -16,6 +19,16 @@ $( document ).on('turbolinks:load', function() {
     cssOnly: true
   });
 
-	canvasPalette.selectable = true;
+  }
+  });
+
+	// canvasPalette.selectable = true;
+ $(function(){
+    if($('body').is('.mathgame')){
+      mathGame();
+    }
+  });
+
+  // mathGame();
 
 });
