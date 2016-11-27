@@ -18,4 +18,15 @@ $( document ).on('turbolinks:load', function() {
 
 	canvasPalette.selectable = true;
 
+
+
+
+ //  $(function(){
+ //   if($('body').is('.read-game')){
+ //     readGame();
+ //   }
+ // });
+
+
+
 });
