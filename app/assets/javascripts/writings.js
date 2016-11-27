@@ -20,7 +20,7 @@ var writeGame = function(){
 function generatePalette(canvasPlay, canvasPalette) {
   canvasPalette.selectable = true;
   canvasPlay.freeDrawingBrush.color = "blue";
-  canvasPlay.freeDrawingBrush.width = 10
+  canvasPlay.freeDrawingBrush.width = 10;
 
   var traceMode = document.getElementById('drawing-mode')
 
@@ -34,17 +34,13 @@ function generatePalette(canvasPlay, canvasPalette) {
       }
   };
 
-  canvasPlay.on('path:created', function() {
-    updateComplexity();
-  });
-
 	var letterImages = $('#letter-images').children();
 	var percentage = 0.05;
 
 	$.each(letterImages, function(i, el) {
 
 		var letter = new fabric.Image(el, {
-		  left: i >= 13 ? ((50 * (i - 11.1)) + (5 * (i - 10))) : ((50 * (i + 2)) + (5 * (i + 2))),
+		  left: i >= 13 ? ((55 * (i - 11.1)) + (5 * (i - 10))) : ((50 * (i + 2)) + (10 * (i + 2))),
 		  top: i >= 13 ? 70 : 10,
 		  width: canvasPalette.width*percentage,
 		  height: canvasPalette.width*percentage
@@ -68,13 +64,13 @@ function generatePalette(canvasPlay, canvasPalette) {
 
 
 				// animation on adding the block
-				clone.animate('height', 480, {
+				clone.animate('height', 380, {
 				  onChange: canvasPlay.renderAll.bind(canvasPlay),
 				  duration: 1000,
 				  easing: fabric.util.ease.easeOutBounce
 				});
 
-				clone.animate('width', 420,  {
+				clone.animate('width', 320,  {
 					onChange: canvasPlay.renderAll.bind(canvasPlay),
 					duration: 1000,
 					easing: fabric.util.ease.easeOutBounce
@@ -110,7 +106,11 @@ function generatePalette(canvasPlay, canvasPalette) {
 
 function borders(object){
 	var activeObject = object.target;
-	activeObject.set({'borderColor': 'red'});
+	activeObject.set({
+  'borderColor': 'red',
+  'borderScaleFactor': 6
+
+  });
 };
 
 var clearElement = document.getElementById('clear-img');
@@ -135,7 +135,7 @@ clearButton.on('selected', function() {
 
 	var trashCanElement = document.getElementById('trashcan-img');
 	var	trashCan = new fabric.Image(trashCanElement, {
-		left: 820,
+		left: 900,
 		top: 25,
 		width: canvasPalette.width*(percentage*1.6),
 		height: canvasPalette.width*(percentage*1.6)
