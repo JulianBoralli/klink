@@ -72,9 +72,6 @@ function generatePalette() {
         canvasPalette.deactivateAll().renderAll();
         canvasPlay.add(clone);
 
-        // clone.on('selected', function(){
-        //   responsiveVoice.speak(this.char);
-        // });
         trace(clone);
 			}
 		});
@@ -97,13 +94,15 @@ function generatePalette() {
       if (clicks < 3){
         clone.animate('left', '+=450', { onChange: canvasPlay.renderAll.bind(canvasPlay) });
       }
+      responsiveVoice.speak(this.char);
     })
-      canvasPlay.isDrawingMode = !canvasPlay.isDrawingMode;
+    
+    canvasPlay.isDrawingMode = !canvasPlay.isDrawingMode;
       if (canvasPlay.isDrawingMode) {
-        traceMode.innerHTML = 'exit trace mode';
+        traceMode.innerHTML = 'Exit Trace';
       }
       else {
-        traceMode.innerHTML = 'enter trace mode';
+        traceMode.innerHTML = 'Trace';
       };
     };
   };
