@@ -7,19 +7,10 @@ function drawGame(ResponsiveCanvas) {
       cssOnly: true
       });
 
-    // var clearDrawing = document.getElementById('clear-drawing-btn');
-    //   clearDrawing.onclick = function() {
-    //     canvasDraw.clear();
-    //     canvasDraw.backgroundColor = "#fff";
-    //   };
-
-
-
     var backgroundImages = $('#drawing-bg-images').children();
 
     $.each(backgroundImages, function(idx, img) {
         $(img).on('click', function() {
-          canvasDraw.clear();
           canvasDraw.setBackgroundImage($(this).attr('src'), 
             canvasDraw.renderAll.bind(canvasDraw), {
             width: canvasDraw.width,
@@ -30,6 +21,7 @@ function drawGame(ResponsiveCanvas) {
         });
     });
 
+    var clearDrawing = document.getElementById('clear-drawing-btn');
     var drawingModeEl = document.getElementById('drawing-mode-btn'),
           drawingOptionsEl = document.getElementById('drawing-mode-options'),
           drawingColorEl = document.getElementById('drawing-color'),
@@ -38,8 +30,13 @@ function drawGame(ResponsiveCanvas) {
         drawingModeEl.onclick = function() {
           canvasDraw.isDrawingMode = !canvasDraw.isDrawingMode;
           if (canvasDraw.isDrawingMode) {
-            $('#drawing-mode').fadeOut();
+            $('#drawing-mode-btn').fadeOut();
             drawingOptionsEl.style.display = '';
+            $('#clear-drawing-btn').fadeIn();
+            clearDrawing.onclick = function() {
+              canvasDraw.clear();
+              canvasDraw.setBackgroundColor('white');
+            };
           }
         };
     
