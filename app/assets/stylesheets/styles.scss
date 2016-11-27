@@ -11,8 +11,8 @@
 }
 
 canvas {
-  border: 1px solid #000000;
-  padding-bottom: 10px;
+  /*border: 1px solid #000000;*/
+  /*padding-bottom: 10px;*/
   display: inline;
 }
 
@@ -30,6 +30,12 @@ canvas {
 
 .game-cards {
   text-align: center;
+}
+
+.read-game {
+  background: url("https://s-media-cache-ak0.pinimg.com/originals/d8/d5/9f/d8d59f1836f374864bb58a2a68c6c304.png");
+  background-repeat: no-repeat;
+  background-size: 100% auto;
 }
 
 .game-logo {

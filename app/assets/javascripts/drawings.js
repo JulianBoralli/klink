@@ -1,4 +1,4 @@
-function drawGame() {
+function drawGame(ResponsiveCanvas) {
 
     var canvasDraw = new ResponsiveCanvas('canvas-draw', {
       backgroundColor : "#fff"

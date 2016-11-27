@@ -1,115 +1,52 @@
-function readGame() {
+function readGame(ResponsiveCanvas) {
 
-			var canvasPlay = new ResponsiveCanvas('canvas-play');
-			var canvasPalette = new ResponsiveCanvas('canvas-palette');
-		
-			fabric.Object.prototype.hasControls = false;
-		
-			generatePalette(canvasPlay, canvasPalette);
-		
-		  canvasPlay.setDimensions({width: '98vw', height: '40vw'}, {
-		    cssOnly: true
-		  });
-		
-		  canvasPalette.setDimensions({width: '98vw', height: '13vw'}, {
-		    cssOnly: true
-		  });
+	// Load Mobile Text2Speech feature
+	document.addEventListener("click", responsiveVoice.clickEvent);
 
-		 canvasPalette.selectable = true;
-		
-		
-		function generatePalette(canvasPlay, canvasPalette) {
-		
-			var letterImages = $('#letter-images').children();
-			var percentage = 0.05;
-			canvasPalette.renderAll();
-		
-			$.each(letterImages, function(i, el) {
-		
-				var letter = new fabric.Image(el, {
-				  char: String.fromCharCode(65 + i),
-				  left: i >= 13 ? ((50 * (i - 11.1)) + (5 * (i - 10))) : ((50 * (i + 2)) + (5 * (i + 2))),
-				  top: i >= 13 ? 70 : 10,
-				  width: canvasPalette.width*percentage,
-				  height: canvasPalette.width*percentage
-				});
-		
-				letter.lockMovementX = true;
-				letter.lockMovementY = true;
-				letter.lockScalingX = letter.lockScalingY = true;
-				letter.lockRotation = true;
-		
-				letter.toObject = function () {
-					return {
-						letter: String.fromCharCode(65 + i),
-						left: this.left
-					};
-				};
-		
-				letter.on('selected', function() {
-				  console.log(this.char);
-		
-				  // Trigger API call for text2Speech individual letter
-					if (this.canvas.lowerCanvasEl.id === "canvas-palette") {
-						var clone = fabric.util.object.clone(this);
-						clone.width = 60;
-						clone.height = 85;
-			    	clone.lockMovementX = false;
-						clone.lockMovementY = false;
-		
-		
-						// animation on adding the block
-						clone.animate('height', 100, {
-						  onChange: canvasPlay.renderAll.bind(canvasPlay),
-						  duration: 1000,
-						  easing: fabric.util.ease.easeOutBounce
-						});
-		
-						clone.animate('width', 75,  {
-							onChange: canvasPlay.renderAll.bind(canvasPlay),
-							duration: 1000,
-							easing: fabric.util.ease.easeOutBounce
-						});
-			    	canvasPlay.add(clone);
-			    	canvasPalette.deactivateAll().renderAll();
-					}
-				});
-		
-				canvasPalette.add(letter);
-				canvasPalette.renderAll();
-		
-			});
-		
-			// to bound the canvas so the elements won't disappear
-			canvasPlay.on ("object:moving", function (event) {
-				var el = event.target;
-		
-				el.left = el.left < el.getBoundingRectWidth() / 2 ? el.getBoundingRectWidth() / 6 : el.left;
-				el.top = el.top < el.getBoundingRectHeight () / 2 ? el.getBoundingRectHeight() / 6 : el.top;
-		
-				var right = el.left + el.getBoundingRectWidth() / 2;
-				var bottom = el.top + el.getBoundingRectHeight() / 2;
-		
-				el.left = right > canvasPlay.width - el.getBoundingRectWidth() / 2 ? canvasPlay.width - el.getBoundingRectWidth() / 1 : el.left;
-				el.top = bottom > canvasPlay.height - el.getBoundingRectHeight() / 2 ? canvasPlay.height - el.getBoundingRectHeight() / 1 : el.top;
-			});
-		
-			// active object has red border
-			canvasPlay.on({
-			'object:selected': borders
-		});
-		
-		function borders(object){
-			var activeObject = object.target;
-			activeObject.set({'borderColor': 'red'});
-		};
-		
-		// SNAPPING & INTERSECTING
-		
+	// Create Canvas
+	var canvasPlay = new ResponsiveCanvas('canvas-play');
+  var canvasPalette = new ResponsiveCanvas('canvas-palette');
+  
+  canvasPlay.setDimensions({width: '98vw', height: '40vw'}, {
+    cssOnly: true
+  });
+  
+  canvasPalette.setDimensions({width: '98vw', height: '13vw'}, {
+    cssOnly: true
+  });
+
+	// Disable Object Controls  
+  fabric.Object.prototype.hasControls = false;
+
+  // Enable Selectable
+  canvasPalette.selectable = true;
+
+  // Disable Multiple Selection
+	canvasPalette.selection = false;
+	canvasPlay.selection = false;
+
+	// Draw Palette
+	generatePalette();
+
+	// Create Red Obj border when selected
+	// redObjectBorder();
+
+	// Bound Canvas Border so objects don't disappear
+	boundCanvas();
+
+	// Configure Snapping and Intersecting 
+	configureSnapIntersect();
+
+	// Wiggle Letter Effect
+	wiggleLetter();
+
+
+	function configureSnapIntersect() {
+
 		var snap = 20;
 		var canvasWidth = document.getElementById('canvas-play').width;
 		var canvasHeight = document.getElementById('canvas-play').height;
-		
+
 		function findNewPos(distX, distY, target, obj) {
 			// See whether to focus on X or Y axis
 			if(Math.abs(distX) > Math.abs(distY)) {
@@ -125,13 +62,15 @@ function readGame() {
 					target.setTop(obj.getTop() + obj.getHeight());
 				}
 			}
-		}
-		
+		};
+
 		canvasPlay.on('object:moving', function (options) {
+		
 			options.target.setCoords();
+		
 			canvasPlay.forEachObject(function (obj) {
 				if (obj === options.target) return;
-		
+
 				// If objects intersect
 				if (options.target.isContainedWithinObject(obj) || options.target.intersectsWithObject(obj) || obj.isContainedWithinObject(options.target)) {
 					var distX = ((obj.getLeft() + obj.getWidth()) / 2) - ((options.target.getLeft() + options.target.getWidth()) / 2);
@@ -139,9 +78,9 @@ function readGame() {
 					// Set new position
 					findNewPos(distX, distY, options.target, obj);
 				}
-		
-			// SNAPPING
-		
+
+				// SNAPPING
+
 				// if bottom points are on same Y axis
 				if(Math.abs((options.target.getTop() + options.target.getHeight()) - (obj.getTop() + obj.getHeight())) < snap) {
 					// target bottom left to object bottom right
@@ -155,7 +94,7 @@ function readGame() {
 						options.target.setTop(obj.getTop() + obj.getHeight() - options.target.getHeight());
 					}
 				}
-		
+
 				// if top points are on same Y axis
 				if(Math.abs(options.target.getTop() - obj.getTop()) < snap) {
 					// target top left to object top right
@@ -170,20 +109,20 @@ function readGame() {
 					}
 				}
 			});
-		
+
 			options.target.setCoords();
-		
-		// INTERSECTING
-		
+
+			// INTERSECTING
+
 			var outerAreaLeft = null,
-				outerAreaTop = null,
-				outerAreaRight = null,
-				outerAreaBottom = null;
-		
+					outerAreaTop = null,
+					outerAreaRight = null,
+					outerAreaBottom = null;
+
 			canvasPlay.forEachObject(function (obj) {
 				if (obj === options.target) return;
 				if (options.target.isContainedWithinObject(obj) || options.target.intersectsWithObject(obj) || obj.isContainedWithinObject(options.target)) {
-		
+
 					var intersectLeft = null,
 						intersectTop = null,
 						intersectWidth = null,
@@ -197,7 +136,7 @@ function readGame() {
 						objectRight = objectLeft + obj.getWidth(),
 						objectTop = obj.getTop(),
 						objectBottom = objectTop + obj.getHeight();
-		
+
 					// find intersect info for X axis
 					if(targetLeft >= objectLeft && targetLeft <= objectRight) {
 						intersectLeft = targetLeft;
@@ -206,7 +145,7 @@ function readGame() {
 						intersectLeft = objectLeft;
 						intersectWidth = options.target.getWidth() - (intersectLeft - targetLeft);
 					};
-		
+
 					// find intersect infofor Y axis
 					if(targetTop >= objectTop && targetTop <= objectBottom) {
 						intersectTop = targetTop;
@@ -215,12 +154,12 @@ function readGame() {
 						intersectTop = objectTop;
 						intersectHeight = options.target.getHeight() - (intersectTop - targetTop);
 					}
-		
+
 					// find intersect size (0 if objs are touching but not overlapping)
 					if(intersectWidth > 0 && intersectHeight > 0) {
 						intersectSize = intersectWidth * intersectHeight;
 					}
-		
+
 					// set outer snapping area
 					if(obj.getLeft() < outerAreaLeft || outerAreaLeft == null) {
 						outerAreaLeft = obj.getLeft();
@@ -234,91 +173,181 @@ function readGame() {
 					if((obj.getTop() + obj.getHeight()) > outerAreaBottom || outerAreaBottom == null) {
 						outerAreaBottom = obj.getTop() + obj.getHeight();
 					}
-		
+
 					// reposition intersecting objs
 					if(intersectSize) {
 						var distX = (outerAreaRight / 2) - ((options.target.getLeft() + options.target.getWidth()) / 2);
 						var distY = (outerAreaBottom / 2) - ((options.target.getTop() + options.target.getHeight()) / 2);
-		
+
 						findNewPos(distX, distY, options.target, obj);
 					}
 				}
 			});
 		});
+	};
+
+
+	function boundCanvas() {
+
+		canvasPlay.on ("object:moving", function (event) {
+			var el = event.target;
+
+			el.left = el.left < el.getBoundingRectWidth() / 2 ? el.getBoundingRectWidth() / 6 : el.left;
+			el.top = el.top < el.getBoundingRectHeight () / 2 ? el.getBoundingRectHeight() / 6 : el.top;
+
+			var right = el.left + el.getBoundingRectWidth() / 2;
+			var bottom = el.top + el.getBoundingRectHeight() / 2;
+
+			el.left = right > canvasPlay.width - el.getBoundingRectWidth() / 2 ? canvasPlay.width - el.getBoundingRectWidth() / 1 : el.left;
+			el.top = bottom > canvasPlay.height - el.getBoundingRectHeight() / 2 ? canvasPlay.height - el.getBoundingRectHeight() / 1 : el.top;
+		});
+	};
+
+  function redObjectBorder() {
 		
-		// END SNAPPING & INTERSECTING
-		
-		
-			var searchElement = document.getElementById('search-img');
-		
-			var searchButton = new fabric.Image(searchElement, {
-			  left: 910,
-			  top: 25,
-				width: canvasPalette.width*(percentage*1.6),
-				height: canvasPalette.width*(percentage*1.6)
+		canvasPlay.on({'object:selected': borders});
+
+		function borders(object) {
+			var activeObject = object.target;
+			activeObject.set({'borderColor': 'red'});
+		};
+  };
+
+
+	function generatePalette() {
+
+		var letterImages = $('#letter-images').children();
+		var percentage = 0.05;
+		canvasPalette.renderAll();
+
+
+		// Creates Letters
+		$.each(letterImages, function(i, el) {
+
+			var letter = new fabric.Image(el, {
+			  char: String.fromCharCode(65 + i),
+			  left: i >= 13 ? ((50 * (i - 11.1)) + (5 * (i - 10))) : ((50 * (i + 2)) + (5 * (i + 2))),
+			  top: i >= 13 ? 70 : 10,
+			  width: canvasPalette.width*percentage,
+			  height: canvasPalette.width*percentage
 			});
-		
-			searchButton.lockMovementX = true;
-			searchButton.lockMovementY = true;
-			searchButton.lockScalingX = searchButton.lockScalingY = true;
-			searchButton.lockRotation = true;
-		
-			searchButton.on('selected', function() {
-			  console.log('clear');
-		    searchAjax(event, canvasPlay);
-		
-			  console.log('search');
-			  // Ajax json data of all letters inside canvasPlay [{}, {}]
-		    searchAjax(event, canvasPlay);
+
+			letter.lockMovementX = true;
+			letter.lockMovementY = true;
+			letter.lockScalingX = letter.lockScalingY = true;
+			letter.lockRotation = true;
+
+			letter.toObject = function () {
+				return {
+					letter: String.fromCharCode(65 + i),
+					left: this.left
+				};
+			};
+
+			letter.on('selected', function() {
+			  console.log(this.char);
+
+			  
+				if (this.canvas.lowerCanvasEl.id === "canvas-palette") {
+					var clone = fabric.util.object.clone(this);
+					responsiveVoice.speak(this.char);
+					clone.width = 60;
+					clone.height = 85;
+		    	clone.lockMovementX = false;
+					clone.lockMovementY = false;
+
+
+					// animation on adding the block
+					clone.animate('height', 100, {
+					  onChange: canvasPlay.renderAll.bind(canvasPlay),
+					  duration: 1000,
+					  easing: fabric.util.ease.easeOutBounce
+					});
+
+					clone.animate('width', 75,  {
+						onChange: canvasPlay.renderAll.bind(canvasPlay),
+						duration: 1000,
+						easing: fabric.util.ease.easeOutBounce
+					});
+		    	canvasPlay.add(clone);
+		    	// canvasPalette.deactivateAll().renderAll();
+
+				}
 			});
-		
-			var clearElement = document.getElementById('clear-img');
-		
-			var clearButton = new fabric.Image(clearElement, {
-			  left: 10,
-			  top: 25,
-				width: canvasPalette.width*(percentage*1.6),
-				height: canvasPalette.width*(percentage*1.6)
+
+			canvasPalette.add(letter);
+			canvasPalette.renderAll();
+		});
+
+
+		// Creates Search Button
+		var searchElement = document.getElementById('search-img');
+
+		var searchButton = new fabric.Image(searchElement, {
+		  left: 910,
+		  top: 25,
+			width: canvasPalette.width*(percentage*1.6),
+			height: canvasPalette.width*(percentage*1.6)
+		});
+
+		searchButton.lockMovementX = true;
+		searchButton.lockMovementY = true;
+		searchButton.lockScalingX = searchButton.lockScalingY = true;
+		searchButton.lockRotation = true;
+
+		searchButton.on('selected', function() {
+		  console.log('search');
+	    searchAjax(event, canvasPlay);
+		});
+
+
+		// Creates Clear Button
+		var clearElement = document.getElementById('clear-img');
+
+		var clearButton = new fabric.Image(clearElement, {
+		  left: 10,
+		  top: 25,
+			width: canvasPalette.width*(percentage*1.6),
+			height: canvasPalette.width*(percentage*1.6)
+		});
+
+		clearButton.lockMovementX = true;
+		clearButton.lockMovementY = true;
+		clearButton.lockScalingX = clearButton.lockScalingY = true;
+		clearButton.lockRotation = true;
+
+		clearButton.on('selected', function() {
+		  console.log('clear');
+	    canvasPlay.clear();
+		});
+
+		// Create Trash Button
+		var trashCanElement = document.getElementById('trashcan-img');
+		var	trashCan = new fabric.Image(trashCanElement, {
+			left: 820,
+			top: 25,
+			width: canvasPalette.width*(percentage*1.6),
+			height: canvasPalette.width*(percentage*1.6)
 			});
-		
-			clearButton.lockMovementX = true;
-			clearButton.lockMovementY = true;
-			clearButton.lockScalingX = clearButton.lockScalingY = true;
-			clearButton.lockRotation = true;
-		
-			clearButton.on('selected', function() {
-			  console.log('clear');
-		    canvasPlay.clear();
-		
-		
-			});
-		
-			var trashCanElement = document.getElementById('trashcan-img');
-			var	trashCan = new fabric.Image(trashCanElement, {
-				left: 820,
-				top: 25,
-				width: canvasPalette.width*(percentage*1.6),
-				height: canvasPalette.width*(percentage*1.6)
-		
-		
-			});
-		
-			trashCan.lockMovementX = true;
-			trashCan.lockMovementY = true;
-			trashCan.lockUniScaling = true;
-			trashCan.lockRotation = true;
-			trashCan.on('selected', function(){
-				var activeObject = canvasPlay.getActiveObject();
-				canvasPlay.remove(activeObject);
-				canvasPalette.deactivateAll().renderAll();
-			});
-		
-			canvasPalette.add(searchButton, clearButton, trashCan);
-		
-		
+
+		trashCan.lockMovementX = true;
+		trashCan.lockMovementY = true;
+		trashCan.lockUniScaling = true;
+		trashCan.lockRotation = true;
+		trashCan.on('selected', function(){
+			var activeObject = canvasPlay.getActiveObject();
+			canvasPlay.remove(activeObject);
+			canvasPalette.deactivateAll().renderAll();
+		});
+
+		canvasPalette.add(searchButton, clearButton, trashCan);
+	};
+
+	function wiggleLetter() {
 		// letter wiggle
-			canvasPlay.hoverCursor = 'pointer';
-			function animate(e, dir) {
+		canvasPlay.hoverCursor = 'pointer';
+		function animate(e, dir) {
+
 			if (e.target) {
 				fabric.util.animate({
 					startValue: e.target.get('scaleY'),
@@ -344,6 +373,7 @@ function readGame() {
 						e.target.setCoords();
 					}
 				});
+
 				}
 			}
 			canvasPlay.on('mouse:down', function(e) { animate(e); });
@@ -388,5 +418,67 @@ function readGame() {
 				alert(error.status);
 			});
 		};
+
+};
+
+			}
+		};
+
+		canvasPlay.on('mouse:down', function(e) { animate(e); });
+		canvasPlay.on('mouse:up', function(e) { animate(e); });
+	};
+
+
+	function searchAjax(event, canvasPlay) {
+		console.log(canvasPlay);
+
+		var letters = canvasPlay._objects.filter(function(el) { return el.char !== undefined });
+
+		var action = "/letters/show";
+		var method = "GET";
+
+	 	var jsonLetters = JSON.stringify(letters);
+		var data = {array: jsonLetters};
+		console.log(data);
+		$.ajax({
+			url: action,
+			method: method,
+			data: data,
+			dataType: 'json'
+		})
+		.done(function(response) {
+			console.log(response)
+			var textSpeak = JSON.stringify(response[1])
+			// function to call the APIs with response
+			
+			responsiveVoice.speak("You spelled " + textSpeak, "UK English Female");
+			$("#image-result").append("<img src=" + "\"" + response[0] + "\"" + "id=" + textSpeak + " />");
+			var stickerElement = document.getElementById(response[1]);
+
+			addSticker(stickerElement, canvasPlay);
+
+		})
+		.fail(function(error) {
+			console.log(error);
+			responsiveVoice.speak("Oh no!", "UK English Female");
+			alert(error.status);
+		});
+	};
+
+
+	function addSticker(stickerElement, canvasPlay) {
+
+		var sticker = new fabric.Image(stickerElement, {
+		  left: Math.floor((Math.random() * 400) + 1),
+      top: Math.floor((Math.random() * 50) + 1),
+			width: 100,
+			height: 100
+		});
+
+		sticker.hasControls = true;
+
+		canvasPlay.add(sticker);
+		canvasPlay.renderAll();
+	};
 
 };
