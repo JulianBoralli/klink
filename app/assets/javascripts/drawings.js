@@ -13,7 +13,7 @@ function drawGame() {
         drawingModeEl.onclick = function() {
           canvasDraw.isDrawingMode = !canvasDraw.isDrawingMode;
           if (canvasDraw.isDrawingMode) {
-            drawingModeEl.remove()
+            $('#drawing-mode-btn').fadeOut();
             drawingOptionsEl.style.display = '';
           }
         };

@@ -29,15 +29,24 @@ canvas {
   margin-top: 3%;
 }
 
+#drawing-mode-btn {
+  font-size: 200%;
+  border-radius: 50%;
+  border: 2px solid #4CAF50;
+  padding: 20%;
+  margin: 2%;
+}
+
 #drawing-mode-options {
   display: inline-block;
+  margin: 2%;
 }
 
 #drawing-mode {
   display: inline-block;
   vertical-align: top;
-  margin-top: 30px;
-  margin-right: 2%;
+  margin-top: 15px;
+  margin-right: 5%;
 }
 
 
