@@ -23,7 +23,7 @@ function readGame(ResponsiveCanvas) {
 
   // Disable Multiple Selection
 	canvasPalette.selection = false;
-	canvasPlay.selection = false;
+	canvasPlay.selection = true;
 
 	// Draw Palette
 	generatePalette();
@@ -40,18 +40,19 @@ function readGame(ResponsiveCanvas) {
 	// Wiggle Letter Effect
 	wiggleLetter();
 
-	// Create puppy
+	// Create puppy and broom
 	createPuppy();
-
+	createBroom();
 
 	function createPuppy() {
 
 		var puppyElement = document.getElementById('puppy-img');
 
 		var puppy = new fabric.Image(puppyElement, {
-		  left: 0,
-		  top: 0,
-		  width: 50,
+		  button: true,
+		  left: 900,
+		  top: 450,
+		  width: 80,
 		  height: 100
 		});
 
@@ -61,6 +62,26 @@ function readGame(ResponsiveCanvas) {
 		puppy.lockRotation = true;
 
 		canvasPlay.add(puppy);
+	};
+
+	function createBroom() {
+
+		var broomElement = document.getElementById('clear-img');
+
+		var broom = new fabric.Image(broomElement, {
+		  button: true,
+		  left: 10,
+		  top: 450,
+		  width: 80,
+		  height: 100
+		});
+
+		broom.lockMovementX = true;
+		broom.lockMovementY = true;
+		broom.lockScalingX = broom.lockScalingY = true;
+		broom.lockRotation = true;
+
+		canvasPlay.add(broom);
 	};
 
 	function configureSnapIntersect() {
@@ -319,7 +340,10 @@ function readGame(ResponsiveCanvas) {
 
 		searchButton.on('selected', function() {
 		  console.log('search');
+
 	    searchAjax(event, canvasPlay);
+	    canvasPalette.discardActiveObject();
+			canvasPalette.renderAll(); 
 		});
 
 
@@ -340,7 +364,32 @@ function readGame(ResponsiveCanvas) {
 
 		clearButton.on('selected', function() {
 		  console.log('clear');
-	    canvasPlay.clear();
+		  // canvas.remove(activeObject)
+	   //  canvasPlay.clear();
+
+	    // test
+
+
+	    var activeObject = canvasPlay.getActiveObject(),
+    			activeGroup = canvasPlay.getActiveGroup();
+
+
+	    if (activeObject && !activeObject.button) {
+	      
+        canvasPlay.remove(activeObject);
+	    }
+	    else if (activeGroup) {
+        var objectsInGroup = activeGroup.getObjects();
+        canvasPlay.discardActiveGroup();
+        //objectsInGroup = objectsInGroup.filter(function(el) { return el.char !== undefined });
+        objectsInGroup.forEach(function(object) {
+        	if (!object.button)	{
+        		canvasPlay.remove(object);
+      		}
+        });
+	    }
+
+	    // finish test
 		});
 
 		// Create Trash Button
