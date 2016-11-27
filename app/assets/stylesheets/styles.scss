@@ -47,16 +47,6 @@ canvas {
   margin-top: 3%;
 }
 
-#drawing-mode-btn {
-  font-size: 200%;
-  border-radius: 50%;
-  border: 2px solid #4CAF50;
-  background-color: #008CBA;
-  color: white;
-  padding: 20%;
-  margin: 2%;
-}
-
 #drawing-mode-options label {
   font-size: 200%;
 }
@@ -65,18 +55,25 @@ canvas {
   display: inline-block;
   margin: 2%;
   margin-right: 5%;
-  margin-left: 8%;
+  margin-left: 5%;
 }
 
 #drawing-mode {
   display: inline-block;
   vertical-align: top;
-  margin-top: 3%;
+  margin-top: 1%;
+}
+
+#drawing-mode-btn {
+  width: 120px;
+}
+
+#clear-drawing-mode {
+  display: inline-block;
+  vertical-align: top;
+  margin-top: 1%;
 }
 
 #clear-drawing-btn {
-  width: 100px;
-  display: inline-block;
-  vertical-align: top;
-  margin-top: 2%;
+  width: 120px;
 }
