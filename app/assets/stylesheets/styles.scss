@@ -64,13 +64,19 @@ canvas {
 #drawing-mode-options {
   display: inline-block;
   margin: 2%;
+  margin-right: 5%;
+  margin-left: 8%;
 }
 
 #drawing-mode {
   display: inline-block;
   vertical-align: top;
   margin-top: 3%;
-  margin-right: 5%;
 }
 
-
+#clear-drawing-btn {
+  width: 100px;
+  display: inline-block;
+  vertical-align: top;
+  margin-top: 2%;
+}

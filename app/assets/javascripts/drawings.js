@@ -5,6 +5,12 @@ function drawGame() {
       cssOnly: true
       });
 
+    var clearDrawing = document.getElementById('clear-drawing-btn');
+      clearDrawing.onclick = function() {
+        canvasDraw.clear();
+      };
+
+
     var drawingModeEl = document.getElementById('drawing-mode-btn'),
           drawingOptionsEl = document.getElementById('drawing-mode-options'),
           drawingColorEl = document.getElementById('drawing-color'),
