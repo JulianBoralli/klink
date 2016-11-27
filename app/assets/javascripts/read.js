@@ -471,7 +471,7 @@ function readGame(ResponsiveCanvas) {
 			dataType: 'json'
 		})
 		.done(function(response) {
-			if (response[0] === response[1]) {
+			if (response[0] === response[1] || response[1] === "whoopsies") {
 				var textSpeak = JSON.stringify(response[1])
 				responsiveVoice.speak(textSpeak, "UK English Female");
 				return
