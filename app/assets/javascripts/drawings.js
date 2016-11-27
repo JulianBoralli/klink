@@ -30,19 +30,6 @@ function drawGame() {
         });
     });
 
-
-
-    // $('#drawing-bg-images').on('click', function() {
-    //   canvasDraw.setBackgroundImage('images/landscape.png', 
-    //     canvasDraw.renderAll.bind(canvasDraw), {
-    //       width: canvasDraw.width,
-    //       height: canvasDraw.height,
-    //       originX: 'left',
-    //       originY: 'top'
-    //     });
-    // });
-
-
     var drawingModeEl = document.getElementById('drawing-mode-btn'),
           drawingOptionsEl = document.getElementById('drawing-mode-options'),
           drawingColorEl = document.getElementById('drawing-color'),
