@@ -40,6 +40,28 @@ function readGame(ResponsiveCanvas) {
 	// Wiggle Letter Effect
 	wiggleLetter();
 
+	// Create puppy
+	createPuppy();
+
+
+	function createPuppy() {
+
+		var puppyElement = document.getElementById('puppy-img');
+
+		var puppy = new fabric.Image(puppyElement, {
+		  left: 0,
+		  top: 0,
+		  width: 50,
+		  height: 100
+		});
+
+		puppy.lockMovementX = true;
+		puppy.lockMovementY = true;
+		puppy.lockScalingX = puppy.lockScalingY = true;
+		puppy.lockRotation = true;
+
+		canvasPlay.add(puppy);
+	};
 
 	function configureSnapIntersect() {
 
@@ -287,7 +309,7 @@ function readGame(ResponsiveCanvas) {
 		  left: 910,
 		  top: 25,
 			width: canvasPalette.width*(percentage*1.6),
-			height: canvasPalette.width*(percentage*1.6)
+			height: canvasPalette.width*(percentage*2)
 		});
 
 		searchButton.lockMovementX = true;
@@ -326,7 +348,7 @@ function readGame(ResponsiveCanvas) {
 		var	trashCan = new fabric.Image(trashCanElement, {
 			left: 820,
 			top: 25,
-			width: canvasPalette.width*(percentage*1.6),
+			width: canvasPalette.width*(percentage*1.2),
 			height: canvasPalette.width*(percentage*1.6)
 			});
 
