@@ -39,6 +39,10 @@ canvas {
   margin: 2%;
 }
 
+#drawing-mode-options label {
+  font-size: 200%;
+}
+
 #drawing-mode-options {
   display: inline-block;
   margin: 2%;
@@ -47,7 +51,7 @@ canvas {
 #drawing-mode {
   display: inline-block;
   vertical-align: top;
-  margin-top: 15px;
+  margin-top: 3%;
   margin-right: 5%;
 }
 
