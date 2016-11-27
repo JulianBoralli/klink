@@ -1,12 +1,9 @@
-var writeGame = function(){
+function writeGame(ResponsiveCanvas) {
 
   var canvasPlay = new ResponsiveCanvas('canvas-play');
-
   var canvasPalette = new ResponsiveCanvas('canvas-palette');
 
   fabric.Object.prototype.hasControls = false;
-
-  generatePalette(canvasPlay, canvasPalette);
 
   canvasPlay.setDimensions({width: '98vw', height: '30vw'}, {
     cssOnly: true
@@ -16,8 +13,14 @@ var writeGame = function(){
     cssOnly: true
   });
 
+  canvasPalette.selection = false;
+  canvasPlay.selection = false;
+  canvasPalette.selectable = true;
+  generatePalette();
+  boundCanvas();
+  wiggleLetter();
 
-function generatePalette(canvasPlay, canvasPalette) {
+function generatePalette() {
   canvasPalette.selectable = true;
   canvasPlay.freeDrawingBrush.color = "blue";
   canvasPlay.freeDrawingBrush.width = 10;
@@ -32,6 +35,7 @@ function generatePalette(canvasPlay, canvasPalette) {
     else {
       traceMode.innerHTML = 'enter trace mode';
       }
+    }
   };
 
 	var letterImages = $('#letter-images').children();
@@ -52,7 +56,6 @@ function generatePalette(canvasPlay, canvasPalette) {
 		letter.lockScalingX = letter.lockScalingY = true;
 		letter.lockRotation = true;
 
-
 		letter.on('selected', function() {
 
 			if (this.canvas.lowerCanvasEl.id === "canvas-palette") {
@@ -61,7 +64,6 @@ function generatePalette(canvasPlay, canvasPalette) {
 				clone.height = 385;
 	    	clone.lockMovementX = false;
 				clone.lockMovementY = false;
-
 
 				// animation on adding the block
 				clone.animate('height', 380, {
@@ -85,9 +87,9 @@ function generatePalette(canvasPlay, canvasPalette) {
 
 	});
 
-	// to bound the canvas so the elements won't disappear
-	canvasPlay.on ("object:moving", function (event) {
-		var el = event.target;
+function boundCanvas() {
+	canvasPlay.on ("object:moving", function(event) {
+		     var el = event.target;
 
 		el.left = el.left < el.getBoundingRectWidth() / 2 ? el.getBoundingRectWidth() / 6 : el.left;
 		el.top = el.top < el.getBoundingRectHeight () / 2 ? el.getBoundingRectHeight() / 6 : el.top;
@@ -98,40 +100,36 @@ function generatePalette(canvasPlay, canvasPalette) {
 		el.left = right > canvasPlay.width - el.getBoundingRectWidth() / 2 ? canvasPlay.width - el.getBoundingRectWidth() / 1 : el.left;
 		el.top = bottom > canvasPlay.height - el.getBoundingRectHeight() / 2 ? canvasPlay.height - el.getBoundingRectHeight() / 1 : el.top;
 	});
-
-	// active object has red border
-	canvasPlay.on({
-	'object:selected': borders
-});
-
-function borders(object){
-	var activeObject = object.target;
-	activeObject.set({
-  'borderColor': 'red',
-  'borderScaleFactor': 6
-
-  });
 };
 
-var clearElement = document.getElementById('clear-img');
 
-var clearButton = new fabric.Image(clearElement, {
-  left: 10,
-  top: 25,
-  width: canvasPalette.width*(percentage*1.6),
-  height: canvasPalette.width*(percentage*1.6)
-});
+  canvasPlay.on({ 'object:selected': borders});
 
-clearButton.lockMovementX = true;
-clearButton.lockMovementY = true;
-clearButton.lockScalingX = clearButton.lockScalingY = true;
-clearButton.lockRotation = true;
+  function borders(object){
+	  var activeObject = object.target;
+	  activeObject.set({
+    'borderColor': 'red',
+    'borderScaleFactor': 6
+    });
+  };
 
-clearButton.on('selected', function() {
-  canvasPlay.clear();
+  var clearElement = document.getElementById('clear-img');
 
+  var clearButton = new fabric.Image(clearElement, {
+    left: 10,
+    top: 25,
+    width: canvasPalette.width*(percentage*1.6),
+    height: canvasPalette.width*(percentage*1.6)
+  });
 
-});
+  clearButton.lockMovementX = true;
+  clearButton.lockMovementY = true;
+  clearButton.lockScalingX = clearButton.lockScalingY = true;
+  clearButton.lockRotation = true;
+
+  clearButton.on('selected', function() {
+    canvasPlay.clear();
+  });
 
 	var trashCanElement = document.getElementById('trashcan-img');
 	var	trashCan = new fabric.Image(trashCanElement, {
@@ -139,8 +137,6 @@ clearButton.on('selected', function() {
 		top: 25,
 		width: canvasPalette.width*(percentage*1.6),
 		height: canvasPalette.width*(percentage*1.6)
-
-
 	});
 
 	trashCan.lockMovementX = true;
@@ -156,9 +152,9 @@ clearButton.on('selected', function() {
 	canvasPalette.add(trashCan, clearButton);
 
 
-// letter wiggle
+function wiggleLetter(){
 	canvasPlay.hoverCursor = 'pointer';
-	function animate(e, dir) {
+	function animate(e, dir){
 	if (e.target) {
 		fabric.util.animate({
 			startValue: e.target.get('scaleY'),
@@ -183,14 +179,11 @@ clearButton.on('selected', function() {
 			onComplete: function() {
 				e.target.setCoords();
 			}
-		});
-		}
-	}
-	canvasPlay.on('mouse:down', function(e) { animate(e, 0); });
-	canvasPlay.on('mouse:up', function(e) { animate(e, 0); });
-	canvasPalette.selection = false;
-	canvasPlay.selection = false;
+	  });
+	 }
+ };
+ canvasPlay.on('mouse:down', function(e) { animate(e, 0); });
+ canvasPlay.on('mouse:up', function(e) { animate(e, 0); });
 
 	};
-
 };
