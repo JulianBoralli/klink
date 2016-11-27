@@ -13,30 +13,18 @@ function writeGame(ResponsiveCanvas) {
     cssOnly: true
   });
 
-  canvasPalette.selection = false;
-  canvasPlay.selection = false;
-  canvasPalette.selectable = true;
   generatePalette();
   boundCanvas();
   wiggleLetter();
 
 function generatePalette() {
-  canvasPalette.selectable = true;
+  canvasPalette.renderAll();
+  canvasPalette.selection = false;
+  canvasPalette.selectable = false;
+  canvasPlay.selection = false;
   canvasPlay.freeDrawingBrush.color = "blue";
   canvasPlay.freeDrawingBrush.width = 10;
-
-  var traceMode = document.getElementById('drawing-mode')
-
-  traceMode.onclick = function() {
-    canvasPlay.isDrawingMode = !canvasPlay.isDrawingMode;
-    if (canvasPlay.isDrawingMode) {
-      traceMode.innerHTML = 'exit trace mode';
-    }
-    else {
-      traceMode.innerHTML = 'enter trace mode';
-      }
-    }
-  };
+};
 
 	var letterImages = $('#letter-images').children();
 	var percentage = 0.05;
@@ -44,6 +32,7 @@ function generatePalette() {
 	$.each(letterImages, function(i, el) {
 
 		var letter = new fabric.Image(el, {
+      char: String.fromCharCode(65 + i),
 		  left: i >= 13 ? ((55 * (i - 11.1)) + (5 * (i - 10))) : ((50 * (i + 2)) + (10 * (i + 2))),
 		  top: i >= 13 ? 70 : 10,
 		  width: canvasPalette.width*percentage,
@@ -56,16 +45,23 @@ function generatePalette() {
 		letter.lockScalingX = letter.lockScalingY = true;
 		letter.lockRotation = true;
 
-		letter.on('selected', function() {
+    letter.toObject = function () {
+      return {
+        letter: String.fromCharCode(65 + i)
+      };
+    };
 
+		letter.on('selected', function() {
+      console.log(this.char);
 			if (this.canvas.lowerCanvasEl.id === "canvas-palette") {
 				var clone = fabric.util.object.clone(this);
 				clone.width = 360;
 				clone.height = 385;
+        clone.left =  100;
+        clone.top = 65;
 	    	clone.lockMovementX = false;
 				clone.lockMovementY = false;
 
-				// animation on adding the block
 				clone.animate('height', 380, {
 				  onChange: canvasPlay.renderAll.bind(canvasPlay),
 				  duration: 1000,
@@ -77,15 +73,40 @@ function generatePalette() {
 					duration: 1000,
 					easing: fabric.util.ease.easeOutBounce
 				});
-	    	canvasPlay.add(clone);
-	    	canvasPalette.deactivateAll().renderAll();
+
+        canvasPalette.deactivateAll().renderAll();
+        canvasPlay.add(clone);
+        clone.on('selected', function(){
+          responsiveVoice.speak(this.char);
+        });
+        trace(clone);
 			}
 		});
 
 		canvasPalette.add(letter);
 		canvasPalette.renderAll();
-
 	});
+
+  function trace(clone){
+    boundCanvas();
+    var traceMode = document.getElementById('drawing-mode')
+    traceMode.onclick = function() {
+
+    clone.on('selected', function(){
+      clone.animate('left', '+=450', { onChange: canvasPlay.renderAll.bind(canvasPlay) });
+      responsiveVoice.speak(this.char);
+    })
+
+      canvasPlay.isDrawingMode = !canvasPlay.isDrawingMode;
+      if (canvasPlay.isDrawingMode) {
+        traceMode.innerHTML = 'exit trace mode';
+      }
+      else {
+        traceMode.innerHTML = 'enter trace mode';
+      };
+    };
+    responsiveVoice.speak(this.char);
+  };
 
 function boundCanvas() {
 	canvasPlay.on ("object:moving", function(event) {
@@ -102,9 +123,6 @@ function boundCanvas() {
 	});
 };
 
-
-  canvasPlay.on({ 'object:selected': borders});
-
   function borders(object){
 	  var activeObject = object.target;
 	  activeObject.set({
@@ -112,6 +130,8 @@ function boundCanvas() {
     'borderScaleFactor': 6
     });
   };
+
+  canvasPlay.on({ 'object:selected': borders});
 
   var clearElement = document.getElementById('clear-img');
 
@@ -151,7 +171,6 @@ function boundCanvas() {
 
 	canvasPalette.add(trashCan, clearButton);
 
-
 function wiggleLetter(){
 	canvasPlay.hoverCursor = 'pointer';
 	function animate(e, dir){
@@ -184,6 +203,5 @@ function wiggleLetter(){
  };
  canvasPlay.on('mouse:down', function(e) { animate(e, 0); });
  canvasPlay.on('mouse:up', function(e) { animate(e, 0); });
-
 	};
 };
