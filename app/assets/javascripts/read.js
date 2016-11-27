@@ -1,5 +1,7 @@
 function readGame(ResponsiveCanvas) {
 
+	// Load Mobile Text2Speech feature
+	document.addEventListener("click", responsiveVoice.clickEvent);
 
 	// Create Canvas
 	var canvasPlay = new ResponsiveCanvas('canvas-play');
