@@ -1,7 +1,7 @@
 $( document ).on('turbolinks:load', function() {
 
     var canvasDraw = new ResponsiveCanvas('canvas-draw');
-      canvasDraw.setDimensions({width: '98vw', height: '50vw'}, {
+      canvasDraw.setDimensions({width: '98vw', height: '30vw'}, {
       cssOnly: true
       });
 
@@ -13,11 +13,7 @@ $( document ).on('turbolinks:load', function() {
         drawingModeEl.onclick = function() {
           canvasDraw.isDrawingMode = !canvasDraw.isDrawingMode;
           if (canvasDraw.isDrawingMode) {
-            drawingModeEl.innerHTML = 'stop drawing';
-            drawingOptionsEl.style.display = '';
-          }
-          else {
-            drawingModeEl.innerHTML = 'Draw!';
+            drawingModeEl.remove()
             drawingOptionsEl.style.display = '';
           }
         };
