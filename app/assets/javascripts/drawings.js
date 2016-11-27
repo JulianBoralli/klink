@@ -3,7 +3,7 @@ function drawGame() {
     var canvasDraw = new ResponsiveCanvas('canvas-draw', {
       backgroundColor : "#fff"
     });
-      canvasDraw.setDimensions({width: '98vw', height: '40vw'}, {
+      canvasDraw.setDimensions({width: '98vw', height: '50vw'}, {
       cssOnly: true
       });
 
