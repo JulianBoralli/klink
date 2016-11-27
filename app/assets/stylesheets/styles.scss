@@ -63,7 +63,6 @@ canvas {
 
 #drawing-mode-options {
   display: inline-block;
-  margin: 2%;
   margin-right: 5%;
   margin-left: 5%;
 }
@@ -83,13 +82,12 @@ canvas {
 }
 
 #drawing-bg-images {
+  display: inline-block;
+  vertical-align: top;
   text-align: center;
-  margin: auto;
-  margin-top: 2%;
-  margin-bottom: 2%;
   background-color: white;
   border: 1px solid black;
-  width: 80%;
+  width: 40%;
   height: 9em;
   overflow: auto;
   white-space: nowrap;
@@ -98,5 +96,5 @@ canvas {
 .drawing-bg {
   width: 12em;
   height: 7em;
-  padding-top: 1%;
+  padding: 1%;
 }
