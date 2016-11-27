@@ -1,6 +1,8 @@
 function drawGame() {
 
-    var canvasDraw = new ResponsiveCanvas('canvas-draw');
+    var canvasDraw = new ResponsiveCanvas('canvas-draw', {
+      backgroundColor : "#fff"
+    });
       canvasDraw.setDimensions({width: '98vw', height: '30vw'}, {
       cssOnly: true
       });
@@ -8,8 +10,8 @@ function drawGame() {
     var clearDrawing = document.getElementById('clear-drawing-btn');
       clearDrawing.onclick = function() {
         canvasDraw.clear();
+        canvasDraw.backgroundColor = "#fff";
       };
-
 
     var drawingModeEl = document.getElementById('drawing-mode-btn'),
           drawingOptionsEl = document.getElementById('drawing-mode-options'),
