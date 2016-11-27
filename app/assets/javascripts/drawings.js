@@ -13,6 +13,17 @@ function drawGame() {
         canvasDraw.backgroundColor = "#fff";
       };
 
+    $('#drawing-bg-images').on('click', function() {
+      canvasDraw.setBackgroundImage('images/landscape.png', 
+        canvasDraw.renderAll.bind(canvasDraw), {
+          width: canvasDraw.width,
+          height: canvasDraw.height,
+          originX: 'left',
+          originY: 'top'
+        });
+    });
+
+
     var drawingModeEl = document.getElementById('drawing-mode-btn'),
           drawingOptionsEl = document.getElementById('drawing-mode-options'),
           drawingColorEl = document.getElementById('drawing-color'),
@@ -21,7 +32,7 @@ function drawGame() {
         drawingModeEl.onclick = function() {
           canvasDraw.isDrawingMode = !canvasDraw.isDrawingMode;
           if (canvasDraw.isDrawingMode) {
-            $('.drawing-bg').fadeOut();
+            $('#drawing-mode').fadeOut();
             drawingOptionsEl.style.display = '';
           }
         };
