@@ -14,6 +14,8 @@ function readGame() {
 		  canvasPalette.setDimensions({width: '98vw', height: '13vw'}, {
 		    cssOnly: true
 		  });
+
+		 canvasPalette.selectable = true;
 		
 		
 		function generatePalette(canvasPlay, canvasPalette) {

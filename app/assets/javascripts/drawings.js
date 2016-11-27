@@ -1,3 +1,5 @@
+function drawGame() {
+
     var canvasDraw = new ResponsiveCanvas('canvas-draw');
       canvasDraw.setDimensions({width: '98vw', height: '30vw'}, {
       cssOnly: true
@@ -42,3 +44,5 @@
       }
   
       canvasDraw.renderAll();
+
+};
