@@ -3,15 +3,15 @@ function drawGame() {
     var canvasDraw = new ResponsiveCanvas('canvas-draw', {
       backgroundColor : "#fff"
     });
-      canvasDraw.setDimensions({width: '98vw', height: '30vw'}, {
+      canvasDraw.setDimensions({width: '98vw', height: '40vw'}, {
       cssOnly: true
       });
 
-    var clearDrawing = document.getElementById('clear-drawing-btn');
-      clearDrawing.onclick = function() {
-        canvasDraw.clear();
-        canvasDraw.backgroundColor = "#fff";
-      };
+    // var clearDrawing = document.getElementById('clear-drawing-btn');
+    //   clearDrawing.onclick = function() {
+    //     canvasDraw.clear();
+    //     canvasDraw.backgroundColor = "#fff";
+    //   };
 
 
 
@@ -19,7 +19,7 @@ function drawGame() {
 
     $.each(backgroundImages, function(idx, img) {
         $(img).on('click', function() {
-          // console.log("What the fuck?")
+          canvasDraw.clear();
           canvasDraw.setBackgroundImage($(this).attr('src'), 
             canvasDraw.renderAll.bind(canvasDraw), {
             width: canvasDraw.width,
