@@ -65,11 +65,15 @@ canvas {
 #drawing-mode {
   display: inline-block;
   vertical-align: top;
-  margin-top: 1%;
 }
 
 #drawing-mode-btn {
   width: 120px;
+}
+
+.drawing-bg-images-header {
+  text-align: center;
+  margin-bottom: -10px;
 }
 
 #drawing-bg-images {
@@ -77,9 +81,16 @@ canvas {
   margin: auto;
   margin-top: 2%;
   margin-bottom: 2%;
+  background-color: white;
+  border: 1px solid black;
+  width: 80%;
+  height: 9em;
+  overflow: auto;
+  white-space: nowrap;
 }
 
 .drawing-bg {
   width: 12em;
   height: 7em;
+  padding-top: 1%;
 }
