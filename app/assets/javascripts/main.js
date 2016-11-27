@@ -2,8 +2,14 @@ $( document ).on('turbolinks:load', function() {
 
   $(function(){
    if($('body').is('.writegame')){
-     writeGame();
+     writeGame(createResponsiveCanvas());
    }
  });
- 
+
+  $(function(){
+   if($('body').is('.read-game')){
+    readGame(createResponsiveCanvas());
+   }
+ });
+
 });
