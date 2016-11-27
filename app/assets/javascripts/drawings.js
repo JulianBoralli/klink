@@ -1,11 +1,14 @@
 $( document ).on('turbolinks:load', function() {
 
-    var canvasDraw = new fabric.Canvas('canvas-draw');
+    var canvasDraw = new ResponsiveCanvas('canvas-draw');
+      canvasDraw.setDimensions({width: '98vw', height: '50vw'}, {
+      cssOnly: true
+      });
+
     var drawingModeEl = document.getElementById('drawing-mode-btn'),
           drawingOptionsEl = document.getElementById('drawing-mode-options'),
           drawingColorEl = document.getElementById('drawing-color'),
-          drawingLineWidthEl = document.getElementById('drawing-line-width'),
-          drawingShadowWidth = document.getElementById('drawing-shadow-width');
+          drawingLineWidthEl = document.getElementById('drawing-line-width');
     
         drawingModeEl.onclick = function() {
           canvasDraw.isDrawingMode = !canvasDraw.isDrawingMode;
@@ -29,7 +32,6 @@ $( document ).on('turbolinks:load', function() {
         if (canvasDraw.freeDrawingBrush) {
           canvasDraw.freeDrawingBrush.color = drawingColorEl.value;
           canvasDraw.freeDrawingBrush.width = parseInt(drawingLineWidthEl.value, 10) || 1;
-          canvasDraw.freeDrawingBrush.shadowBlur = parseInt(drawingShadowWidth.value, 10) || 0;
         }
       });
     
@@ -39,19 +41,12 @@ $( document ).on('turbolinks:load', function() {
       drawingLineWidthEl.onchange = function() {
         canvasDraw.freeDrawingBrush.width = parseInt(drawingLineWidthEl.value, 10) || 1;
       };
-      drawingShadowWidth.onchange = function() {
-        canvasDraw.freeDrawingBrush.shadowBlur = parseInt(drawingShadowWidth.value, 10) || 0;
-      };
-    
+
       if (canvasDraw.freeDrawingBrush) {
         canvasDraw.freeDrawingBrush.color = drawingColorEl.value;
         canvasDraw.freeDrawingBrush.width = parseInt(drawingLineWidthEl.value, 10) || 1;
-        canvasDraw.freeDrawingBrush.shadowBlur = 0;
       }
-    
-      document.getElementById('canvas-background-picker').addEventListener('change', function() {
-        canvasDraw.backgroundColor = this.value;
-        canvasDraw.renderAll();
-      });
+  
+      canvasDraw.renderAll();
 
 });
