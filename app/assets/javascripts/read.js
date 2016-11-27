@@ -477,11 +477,26 @@ function readGame(ResponsiveCanvas) {
 			
 			responsiveVoice.speak(textSpeak, "UK English Female");
 			$("#image-result").append("<img src=" + "\"" + response[0] + "\"" + "id=" + textSpeak + " />");
+			
 			var stickerElement = document.getElementById(response[1]);
 
-			addSticker(stickerElement, canvasPlay);
-			canvasPlay.renderAll();
+			function sleep(ms, callback) {
+		  	ms = ms || 0;
+		  	setTimeout(callback, ms);
+			}
+			sleep(1000, function() {
+    		console.log('sleeping');
+ 			 });
 
+			
+
+			addSticker(stickerElement, canvasPlay);
+			sleep(1000, function() {
+    		console.log('sleeping');
+ 			 });
+			canvasPlay.renderAll();
+			canvasPlay.setActiveObject((canvasPlay.getObjects()[canvasPlay.getObjects().length - 1]));
+			canvasPlay.renderAll();
 		})
 		.fail(function(error) {
 			console.log(error);
