@@ -41,8 +41,10 @@ function readGame(ResponsiveCanvas) {
 	wiggleLetter();
 
 	// Create puppy and broom
-	createPuppy();
-	createBroom();
+	// createPuppy();
+	// createBroom();
+
+
 
 	function createPuppy() {
 
@@ -80,6 +82,28 @@ function readGame(ResponsiveCanvas) {
 		broom.lockMovementY = true;
 		broom.lockScalingX = broom.lockScalingY = true;
 		broom.lockRotation = true;
+
+		broom.on('selected', function() {
+		  console.log('clear');
+
+	    var activeObject = canvasPlay.getActiveObject(),
+    			activeGroup = canvasPlay.getActiveGroup();
+
+
+	    if (activeObject && !activeObject.button) {
+	      
+        canvasPlay.remove(activeObject);
+	    }
+	    else if (activeGroup) {
+        var objectsInGroup = activeGroup.getObjects();
+        canvasPlay.discardActiveGroup();
+        objectsInGroup.forEach(function(object) {
+        	if (!object.button)	{
+        		canvasPlay.remove(object);
+      		}
+        });
+	    }
+		});
 
 		canvasPlay.add(broom);
 	};
@@ -269,7 +293,7 @@ function readGame(ResponsiveCanvas) {
 
 			var letter = new fabric.Image(el, {
 			  char: String.fromCharCode(65 + i),
-			  left: i >= 13 ? ((50 * (i - 11.1)) + (5 * (i - 10))) : ((50 * (i + 2)) + (5 * (i + 2))),
+			  left: i >= 13 ? (30 + (50 * (i - 11.1)) + (5 * (i - 10))) : (30 + (50 * (i + 2)) + (5 * (i + 2))),
 			  top: i >= 13 ? 70 : 10,
 			  width: canvasPalette.width*percentage,
 			  height: canvasPalette.width*percentage
@@ -344,6 +368,7 @@ function readGame(ResponsiveCanvas) {
 	    searchAjax(event, canvasPlay);
 	    canvasPalette.discardActiveObject();
 			canvasPalette.renderAll(); 
+			canvasPlay.renderAll();
 		});
 
 
@@ -364,11 +389,6 @@ function readGame(ResponsiveCanvas) {
 
 		clearButton.on('selected', function() {
 		  console.log('clear');
-		  // canvas.remove(activeObject)
-	   //  canvasPlay.clear();
-
-	    // test
-
 
 	    var activeObject = canvasPlay.getActiveObject(),
     			activeGroup = canvasPlay.getActiveGroup();
@@ -381,37 +401,19 @@ function readGame(ResponsiveCanvas) {
 	    else if (activeGroup) {
         var objectsInGroup = activeGroup.getObjects();
         canvasPlay.discardActiveGroup();
-        //objectsInGroup = objectsInGroup.filter(function(el) { return el.char !== undefined });
         objectsInGroup.forEach(function(object) {
         	if (!object.button)	{
         		canvasPlay.remove(object);
       		}
         });
 	    }
-
-	    // finish test
+	    canvasPalette.discardActiveObject();
+			canvasPalette.renderAll(); 
 		});
 
-		// Create Trash Button
-		var trashCanElement = document.getElementById('trashcan-img');
-		var	trashCan = new fabric.Image(trashCanElement, {
-			left: 820,
-			top: 25,
-			width: canvasPalette.width*(percentage*1.2),
-			height: canvasPalette.width*(percentage*1.6)
-			});
-
-		trashCan.lockMovementX = true;
-		trashCan.lockMovementY = true;
-		trashCan.lockUniScaling = true;
-		trashCan.lockRotation = true;
-		trashCan.on('selected', function(){
-			var activeObject = canvasPlay.getActiveObject();
-			canvasPlay.remove(activeObject);
-			canvasPalette.deactivateAll().renderAll();
-		});
-
-		canvasPalette.add(searchButton, clearButton, trashCan);
+		canvasPalette.add(searchButton, clearButton);
+		canvasPalette.renderAll();
+		canvasPalette.setActiveObject(clearButton);
 	};
 
 	function wiggleLetter() {
@@ -473,11 +475,12 @@ function readGame(ResponsiveCanvas) {
 			var textSpeak = JSON.stringify(response[1])
 			// function to call the APIs with response
 			
-			responsiveVoice.speak("You spelled " + textSpeak, "UK English Female");
+			responsiveVoice.speak(textSpeak, "UK English Female");
 			$("#image-result").append("<img src=" + "\"" + response[0] + "\"" + "id=" + textSpeak + " />");
 			var stickerElement = document.getElementById(response[1]);
 
 			addSticker(stickerElement, canvasPlay);
+			canvasPlay.renderAll();
 
 		})
 		.fail(function(error) {
@@ -491,8 +494,8 @@ function readGame(ResponsiveCanvas) {
 	function addSticker(stickerElement, canvasPlay) {
 
 		var sticker = new fabric.Image(stickerElement, {
-		  left: Math.floor((Math.random() * 400) + 1),
-      top: Math.floor((Math.random() * 50) + 1),
+		  left: 650,
+      top: Math.floor((Math.random() * 500) + 1),
 			width: 100,
 			height: 100
 		});
