@@ -16,6 +16,7 @@ class LettersController < ApplicationController
       @result = ""
     end
     @results = [@result, word]
+    p @results
     render json: @results.to_json
 	end
 

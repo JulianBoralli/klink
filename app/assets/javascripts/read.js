@@ -471,7 +471,13 @@ function readGame(ResponsiveCanvas) {
 			dataType: 'json'
 		})
 		.done(function(response) {
-			console.log(response)
+			if (response[0] === response[1]) {
+				var textSpeak = JSON.stringify(response[1])
+				responsiveVoice.speak(textSpeak, "UK English Female");
+				return
+			}
+
+			console.log('response:', response)
 			var textSpeak = JSON.stringify(response[1])
 			// function to call the APIs with response
 			
@@ -488,20 +494,20 @@ function readGame(ResponsiveCanvas) {
     		console.log('sleeping');
  			 });
 
-			
+			canvasPlay.renderAll();
 
 			addSticker(stickerElement, canvasPlay);
 			sleep(1000, function() {
     		console.log('sleeping');
  			 });
-			canvasPlay.renderAll();
+			
 			canvasPlay.setActiveObject((canvasPlay.getObjects()[canvasPlay.getObjects().length - 1]));
 			canvasPlay.renderAll();
 		})
 		.fail(function(error) {
 			console.log(error);
 			responsiveVoice.speak("Oh no!", "UK English Female");
-			alert(error.status);
+			// alert(error.status);
 		});
 	};
 
