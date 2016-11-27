@@ -27,7 +27,7 @@ function readGame(ResponsiveCanvas) {
 	generatePalette();
 
 	// Create Red Obj border when selected
-	redObjectBorder();
+	// redObjectBorder();
 
 	// Bound Canvas Border so objects don't disappear
 	boundCanvas();
@@ -418,12 +418,13 @@ function readGame(ResponsiveCanvas) {
 	function addSticker(stickerElement, canvasPlay) {
 
 		var sticker = new fabric.Image(stickerElement, {
-		  left: 910,
-		  top: 25,
+		  left: Math.floor((Math.random() * 400) + 1),
+      top: Math.floor((Math.random() * 50) + 1),
 			width: 100,
 			height: 100
 		});
 
+		sticker.hasControls = true;
 
 		canvasPlay.add(sticker);
 		canvasPlay.renderAll();
