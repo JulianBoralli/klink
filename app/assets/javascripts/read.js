@@ -347,7 +347,6 @@ function readGame(ResponsiveCanvas) {
 		// letter wiggle
 		canvasPlay.hoverCursor = 'pointer';
 		function animate(e, dir) {
-
 			if (e.target) {
 				fabric.util.animate({
 					startValue: e.target.get('scaleY'),
@@ -373,54 +372,6 @@ function readGame(ResponsiveCanvas) {
 						e.target.setCoords();
 					}
 				});
-
-				}
-			}
-			canvasPlay.on('mouse:down', function(e) { animate(e); });
-			canvasPlay.on('mouse:up', function(e) { animate(e); });
-			canvasPalette.selection = false;
-			canvasPlay.selection = false;
-		
-			};
-		
-		
-		
-		function searchAjax(event, canvasPlay) {
-			console.log(canvasPlay);
-		
-			var letters = canvasPlay._objects;
-		
-			var action = "/letters/show";
-			var method = "GET";
-		
-		 	var jsonLetters = JSON.stringify(letters);
-			var data = {array: jsonLetters};
-			console.log(data);
-			$.ajax({
-				url: action,
-				method: method,
-				data: data,
-				dataType: 'json'
-			})
-			.done(function(response) {
-				console.log(response)
-				var textSpeak = JSON.stringify(response[1])
-				// function to call the APIs with response
-		
-				$("#image-result").append("<img src="+response[0]+"/>");
-				responsiveVoice.speak("You spelled " + textSpeak, "UK English Female");
-				$('#image-result').addClass('animated bounceInDown')
-		
-			})
-			.fail(function(error) {
-				console.log(error);
-				responsiveVoice.speak("Oh no!", "UK English Female");
-				alert(error.status);
-			});
-		};
-
-};
-
 			}
 		};
 
