@@ -1,5 +1,3 @@
-$( document ).on('turbolinks:load', function() {
-
     var canvasDraw = new ResponsiveCanvas('canvas-draw');
       canvasDraw.setDimensions({width: '98vw', height: '30vw'}, {
       cssOnly: true
@@ -44,5 +42,3 @@ $( document ).on('turbolinks:load', function() {
       }
   
       canvasDraw.renderAll();
-
-});
