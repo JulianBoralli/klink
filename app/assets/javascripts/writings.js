@@ -45,22 +45,17 @@ function generatePalette() {
 		letter.lockScalingX = letter.lockScalingY = true;
 		letter.lockRotation = true;
 
-    letter.toObject = function () {
-      return {
-        letter: String.fromCharCode(65 + i)
-      };
-    };
-
 		letter.on('selected', function() {
       console.log(this.char);
+      responsiveVoice.speak(this.char);
 			if (this.canvas.lowerCanvasEl.id === "canvas-palette") {
 				var clone = fabric.util.object.clone(this);
 				clone.width = 360;
 				clone.height = 385;
         clone.left =  100;
         clone.top = 65;
-	    	clone.lockMovementX = false;
-				clone.lockMovementY = false;
+	    	clone.lockMovementX = true;
+				clone.lockMovementY = true;
 
 				clone.animate('height', 380, {
 				  onChange: canvasPlay.renderAll.bind(canvasPlay),
@@ -76,9 +71,10 @@ function generatePalette() {
 
         canvasPalette.deactivateAll().renderAll();
         canvasPlay.add(clone);
-        clone.on('selected', function(){
-          responsiveVoice.speak(this.char);
-        });
+
+        // clone.on('selected', function(){
+        //   responsiveVoice.speak(this.char);
+        // });
         trace(clone);
 			}
 		});
@@ -87,16 +83,21 @@ function generatePalette() {
 		canvasPalette.renderAll();
 	});
 
-  function trace(clone){
-    boundCanvas();
+  var clicks = 0
+
+  $('#drawing-mode').on('click', function(event){
+    clicks += 1;
+  });
+
+  function trace(clone) {
     var traceMode = document.getElementById('drawing-mode')
     traceMode.onclick = function() {
 
     clone.on('selected', function(){
-      clone.animate('left', '+=450', { onChange: canvasPlay.renderAll.bind(canvasPlay) });
-      responsiveVoice.speak(this.char);
+      if (clicks < 3){
+        clone.animate('left', '+=450', { onChange: canvasPlay.renderAll.bind(canvasPlay) });
+      }
     })
-
       canvasPlay.isDrawingMode = !canvasPlay.isDrawingMode;
       if (canvasPlay.isDrawingMode) {
         traceMode.innerHTML = 'exit trace mode';
@@ -105,15 +106,14 @@ function generatePalette() {
         traceMode.innerHTML = 'enter trace mode';
       };
     };
-    responsiveVoice.speak(this.char);
   };
 
 function boundCanvas() {
 	canvasPlay.on ("object:moving", function(event) {
 		     var el = event.target;
 
-		el.left = el.left < el.getBoundingRectWidth() / 2 ? el.getBoundingRectWidth() / 6 : el.left;
-		el.top = el.top < el.getBoundingRectHeight () / 2 ? el.getBoundingRectHeight() / 6 : el.top;
+		el.left = el.left < el.getBoundingRectWidth() / 2 ? el.getBoundingRectWidth() / 5 : el.left;
+		el.top = el.top < el.getBoundingRectHeight () / 2 ? el.getBoundingRectHeight() / 5 : el.top;
 
 		var right = el.left + el.getBoundingRectWidth() / 2;
 		var bottom = el.top + el.getBoundingRectHeight() / 2;
@@ -122,16 +122,6 @@ function boundCanvas() {
 		el.top = bottom > canvasPlay.height - el.getBoundingRectHeight() / 2 ? canvasPlay.height - el.getBoundingRectHeight() / 1 : el.top;
 	});
 };
-
-  function borders(object){
-	  var activeObject = object.target;
-	  activeObject.set({
-    'borderColor': 'red',
-    'borderScaleFactor': 6
-    });
-  };
-
-  canvasPlay.on({ 'object:selected': borders});
 
   var clearElement = document.getElementById('clear-img');
 
