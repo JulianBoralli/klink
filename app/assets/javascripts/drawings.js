@@ -13,15 +13,34 @@ function drawGame() {
         canvasDraw.backgroundColor = "#fff";
       };
 
-    $('#drawing-bg-images').on('click', function() {
-      canvasDraw.setBackgroundImage('images/landscape.png', 
-        canvasDraw.renderAll.bind(canvasDraw), {
-          width: canvasDraw.width,
-          height: canvasDraw.height,
-          originX: 'left',
-          originY: 'top'
+
+
+    var backgroundImages = $('#drawing-bg-images').children();
+
+    $.each(backgroundImages, function(idx, img) {
+        $(img).on('click', function() {
+          // console.log("What the fuck?")
+          canvasDraw.setBackgroundImage($(this).attr('src'), 
+            canvasDraw.renderAll.bind(canvasDraw), {
+            width: canvasDraw.width,
+            height: canvasDraw.height,
+            originX: 'left',
+            originY: 'top'
+          });
         });
     });
+
+
+
+    // $('#drawing-bg-images').on('click', function() {
+    //   canvasDraw.setBackgroundImage('images/landscape.png', 
+    //     canvasDraw.renderAll.bind(canvasDraw), {
+    //       width: canvasDraw.width,
+    //       height: canvasDraw.height,
+    //       originX: 'left',
+    //       originY: 'top'
+    //     });
+    // });
 
 
     var drawingModeEl = document.getElementById('drawing-mode-btn'),
