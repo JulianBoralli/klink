@@ -28,14 +28,14 @@ function generatePalette() {
 };
 
 	var letterImages = $('#letter-images').children();
-	var percentage = 0.05;
+	var percentage = 0.04;
 
 	$.each(letterImages, function(i, el) {
 
 		var letter = new fabric.Image(el, {
       char: String.fromCharCode(65 + i),
-		  left: i >= 13 ? ((55 * (i - 11.1)) + (5 * (i - 10))) : ((50 * (i + 2)) + (10 * (i + 2))),
-		  top: i >= 13 ? 70 : 10,
+		  left: i >= 13 ? ((40 * (i - 9)) + (9 * (i - 10))) : ((40 * (i + 4)) + (10 * (i + 2))),
+		  top: i >= 13 ? 64 : 13,
 		  width: canvasPalette.width*percentage,
 		  height: canvasPalette.width*percentage
 		});
@@ -125,10 +125,10 @@ function boundCanvas() {
   var clearElement = document.getElementById('clear-img');
 
   var clearButton = new fabric.Image(clearElement, {
-    left: 10,
-    top: 25,
-    width: canvasPalette.width*(percentage*1.6),
-    height: canvasPalette.width*(percentage*1.6)
+    left: 85,
+    top: 20,
+    width: canvasPalette.width*(percentage*2.3),
+    height: canvasPalette.width*(percentage*2.3)
   });
 
   clearButton.lockMovementX = true;
