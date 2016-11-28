@@ -32,25 +32,56 @@ function drawGame(ResponsiveCanvas) {
           if (canvasDraw.isDrawingMode) {
             $('#drawing-mode-btn').fadeOut();
             drawingOptionsEl.style.display = '';
+            $('#undo-btn').fadeIn();
+            $('#redo-btn').fadeIn();
             $('#clear-drawing-btn').fadeIn();
             clearDrawing.onclick = function() {
               canvasDraw.clear();
               canvasDraw.setBackgroundColor('white');
             };
-          }
+          };
         };
     
       canvasDraw.on('path:created', function() {
         updateComplexity();
       });
-    
+
+      // Undo & Redo Opts
+      var undoButton = document.getElementById('undo-btn');
+      var redoButton = document.getElementById('redo-btn');
+
+      canvasDraw.on('object:added',function() {
+        if(!isRedoing) {
+          h = [];
+        };
+        isRedoing = false;
+      });
+
+      var isRedoing = false;
+      var h = [];
+
+      $(undoButton).on('click', function() {
+        if(canvasDraw._objects.length>0) {
+          h.push(canvasDraw._objects.pop());
+          canvasDraw.renderAll();
+        };
+      });
+      
+      $(redoButton).on('click', function() {
+        if(h.length>0) {
+          isRedoing = true;
+          canvasDraw.add(h.pop());
+        };
+      });
+      // end undo/redo
+
       document.getElementById('drawing-mode-selector').addEventListener('change', function() {
          canvasDraw.freeDrawingBrush = new fabric[this.value + 'Brush'](canvasDraw);
          
         if (canvasDraw.freeDrawingBrush) {
           canvasDraw.freeDrawingBrush.color = drawingColorEl.value;
           canvasDraw.freeDrawingBrush.width = parseInt(drawingLineWidthEl.value, 10) || 1;
-        }
+        };
       });
     
       drawingColorEl.onchange = function() {
@@ -63,7 +94,7 @@ function drawGame(ResponsiveCanvas) {
       if (canvasDraw.freeDrawingBrush) {
         canvasDraw.freeDrawingBrush.color = drawingColorEl.value;
         canvasDraw.freeDrawingBrush.width = parseInt(drawingLineWidthEl.value, 10) || 1;
-      }
+      };
   
       canvasDraw.renderAll();
 
