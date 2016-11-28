@@ -24,11 +24,6 @@ canvas {
 
 /* WELCOME */
 
-body {
-  background-repeat: no-repeat;
-  background-size: 100% 100vh;
-}
-
 .title {
   text-align: center;
 }
@@ -52,6 +47,11 @@ body {
 
 
 /* DRAWING */
+
+body {
+  background-repeat: no-repeat;
+  background-size: 100% 100vh;
+}
 
 .draw-game {
   background-color: #72DEEA;
