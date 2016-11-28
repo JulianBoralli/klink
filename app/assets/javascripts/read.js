@@ -6,16 +6,16 @@ function readGame(ResponsiveCanvas) {
 	// Create Canvas
 	var canvasPlay = new ResponsiveCanvas('canvas-play');
   var canvasPalette = new ResponsiveCanvas('canvas-palette');
-  
+
   canvasPlay.setDimensions({width: '98vw', height: '40vw'}, {
     cssOnly: true
   });
-  
+
   canvasPalette.setDimensions({width: '98vw', height: '13vw'}, {
     cssOnly: true
   });
 
-	// Disable Object Controls  
+	// Disable Object Controls
   fabric.Object.prototype.hasControls = false;
 
   // Enable Selectable
@@ -34,7 +34,7 @@ function readGame(ResponsiveCanvas) {
 	// Bound Canvas Border so objects don't disappear
 	boundCanvas();
 
-	// Configure Snapping and Intersecting 
+	// Configure Snapping and Intersecting
 	configureSnapIntersect();
 
 	// Wiggle Letter Effect
@@ -91,7 +91,7 @@ function readGame(ResponsiveCanvas) {
 
 
 	    if (activeObject && !activeObject.button) {
-	      
+
         canvasPlay.remove(activeObject);
 	    }
 	    else if (activeGroup) {
@@ -132,9 +132,9 @@ function readGame(ResponsiveCanvas) {
 		};
 
 		canvasPlay.on('object:moving', function (options) {
-		
+
 			options.target.setCoords();
-		
+
 			canvasPlay.forEachObject(function (obj) {
 				if (obj === options.target) return;
 
@@ -271,7 +271,7 @@ function readGame(ResponsiveCanvas) {
 	};
 
   function redObjectBorder() {
-		
+
 		canvasPlay.on({'object:selected': borders});
 
 		function borders(object) {
@@ -314,7 +314,7 @@ function readGame(ResponsiveCanvas) {
 			letter.on('selected', function() {
 			  console.log(this.char);
 
-			  
+
 				if (this.canvas.lowerCanvasEl.id === "canvas-palette") {
 					var clone = fabric.util.object.clone(this);
 					responsiveVoice.speak(this.char);
@@ -368,7 +368,7 @@ function readGame(ResponsiveCanvas) {
 
 	    searchAjax(event, canvasPlay);
 	    canvasPalette.discardActiveObject();
-			canvasPalette.renderAll(); 
+			canvasPalette.renderAll();
 			canvasPlay.renderAll();
 		});
 
@@ -406,7 +406,7 @@ function readGame(ResponsiveCanvas) {
 
 
 	    if (activeObject && !activeObject.button) {
-	      
+
         canvasPlay.remove(activeObject);
 	    }
 	    else if (activeGroup) {
@@ -419,7 +419,7 @@ function readGame(ResponsiveCanvas) {
         });
 	    }
 	    canvasPalette.discardActiveObject();
-			canvasPalette.renderAll(); 
+			canvasPalette.renderAll();
 		});
 
 		canvasPalette.add(searchButton, clearButton);
@@ -497,16 +497,17 @@ function readGame(ResponsiveCanvas) {
 			console.log('response:', response)
 			var textSpeak = JSON.stringify(response[1])
 			// function to call the APIs with response
-			
+		
 			responsiveVoice.speak(textSpeak, "UK English Female");
+
 			$("#image-result").append("<img src=" + "\"" + response[0] + "\"" + "id=" + textSpeak + " />");
-			
+
 			var stickerElement = document.getElementById(response[1]);
 
 
 			addSticker(stickerElement, canvasPlay);
-		
-			
+
+
 			canvasPlay.setActiveObject((canvasPlay.getObjects()[canvasPlay.getObjects().length - 1]));
 			canvasPlay.renderAll();
 		})

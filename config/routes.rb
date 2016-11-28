@@ -7,6 +7,10 @@ Rails.application.routes.draw do
 
 	get '/letters/show' => 'letters#show'
 
+	get '/write' => 'writings#index'
+
   get '/draw' => 'drawings#index'
+
+  get '/memory' => 'memory#index'
 
 end
