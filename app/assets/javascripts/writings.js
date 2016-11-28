@@ -1,5 +1,9 @@
 function writeGame(ResponsiveCanvas) {
 
+  setTimeout(function() {
+	canvasPlay.renderAll();
+  }, 500);
+
   var canvasPlay = new ResponsiveCanvas('canvas-play');
 
   var canvasPalette = new ResponsiveCanvas('canvas-palette');

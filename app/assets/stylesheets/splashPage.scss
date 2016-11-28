@@ -1,0 +1,53 @@
+/* WELCOME */
+
+.title {
+  text-align: center;
+}
+
+.game-cards {
+  text-align: center;
+}
+
+.game-logo {
+  width: 28%;
+  padding: 2%;
+}
+
+
+body{
+  background: #ed1c24;
+}
+
+// klink animation
+#klink-animate{
+  max-width: 100%;
+  height: auto;
+  padding-left: 26%
+}
+
+p{
+  color: white;
+  font-family: "arial rounded mt bold";
+  font-size: 15vw;
+  opacity: 0.25;
+  transition:opacity 100ms;
+  overflow: hidden;
+  width: 30em;
+  animation: type 9s steps(70, end);
+}
+
+p.disappear{
+  opacity:0;
+}
+
+span{
+  animation: blink 1s infinite;
+}
+
+@keyframes type{
+  from { width: 0; }
+}
+
+@keyframes blink{
+  to{opacity: .0;}
+}
