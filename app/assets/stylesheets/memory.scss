@@ -4,8 +4,11 @@
 
 #panda-container {
   width: 1080px;
-  margin-top: 290px;
-  margin-left: 500px;
+  position: relative;
+  display: block;
+  margin: auto;
+  padding-top: 220px;
+  padding-left: 50px;
 }
 
 .card {
@@ -31,8 +34,18 @@
 
 #panda-heading {
   font-family: 'Baloo Bhaina', cursive;
-  font-size: 6em;
+  font-size: 8em;
   position: absolute;
   margin-top: -200px;
-  margin-left: 100px;
+  margin-left: 50px;
+}
+
+#panda-victory {
+  font-family: 'Baloo Bhaina', cursive;
+  font-size: 10em;
+  position: relative;
+  display: block;
+  margin: auto;
+  margin-top: 200px;
+  margin-left: 140px;
 }
