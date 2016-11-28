@@ -20,8 +20,6 @@ function writeGame(ResponsiveCanvas) {
 
 function generatePalette() {
   canvasPlay.selection = false;
-  canvasPlay.freeDrawingBrush.color = 'blue';
-  canvasPlay.freeDrawingBrush.width = 10;
   canvasPalette.renderAll();
   canvasPalette.selectable = false;
   canvasPalette.selection = false;
@@ -154,13 +152,18 @@ function boundCanvas() {
   function trace(clone) {
     greenPencilButton.on('selected', function(){
       canvasPlay.isDrawingMode = true;
+      canvasPlay.freeDrawingBrush.color = 'red';
+      canvasPlay.freeDrawingBrush.width = 10;
       clone.on('selected', function(){
         if (clicks <= 1){
           clone.animate('left', '+=380', { onChange: canvasPlay.renderAll.bind(canvasPlay) });
         }
-        responsiveVoice.speak(this.char);
       });
     });
+    redPencilButton.on('selected', function(){
+      canvasPlay.isDrawingMode = false;
+    });
+    responsiveVoice.speak(this.char);
   };
 
 function wiggleLetter(){
