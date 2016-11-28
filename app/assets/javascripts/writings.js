@@ -143,11 +143,11 @@ function boundCanvas() {
 
 	canvasPalette.add(clearButton, greenPencilButton, redPencilButton);
 
-  var clicks = 0
-
-  $('#green-pencil').on('click', function(event){
-    clicks += 1;
-  });
+  // var clicks = 0
+  //
+  // $('#green-pencil').on('click', function(event){
+  //   clicks += 1;
+  // });
 
   function trace(clone) {
     greenPencilButton.on('selected', function(){
