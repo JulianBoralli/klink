@@ -154,14 +154,15 @@ function boundCanvas() {
       canvasPlay.isDrawingMode = true;
       canvasPlay.freeDrawingBrush.color = 'red';
       canvasPlay.freeDrawingBrush.width = 10;
-      clone.on('selected', function(){
-        if (clicks <= 1){
-          clone.animate('left', '+=380', { onChange: canvasPlay.renderAll.bind(canvasPlay) });
-        }
-      });
+      // clone.on('selected', function(){
+      //   if (clicks <= 1){
+      //     clone.animate('left', '+=380', { onChange: canvasPlay.renderAll.bind(canvasPlay) });
+      //   }
+      // });
     });
     redPencilButton.on('selected', function(){
       canvasPlay.isDrawingMode = false;
+      clone.animate('left', '+=380', { onChange: canvasPlay.renderAll.bind(canvasPlay) });
     });
     responsiveVoice.speak(this.char);
   };
