@@ -6,6 +6,6 @@ $( document ).on('turbolinks:load', function() {
 
   setTimeout(function(){
     $('#banner').fadeIn('slow');
-  },4000);
+  }, 3600);
 
 });
