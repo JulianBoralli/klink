@@ -1,6 +1,7 @@
 function writeGame(ResponsiveCanvas) {
 
   var canvasPlay = new ResponsiveCanvas('canvas-play');
+
   var canvasPalette = new ResponsiveCanvas('canvas-palette');
 
   fabric.Object.prototype.hasControls = false;
@@ -18,7 +19,6 @@ function writeGame(ResponsiveCanvas) {
   wiggleLetter();
 
 function generatePalette() {
-  canvasPlay.setBackgroundImage('images/chalkboard.png')
   canvasPlay.selection = false;
   canvasPlay.freeDrawingBrush.color = 'blue';
   canvasPlay.freeDrawingBrush.width = 10;
@@ -53,18 +53,18 @@ function generatePalette() {
 				var clone = fabric.util.object.clone(this);
 				clone.width = 360;
 				clone.height = 385;
-        clone.left =  100;
+        clone.left =  210;
         clone.top = 25;
 	    	clone.lockMovementX = true;
 				clone.lockMovementY = true;
 
-				clone.animate('height', 520, {
+				clone.animate('height', 420, {
 				  onChange: canvasPlay.renderAll.bind(canvasPlay),
 				  duration: 1000,
 				  easing: fabric.util.ease.easeOutBounce
 				});
 
-				clone.animate('width', 300,  {
+				clone.animate('width', 200,  {
 					onChange: canvasPlay.renderAll.bind(canvasPlay),
 					duration: 1000,
 					easing: fabric.util.ease.easeOutBounce
