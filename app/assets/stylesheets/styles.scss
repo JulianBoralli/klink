@@ -24,6 +24,11 @@ canvas {
 
 /* WELCOME */
 
+body {
+  background-repeat: no-repeat;
+  background-size: 100% 100vh;
+}
+
 .title {
   text-align: center;
 }
@@ -37,7 +42,6 @@ canvas {
   background-repeat: no-repeat;
   background-size: 100% auto;
 }
-
 
 .game-logo {
   width: 28%;
@@ -64,8 +68,13 @@ canvas {
 
 #drawing-mode-options {
   display: inline-block;
+  background-color: white;
+  border: 1px solid black;
   margin-right: 5%;
   margin-left: 5%;
+  padding-bottom: 1%;
+  padding-right: .5%;
+  padding-left: .5%;
 }
 
 #drawing-mode {
