@@ -388,8 +388,6 @@ function readGame(ResponsiveCanvas) {
 		clearButton.lockScalingX = clearButton.lockScalingY = true;
 		clearButton.lockRotation = true;
 
-
-
 		clearButton.on('selected', function() {
 		  console.log('clear');
 
@@ -402,8 +400,11 @@ function readGame(ResponsiveCanvas) {
 		});
 
 		canvasPalette.add(searchButton, clearButton);
-		canvasPalette.renderAll();
-		// canvasPalette.setActiveObject(clearButton);
+		setTimeout(function() { 
+			canvasPalette.renderAll();
+		}, 500);
+		
+		// canvasPalette.setActiveObject(searchButton);
 	};
 
 
@@ -411,7 +412,6 @@ function readGame(ResponsiveCanvas) {
 
 		var activeObject = canvasPlay.getActiveObject(),
   			activeGroup = canvasPlay.getActiveGroup();
-
 
     if (activeObject && !activeObject.button) {
 
@@ -430,26 +430,18 @@ function readGame(ResponsiveCanvas) {
 		canvasPalette.renderAll();		
 	};
 
+
 	function moveBroom(broom) {
 		broom.bringToFront();
 		setTimeout(function() { 
 			console.log('timeout', broom);
-			broom.animate('left', 0, {
+			broom.animate('left', -250, {
 			  onChange: canvasPlay.renderAll.bind(canvasPlay),
 			  duration: 1000,
-				onComplete: function() { canvasPlay.remove(broom);}
-				
+			  onComplete: function() { canvasPlay.remove(broom); }
 			}); 
 		}, 1000);
-
-		console.log('timeout', broom);
-		broom.animate('left', 950, {
-		  onChange: canvasPlay.renderAll.bind(canvasPlay),
-		  duration: 1000
-		}); 
 	};
-
-
 
 
 	function animateBroom() {
@@ -457,10 +449,10 @@ function readGame(ResponsiveCanvas) {
 		var clearElement = document.getElementById('clear-img');
 		
 		var broom = new fabric.Image(clearElement, {
-		  left: 10,
-		  top: 250,
-			width: 50,
-			height: 100
+		  left: 1000,
+		  top: 0,
+			width: 250,
+			height: 500
 		});
 
 		broom.lockMovementX = true;
@@ -558,8 +550,8 @@ function readGame(ResponsiveCanvas) {
 			addSticker(stickerElement, canvasPlay);
 
 
-			canvasPlay.setActiveObject((canvasPlay.getObjects()[canvasPlay.getObjects().length - 1]));
-			canvasPlay.renderAll();
+			// canvasPlay.setActiveObject((canvasPlay.getObjects()[canvasPlay.getObjects().length - 1]));
+			// canvasPlay.renderAll();
 		})
 		.fail(function(error) {
 			console.log(error);
@@ -591,8 +583,10 @@ function readGame(ResponsiveCanvas) {
   		console.log('sleeping');
 	 	});
 
-		canvasPlay.renderAll();
-		// sticker.trigger('click');
+		setTimeout(function() { 
+			canvasPlay.renderAll();
+		}, 500);
+		
 	};
 
 };
