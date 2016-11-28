@@ -102,8 +102,9 @@ body {
 }
 
 .drawing-bg-images-header {
-  text-align: center;
-  margin-bottom: -10px;
+  font-size: 150%;
+  position: absolute;
+  margin-left: -6%;
 }
 
 #drawing-bg-images {
@@ -113,7 +114,8 @@ body {
   background-color: white;
   border: 1px solid black;
   width: 40%;
-  height: 9em;
+  min-width: 360px;
+  height: 10em;
   overflow: auto;
   white-space: nowrap;
 }
