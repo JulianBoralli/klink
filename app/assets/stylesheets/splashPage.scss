@@ -22,7 +22,7 @@ body{
 #klink-animate{
   max-width: 100%;
   height: auto;
-  padding-left: 26%
+  padding-left: 26%;
 }
 
 p{
@@ -50,4 +50,12 @@ span{
 
 @keyframes blink{
   to{opacity: .0;}
+}
+
+#banner{
+  display: none;
+  max-width: 100%;
+  height: 40vh;
+  margin: auto;
+  margin-top: 25vh;
 }
