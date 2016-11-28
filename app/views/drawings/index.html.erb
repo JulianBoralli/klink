@@ -1,19 +1,36 @@
-<h1>Drawing Game Page!</h1>
+<body class="draw-game"> 
 
     <canvas id="canvas-draw" height="200" width="800"></canvas>
 
-        <li style="margin-top:10px;">
-          <button id="drawing-mode" class="btn btn-info">Draw!</button>
-          <div style="display: none;" id="drawing-mode-options">
-            <label for="drawing-mode-selector">Mode:</label>
-            <select id="drawing-mode-selector">
+      <div class="drawing-options">
+          <div id="drawing-mode">
+            <img src="images/start-drawing.png" id="drawing-mode-btn" class="btn btn-info">
+            <img src="images/undo-btn.png" id="undo-btn">
+            <img src="images/redo-btn.png" id="redo-btn">
+            <img src="images/clear-drawing-btn.png" id="clear-drawing-btn">
+          </div>
+
+          <div id="drawing-mode-options">
+            <select id="drawing-mode-selector" style="display: none">
               <option>Pencil</option>
             </select><br>
             <label for="drawing-line-width">Size:</label>
-            <input type="range" value="30" min="0" max="150" id="drawing-line-width"><br>
+            <input type="range" value="12" min="0" max="100" id="drawing-line-width"><br>
             <label for="drawing-color">Color:</label>
             <input type="color" value="#6CD8AB" id="drawing-color"><br>
-            <label for="drawing-shadow-width">Shadow:</label>
-            <input type="range" value="0" min="0" max="50" id="drawing-shadow-width"><br>
           </div>
-        </li>
+
+          <div id="drawing-bg-images">
+            pick a backdrop to draw on!<br>      
+            <img src="images/landscape.png" class="drawing-bg" id="land-bg">
+            <img src="images/underwater.png" class="drawing-bg" id="water-bg">
+            <img src="images/beach.png" class="drawing-bg" id="beach-bg">
+            <img src="images/space.png" class="drawing-bg" id="space-bg">
+            <img src="images/jungle.png" class="drawing-bg" id="jungle-bg">
+            <img src="images/mountain.png" class="drawing-bg" id="mountain-bg">
+            <img src="images/desert.svg" class="drawing-bg" id="desert-bg">
+          </div>
+
+      </div>
+
+</body>
