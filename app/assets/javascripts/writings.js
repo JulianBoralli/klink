@@ -53,17 +53,17 @@ function generatePalette() {
 				clone.width = 360;
 				clone.height = 385;
         clone.left =  100;
-        clone.top = 65;
+        clone.top = 25;
 	    	clone.lockMovementX = true;
 				clone.lockMovementY = true;
 
-				clone.animate('height', 380, {
+				clone.animate('height', 520, {
 				  onChange: canvasPlay.renderAll.bind(canvasPlay),
 				  duration: 1000,
 				  easing: fabric.util.ease.easeOutBounce
 				});
 
-				clone.animate('width', 320,  {
+				clone.animate('width', 300,  {
 					onChange: canvasPlay.renderAll.bind(canvasPlay),
 					duration: 1000,
 					easing: fabric.util.ease.easeOutBounce
@@ -94,9 +94,9 @@ function generatePalette() {
       if (clicks < 3){
         clone.animate('left', '+=450', { onChange: canvasPlay.renderAll.bind(canvasPlay) });
       }
-      responsiveVoice.speak(this.char);
+      // responsiveVoice.speak(this.char);
     })
-    
+
     canvasPlay.isDrawingMode = !canvasPlay.isDrawingMode;
       if (canvasPlay.isDrawingMode) {
         traceMode.innerHTML = 'Exit Trace';
@@ -140,25 +140,7 @@ function boundCanvas() {
     canvasPlay.clear();
   });
 
-	var trashCanElement = document.getElementById('trashcan-img');
-	var	trashCan = new fabric.Image(trashCanElement, {
-		left: 900,
-		top: 25,
-		width: canvasPalette.width*(percentage*1.6),
-		height: canvasPalette.width*(percentage*1.6)
-	});
-
-	trashCan.lockMovementX = true;
-	trashCan.lockMovementY = true;
-	trashCan.lockUniScaling = true;
-	trashCan.lockRotation = true;
-	trashCan.on('selected', function(){
-		var activeObject = canvasPlay.getActiveObject();
-		canvasPlay.remove(activeObject);
-		canvasPalette.deactivateAll().renderAll();
-	});
-
-	canvasPalette.add(trashCan, clearButton);
+	canvasPalette.add(clearButton);
 
 function wiggleLetter(){
 	canvasPlay.hoverCursor = 'pointer';
