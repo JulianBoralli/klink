@@ -75,7 +75,6 @@ function generatePalette() {
         trace(clone);
 			}
 		});
-
 		canvasPalette.add(letter);
 		canvasPalette.renderAll();
 	});
