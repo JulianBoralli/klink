@@ -42,11 +42,17 @@ var game = new Phaser.Game("100%","100%", Phaser.auto, 'math', {
     game.load.image("timebar", "/images/math/timebar.png");
     game.load.image("buttonmask", "/images/math/buttonmask.png");
     game.load.spritesheet("buttons", "/images/math/buttons.png",400,50);
-    game.load.spritesheet('myguy', 'images/math/dance.png', 70, 120);
+    game.load.spritesheet('myguy', '/images/math/dance.png', 70, 120);
+    game.load.image("background", "/images/math/chalkboard.png");
   }
   function onCreate() {
     topScore = localStorage.getItem("topScore")==null?0:localStorage.getItem("topScore");
     game.stage.backgroundColor = "#cccccc";
+    chalkBoard = game.add.sprite(1100,850,"background");
+    chalkBoard.x = 0;
+    chalkBoard.y = 0;
+    chalkBoard.height = game.height;
+    chalkBoard.width = game.width;
     game.stage.disableVisibilityChange = true;
     gameOverSprite = this.game.add.sprite(600, 300, 'myguy');
     gameOverSprite.frame = 0;
@@ -65,9 +71,9 @@ var game = new Phaser.Game("100%","100%", Phaser.auto, 'math', {
       font:"bold 24px Arial"
     });
     for(var i=0;i<3;i++){
-      var numberButton = game.add.button(50,250+i*75,"buttons",checkAnswer,this).frame=i;
+      var numberButton = game.add.button(100,250+i*75,"buttons",checkAnswer,this).frame=i;
     }
-    numberTimer =  game.add.sprite(50,250,"timebar");
+    numberTimer =  game.add.sprite(100,250,"timebar");
     nextNumber();
   }
   function gameOver(gameOverString){
