@@ -20,7 +20,12 @@ module ImageApiHelper
   def self.clipart(word)
     url = "https://openclipart.org/search/json/?query=#{word}&sort=downloads"
     response = HTTParty.get(url)
-    return response['payload'][0]['svg']['url']
+    p response
+    if response['payload'].empty?
+      return word
+    else
+      return response['payload'][0]['svg']['url']
+    end
   end
 
 end
