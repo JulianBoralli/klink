@@ -497,7 +497,7 @@ function readGame(ResponsiveCanvas) {
 			console.log('response:', response)
 			var textSpeak = JSON.stringify(response[1])
 			// function to call the APIs with response
-		
+
 			responsiveVoice.speak(textSpeak, "UK English Female");
 
 			$("#image-result").append("<img src=" + "\"" + response[0] + "\"" + "id=" + textSpeak + " />");

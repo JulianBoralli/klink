@@ -53,7 +53,7 @@ function generatePalette() {
 				var clone = fabric.util.object.clone(this);
 				clone.width = 360;
 				clone.height = 385;
-        clone.left =  210;
+        clone.left =  230;
         clone.top = 25;
 	    	clone.lockMovementX = true;
 				clone.lockMovementY = true;
@@ -82,28 +82,21 @@ function generatePalette() {
 
   var clicks = 0
 
-  $('#drawing-mode').on('click', function(event){
+  $('#green-pencil').on('click', function(event){
     clicks += 1;
   });
 
   function trace(clone) {
-    var traceMode = document.getElementById('drawing-mode')
+    var traceMode = document.getElementById('green-pencil')
     traceMode.onclick = function() {
 
     clone.on('selected', function(){
-      if (clicks < 3){
-        clone.animate('left', '+=450', { onChange: canvasPlay.renderAll.bind(canvasPlay) });
+      if (clicks <= 1){
+        clone.animate('left', '+=380', { onChange: canvasPlay.renderAll.bind(canvasPlay) });
       }
-      // responsiveVoice.speak(this.char);
-    })
-
+      responsiveVoice.speak(this.char);
+    });
     canvasPlay.isDrawingMode = !canvasPlay.isDrawingMode;
-      if (canvasPlay.isDrawingMode) {
-        traceMode.innerHTML = 'Exit Trace';
-      }
-      else {
-        traceMode.innerHTML = 'Trace';
-      };
     };
   };
 
@@ -125,7 +118,8 @@ function boundCanvas() {
   var clearElement = document.getElementById('clear-img');
 
   var clearButton = new fabric.Image(clearElement, {
-    left: 85,
+    button: true,
+    left: 80,
     top: 20,
     width: canvasPalette.width*(percentage*2.3),
     height: canvasPalette.width*(percentage*2.3)
@@ -140,7 +134,22 @@ function boundCanvas() {
     canvasPlay.clear();
   });
 
-	canvasPalette.add(clearButton);
+  var pencilElement = document.getElementById('green-pencil');
+
+  var pencilButton = new fabric.Image(pencilElement, {
+    button: true,
+    left: 840,
+    top: 20,
+    width: canvasPalette.width*(percentage*2.3),
+    height: canvasPalette.width*(percentage*2.3)
+  })
+
+  pencilButton.lockMovementX = true;
+  pencilButton.lockMovementY = true;
+  pencilButton.lockScalingX = pencilButton.lockScalingY = true;
+  pencilButton.lockRotation = true;
+
+	canvasPalette.add(clearButton, pencilButton);
 
 function wiggleLetter(){
 	canvasPlay.hoverCursor = 'pointer';
