@@ -33,7 +33,7 @@ function drawGame(ResponsiveCanvas) {
             $('#drawing-mode-btn').addClass('animated rubberBand').fadeOut();
             drawingOptionsEl.style.display = '';
             $('#undo-btn').addClass('animated pulse').fadeIn();
-            $('#redo-btn').fadeIn();
+            $('#redo-btn').addClass('animated pulse').fadeIn();
             $('#clear-drawing-btn').fadeIn();
             clearDrawing.onclick = function() {
               canvasDraw.clear();
