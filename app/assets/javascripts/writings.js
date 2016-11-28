@@ -54,7 +54,7 @@ function generatePalette() {
 				clone.width = 360;
 				clone.height = 385;
         clone.left =  230;
-        clone.top = 25;
+        clone.top = 0;
 	    	clone.lockMovementX = true;
 				clone.lockMovementY = true;
 
@@ -80,25 +80,6 @@ function generatePalette() {
 		canvasPalette.renderAll();
 	});
 
-  var clicks = 0
-
-  $('#green-pencil').on('click', function(event){
-    clicks += 1;
-  });
-
-  function trace(clone) {
-    var traceMode = document.getElementById('green-pencil')
-    traceMode.onclick = function() {
-
-    clone.on('selected', function(){
-      if (clicks <= 1){
-        clone.animate('left', '+=380', { onChange: canvasPlay.renderAll.bind(canvasPlay) });
-      }
-      responsiveVoice.speak(this.char);
-    });
-    canvasPlay.isDrawingMode = !canvasPlay.isDrawingMode;
-    };
-  };
 
 function boundCanvas() {
 	canvasPlay.on ("object:moving", function(event) {
@@ -134,22 +115,53 @@ function boundCanvas() {
     canvasPlay.clear();
   });
 
-  var pencilElement = document.getElementById('green-pencil');
+  var greenPencilElement = document.getElementById('green-pencil');
 
-  var pencilButton = new fabric.Image(pencilElement, {
-    button: true,
-    left: 840,
-    top: 20,
-    width: canvasPalette.width*(percentage*2.3),
-    height: canvasPalette.width*(percentage*2.3)
+  var greenPencilButton = new fabric.Image(greenPencilElement, {
+    left: 850,
+    top: 10,
+    width: canvasPalette.width*(percentage*1.3),
+    height: canvasPalette.width*(percentage*1.3)
   })
 
-  pencilButton.lockMovementX = true;
-  pencilButton.lockMovementY = true;
-  pencilButton.lockScalingX = pencilButton.lockScalingY = true;
-  pencilButton.lockRotation = true;
+  greenPencilButton.lockMovementX = true;
+  greenPencilButton.lockMovementY = true;
+  greenPencilButton.lockScalingX = greenPencilButton.lockScalingY = true;
+  greenPencilButton.lockRotation = true;
 
-	canvasPalette.add(clearButton, pencilButton);
+  var redPencilElement = document.getElementById('red-pencil');
+
+  var redPencilButton = new fabric.Image(redPencilElement, {
+    left: 850,
+    top: 65,
+    width: canvasPalette.width*(percentage*1.3),
+    height: canvasPalette.width*(percentage*1.3)
+  })
+
+  redPencilButton.lockMovementX = true;
+  redPencilButton.lockMovementY = true;
+  redPencilButton.lockScalingX = redPencilButton.lockScalingY = true;
+  redPencilButton.lockRotation = true;
+
+	canvasPalette.add(clearButton, greenPencilButton, redPencilButton);
+
+  var clicks = 0
+
+  $('#green-pencil').on('click', function(event){
+    clicks += 1;
+  });
+
+  function trace(clone) {
+    greenPencilButton.on('selected', function(){
+      canvasPlay.isDrawingMode = true;
+      clone.on('selected', function(){
+        if (clicks <= 1){
+          clone.animate('left', '+=380', { onChange: canvasPlay.renderAll.bind(canvasPlay) });
+        }
+        responsiveVoice.speak(this.char);
+      });
+    });
+  };
 
 function wiggleLetter(){
 	canvasPlay.hoverCursor = 'pointer';
