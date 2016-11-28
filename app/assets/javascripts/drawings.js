@@ -30,7 +30,7 @@ function drawGame(ResponsiveCanvas) {
         drawingModeEl.onclick = function() {
           canvasDraw.isDrawingMode = !canvasDraw.isDrawingMode;
           if (canvasDraw.isDrawingMode) {
-            $('#drawing-mode-btn').fadeOut();
+            $('#drawing-mode-btn').addClass('animated rubberBand').fadeOut();
             drawingOptionsEl.style.display = '';
             $('#undo-btn').fadeIn();
             $('#redo-btn').fadeIn();
