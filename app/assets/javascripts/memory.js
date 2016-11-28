@@ -28,10 +28,15 @@ var memoryPanda = function(){
       memoryGame.clickHandlers();
     },
     clickHandlers: function() {
-      $('.card').on('click', function() {
-        $(this).html('<img src=' + $(this).data('cardValue') + ' style="height: 170px; width: 180px;"/>').addClass('selected');
+      var number = 0;
+      var matchEvent = function(){
+        $('.card').on('click', function(event) {
+        $(this).html('<img src=' + $(this).data('cardValue') + ' style="height: 190px; width: 200px;"/>').addClass('selected');
+          number++;
         memoryGame.checkMatch();
       });
+      };
+      matchEvent();
     },
     checkMatch: function() {
       if ($('.selected').length === 2) {
@@ -50,13 +55,17 @@ var memoryPanda = function(){
             $('.selected').each(function() {
               $(this).html('').removeClass('selected');
             });
-          }, 1000);
+          }, 480);
         }
       }
     },
     checkWin: function() {
       if ($('.unmatched').length === 0) {
-        $('#panda-container').html('<h1>You Did It!</h1>');
+        $('.card').hide();
+        $('#panda-victory').show().addClass('animated bounceInLeft');
+        setTimeout(function() {
+          window.location.reload();
+        }, 3000);
       }
     }
   };
