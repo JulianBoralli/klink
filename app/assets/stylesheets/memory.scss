@@ -3,9 +3,8 @@
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
 #panda-container {
-  width: 1080px;
-  margin-top: 290px;
-  margin-left: 500px;
+  width: 80vw;
+  margin: auto;
 }
 
 .card {
@@ -27,12 +26,10 @@
         -moz-background-size: cover;
         -o-background-size: cover;
         background-size: cover;
-}
+  }
 
 #panda-heading {
   font-family: 'Baloo Bhaina', cursive;
   font-size: 6em;
-  position: absolute;
-  margin-top: -200px;
-  margin-left: 100px;
+  text-align: center;
 }
