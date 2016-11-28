@@ -456,7 +456,13 @@ function readGame(ResponsiveCanvas) {
 	function searchAjax(event, canvasPlay) {
 		console.log(canvasPlay);
 
-		var letters = canvasPlay._objects.filter(function(el) { return el.char !== undefined });
+		var activeGroup = canvasPlay.getActiveGroup();
+		if (activeGroup) {
+      var objectsInGroup = activeGroup.getObjects();
+      var letters = objectsInGroup.filter(function(el) { return el.char !== undefined });
+    } else {
+    	var letters = canvasPlay._objects.filter(function(el) { return el.char !== undefined });
+    }
 
 		var action = "/letters/show";
 		var method = "GET";
@@ -486,20 +492,9 @@ function readGame(ResponsiveCanvas) {
 			
 			var stickerElement = document.getElementById(response[1]);
 
-			function sleep(ms, callback) {
-		  	ms = ms || 0;
-		  	setTimeout(callback, ms);
-			}
-			sleep(1000, function() {
-    		console.log('sleeping');
- 			 });
-
-			canvasPlay.renderAll();
 
 			addSticker(stickerElement, canvasPlay);
-			sleep(1000, function() {
-    		console.log('sleeping');
- 			 });
+		
 			
 			canvasPlay.setActiveObject((canvasPlay.getObjects()[canvasPlay.getObjects().length - 1]));
 			canvasPlay.renderAll();
@@ -515,16 +510,27 @@ function readGame(ResponsiveCanvas) {
 	function addSticker(stickerElement, canvasPlay) {
 
 		var sticker = new fabric.Image(stickerElement, {
-		  left: 650,
+		  left: 750,
       top: Math.floor((Math.random() * 500) + 1),
 			width: 100,
 			height: 100
 		});
 
+
 		sticker.hasControls = true;
 
 		canvasPlay.add(sticker);
+
+		function sleep(ms, callback) {
+	  	ms = ms || 0;
+	  	setTimeout(callback, ms);
+		}
+		sleep(1000, function() {
+  		console.log('sleeping');
+	 	});
+
 		canvasPlay.renderAll();
+		// sticker.trigger('click');
 	};
 
 };
