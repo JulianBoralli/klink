@@ -23,7 +23,7 @@ function readGame(ResponsiveCanvas) {
 
   // Disable Multiple Selection
 	canvasPalette.selection = false;
-	canvasPlay.selection = false;
+	canvasPlay.selection = true;
 
 	// Draw Palette
 	generatePalette();
@@ -40,6 +40,73 @@ function readGame(ResponsiveCanvas) {
 	// Wiggle Letter Effect
 	wiggleLetter();
 
+	// Create puppy and broom
+	// createPuppy();
+	// createBroom();
+
+
+
+	function createPuppy() {
+
+		var puppyElement = document.getElementById('puppy-img');
+
+		var puppy = new fabric.Image(puppyElement, {
+		  button: true,
+		  left: 900,
+		  top: 450,
+		  width: 80,
+		  height: 100
+		});
+
+		puppy.lockMovementX = true;
+		puppy.lockMovementY = true;
+		puppy.lockScalingX = puppy.lockScalingY = true;
+		puppy.lockRotation = true;
+
+		canvasPlay.add(puppy);
+	};
+
+	function createBroom() {
+
+		var broomElement = document.getElementById('clear-img');
+
+		var broom = new fabric.Image(broomElement, {
+		  button: true,
+		  left: 10,
+		  top: 450,
+		  width: 80,
+		  height: 100
+		});
+
+		broom.lockMovementX = true;
+		broom.lockMovementY = true;
+		broom.lockScalingX = broom.lockScalingY = true;
+		broom.lockRotation = true;
+
+		broom.on('selected', function() {
+		  console.log('clear');
+
+	    var activeObject = canvasPlay.getActiveObject(),
+    			activeGroup = canvasPlay.getActiveGroup();
+
+
+	    if (activeObject && !activeObject.button) {
+	      
+        canvasPlay.remove(activeObject);
+	    }
+	    else if (activeGroup) {
+        var objectsInGroup = activeGroup.getObjects();
+        canvasPlay.discardActiveGroup();
+        objectsInGroup.forEach(function(object) {
+        	if (!object.button)	{
+        		canvasPlay.remove(object);
+      		}
+        });
+	    }
+		});
+
+		canvasPlay.add(broom);
+	};
 
 	function configureSnapIntersect() {
 
@@ -226,7 +293,7 @@ function readGame(ResponsiveCanvas) {
 
 			var letter = new fabric.Image(el, {
 			  char: String.fromCharCode(65 + i),
-			  left: i >= 13 ? ((50 * (i - 11.1)) + (5 * (i - 10))) : ((50 * (i + 2)) + (5 * (i + 2))),
+			  left: i >= 13 ? (30 + (50 * (i - 11.1)) + (5 * (i - 10))) : (30 + (50 * (i + 2)) + (5 * (i + 2))),
 			  top: i >= 13 ? 70 : 10,
 			  width: canvasPalette.width*percentage,
 			  height: canvasPalette.width*percentage
@@ -270,6 +337,7 @@ function readGame(ResponsiveCanvas) {
 						easing: fabric.util.ease.easeOutBounce
 					});
 		    	canvasPlay.add(clone);
+		    	canvasPalette.discardActiveObject();
 		    	// canvasPalette.deactivateAll().renderAll();
 
 				}
@@ -287,7 +355,7 @@ function readGame(ResponsiveCanvas) {
 		  left: 910,
 		  top: 25,
 			width: canvasPalette.width*(percentage*1.6),
-			height: canvasPalette.width*(percentage*1.6)
+			height: canvasPalette.width*(percentage*2)
 		});
 
 		searchButton.lockMovementX = true;
@@ -297,7 +365,11 @@ function readGame(ResponsiveCanvas) {
 
 		searchButton.on('selected', function() {
 		  console.log('search');
+
 	    searchAjax(event, canvasPlay);
+	    canvasPalette.discardActiveObject();
+			canvasPalette.renderAll(); 
+			canvasPlay.renderAll();
 		});
 
 
@@ -318,29 +390,41 @@ function readGame(ResponsiveCanvas) {
 
 		clearButton.on('selected', function() {
 		  console.log('clear');
-	    canvasPlay.clear();
+
+		 //  clearButton.animate('angle', 45, {
+			//   onChange: canvasPalette.renderAll.bind(canvasPalette),
+			//   duration: 2000,
+			// });
+
+			// clearButton.animate('left', 455, {
+			//   onChange: canvasPalette.renderAll.bind(canvasPalette),
+			//   duration: 2000,
+			// });
+
+	    var activeObject = canvasPlay.getActiveObject(),
+    			activeGroup = canvasPlay.getActiveGroup();
+
+
+	    if (activeObject && !activeObject.button) {
+	      
+        canvasPlay.remove(activeObject);
+	    }
+	    else if (activeGroup) {
+        var objectsInGroup = activeGroup.getObjects();
+        canvasPlay.discardActiveGroup();
+        objectsInGroup.forEach(function(object) {
+        	if (!object.button)	{
+        		canvasPlay.remove(object);
+      		}
+        });
+	    }
+	    canvasPalette.discardActiveObject();
+			canvasPalette.renderAll(); 
 		});
 
-		// Create Trash Button
-		var trashCanElement = document.getElementById('trashcan-img');
-		var	trashCan = new fabric.Image(trashCanElement, {
-			left: 820,
-			top: 25,
-			width: canvasPalette.width*(percentage*1.6),
-			height: canvasPalette.width*(percentage*1.6)
-			});
-
-		trashCan.lockMovementX = true;
-		trashCan.lockMovementY = true;
-		trashCan.lockUniScaling = true;
-		trashCan.lockRotation = true;
-		trashCan.on('selected', function(){
-			var activeObject = canvasPlay.getActiveObject();
-			canvasPlay.remove(activeObject);
-			canvasPalette.deactivateAll().renderAll();
-		});
-
-		canvasPalette.add(searchButton, clearButton, trashCan);
+		canvasPalette.add(searchButton, clearButton);
+		canvasPalette.renderAll();
+		canvasPalette.setActiveObject(clearButton);
 	};
 
 	function wiggleLetter() {
@@ -383,7 +467,13 @@ function readGame(ResponsiveCanvas) {
 	function searchAjax(event, canvasPlay) {
 		console.log(canvasPlay);
 
-		var letters = canvasPlay._objects.filter(function(el) { return el.char !== undefined });
+		var activeGroup = canvasPlay.getActiveGroup();
+		if (activeGroup) {
+      var objectsInGroup = activeGroup.getObjects();
+      var letters = objectsInGroup.filter(function(el) { return el.char !== undefined });
+    } else {
+    	var letters = canvasPlay._objects.filter(function(el) { return el.char !== undefined });
+    }
 
 		var action = "/letters/show";
 		var method = "GET";
@@ -398,21 +488,32 @@ function readGame(ResponsiveCanvas) {
 			dataType: 'json'
 		})
 		.done(function(response) {
-			console.log(response)
+			if (response[0] === response[1] || response[1] === "whoopsies") {
+				var textSpeak = JSON.stringify(response[1])
+				responsiveVoice.speak(textSpeak, "UK English Female");
+				return
+			}
+
+			console.log('response:', response)
 			var textSpeak = JSON.stringify(response[1])
 			// function to call the APIs with response
 			
-			responsiveVoice.speak("You spelled " + textSpeak, "UK English Female");
+			responsiveVoice.speak(textSpeak, "UK English Female");
 			$("#image-result").append("<img src=" + "\"" + response[0] + "\"" + "id=" + textSpeak + " />");
+			
 			var stickerElement = document.getElementById(response[1]);
 
-			addSticker(stickerElement, canvasPlay);
 
+			addSticker(stickerElement, canvasPlay);
+		
+			
+			canvasPlay.setActiveObject((canvasPlay.getObjects()[canvasPlay.getObjects().length - 1]));
+			canvasPlay.renderAll();
 		})
 		.fail(function(error) {
 			console.log(error);
 			responsiveVoice.speak("Oh no!", "UK English Female");
-			alert(error.status);
+			// alert(error.status);
 		});
 	};
 
@@ -420,16 +521,27 @@ function readGame(ResponsiveCanvas) {
 	function addSticker(stickerElement, canvasPlay) {
 
 		var sticker = new fabric.Image(stickerElement, {
-		  left: Math.floor((Math.random() * 400) + 1),
-      top: Math.floor((Math.random() * 50) + 1),
+		  left: 750,
+      top: Math.floor((Math.random() * 500) + 1),
 			width: 100,
 			height: 100
 		});
 
+
 		sticker.hasControls = true;
 
 		canvasPlay.add(sticker);
+
+		function sleep(ms, callback) {
+	  	ms = ms || 0;
+	  	setTimeout(callback, ms);
+		}
+		sleep(1000, function() {
+  		console.log('sleeping');
+	 	});
+
 		canvasPlay.renderAll();
+		// sticker.trigger('click');
 	};
 
 };
