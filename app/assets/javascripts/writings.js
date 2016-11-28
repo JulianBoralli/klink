@@ -18,12 +18,13 @@ function writeGame(ResponsiveCanvas) {
   wiggleLetter();
 
 function generatePalette() {
-  canvasPalette.renderAll();
-  canvasPalette.selection = false;
-  canvasPalette.selectable = false;
+  canvasPlay.setBackgroundImage('images/chalkboard.png')
   canvasPlay.selection = false;
-  canvasPlay.freeDrawingBrush.color = "blue";
+  canvasPlay.freeDrawingBrush.color = 'blue';
   canvasPlay.freeDrawingBrush.width = 10;
+  canvasPalette.renderAll();
+  canvasPalette.selectable = false;
+  canvasPalette.selection = false;
 };
 
 	var letterImages = $('#letter-images').children();
