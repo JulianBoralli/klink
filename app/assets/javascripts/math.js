@@ -63,17 +63,17 @@ var game = new Phaser.Game("100%","100%", Phaser.auto, 'math', {
         buildThrees(j,1,i,j);
       }
     }
-    questionText = game.add.text(250,160,"-",{
+    questionText = game.add.text(250,180,"-",{
       font:"bold 72px Arial"
     });
     questionText.anchor.set(0.5);
-    scoreText = game.add.text(10,10,"-",{
+    scoreText = game.add.text(100,80,"-",{
       font:"bold 24px Arial"
     });
     for(var i=0;i<3;i++){
-      var numberButton = game.add.button(100,250+i*75,"buttons",checkAnswer,this).frame=i;
+      var numberButton = game.add.button(50,250+i*75,"buttons",checkAnswer,this).frame=i;
     }
-    numberTimer =  game.add.sprite(100,250,"timebar");
+    numberTimer =  game.add.sprite(50,250,"timebar");
     nextNumber();
   }
   function gameOver(gameOverString){
