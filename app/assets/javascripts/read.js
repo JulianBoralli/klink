@@ -337,6 +337,7 @@ function readGame(ResponsiveCanvas) {
 						easing: fabric.util.ease.easeOutBounce
 					});
 		    	canvasPlay.add(clone);
+		    	canvasPalette.discardActiveObject();
 		    	// canvasPalette.deactivateAll().renderAll();
 
 				}
@@ -389,6 +390,16 @@ function readGame(ResponsiveCanvas) {
 
 		clearButton.on('selected', function() {
 		  console.log('clear');
+
+		 //  clearButton.animate('angle', 45, {
+			//   onChange: canvasPalette.renderAll.bind(canvasPalette),
+			//   duration: 2000,
+			// });
+
+			// clearButton.animate('left', 455, {
+			//   onChange: canvasPalette.renderAll.bind(canvasPalette),
+			//   duration: 2000,
+			// });
 
 	    var activeObject = canvasPlay.getActiveObject(),
     			activeGroup = canvasPlay.getActiveGroup();
