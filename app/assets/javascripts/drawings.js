@@ -34,7 +34,7 @@ function drawGame(ResponsiveCanvas) {
             drawingOptionsEl.style.display = '';
             $('#undo-btn').addClass('animated pulse').fadeIn();
             $('#redo-btn').addClass('animated pulse').fadeIn();
-            $('#clear-drawing-btn').fadeIn();
+            $('#clear-drawing-btn').addClass('animated pulse').fadeIn();
             clearDrawing.onclick = function() {
               canvasDraw.clear();
               canvasDraw.setBackgroundColor('white');
