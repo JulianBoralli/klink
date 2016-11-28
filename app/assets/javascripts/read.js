@@ -391,40 +391,82 @@ function readGame(ResponsiveCanvas) {
 		clearButton.on('selected', function() {
 		  console.log('clear');
 
-		 //  clearButton.animate('angle', 45, {
-			//   onChange: canvasPalette.renderAll.bind(canvasPalette),
-			//   duration: 2000,
-			// });
+		  animateBroom();
 
-			// clearButton.animate('left', 455, {
-			//   onChange: canvasPalette.renderAll.bind(canvasPalette),
-			//   duration: 2000,
-			// });
-
-	    var activeObject = canvasPlay.getActiveObject(),
-    			activeGroup = canvasPlay.getActiveGroup();
-
-
-	    if (activeObject && !activeObject.button) {
-
-        canvasPlay.remove(activeObject);
-	    }
-	    else if (activeGroup) {
-        var objectsInGroup = activeGroup.getObjects();
-        canvasPlay.discardActiveGroup();
-        objectsInGroup.forEach(function(object) {
-        	if (!object.button)	{
-        		canvasPlay.remove(object);
-      		}
-        });
-	    }
-	    canvasPalette.discardActiveObject();
-			canvasPalette.renderAll();
+		  setTimeout(function() { 
+				clearPlayCanvas();
+			}, 1500);
+	    
 		});
 
 		canvasPalette.add(searchButton, clearButton);
-		canvasPalette.renderAll();
-		canvasPalette.setActiveObject(clearButton);
+		setTimeout(function() { 
+			canvasPalette.renderAll();
+		}, 500);
+		
+		// canvasPalette.setActiveObject(searchButton);
+	};
+
+
+	function clearPlayCanvas() {
+
+		var activeObject = canvasPlay.getActiveObject(),
+  			activeGroup = canvasPlay.getActiveGroup();
+
+    if (activeObject && !activeObject.button) {
+
+      canvasPlay.remove(activeObject);
+    }
+    else if (activeGroup) {
+      var objectsInGroup = activeGroup.getObjects();
+      canvasPlay.discardActiveGroup();
+      objectsInGroup.forEach(function(object) {
+      	if (!object.button)	{
+      		canvasPlay.remove(object);
+    		}
+      });
+    }
+    canvasPalette.discardActiveObject();
+		canvasPalette.renderAll();		
+	};
+
+
+	function moveBroom(broom) {
+		broom.bringToFront();
+		setTimeout(function() { 
+			console.log('timeout', broom);
+			broom.animate('left', -250, {
+			  onChange: canvasPlay.renderAll.bind(canvasPlay),
+			  duration: 1000,
+			  onComplete: function() { canvasPlay.remove(broom); }
+			}); 
+		}, 1000);
+	};
+
+
+	function animateBroom() {
+
+		var clearElement = document.getElementById('clear-img');
+		
+		var broom = new fabric.Image(clearElement, {
+		  left: 1000,
+		  top: 0,
+			width: 250,
+			height: 500
+		});
+
+		broom.lockMovementX = true;
+		broom.lockMovementY = true;
+		broom.lockScalingX = broom.lockScalingY = true;
+		broom.lockRotation = true;
+
+		canvasPlay.add(broom);
+		canvasPlay.renderAll();
+		
+		moveBroom(broom);
+
+		// // canvasPlay.remove(broom);
+		// canvasPlay.renderAll();
 	};
 
 	function wiggleLetter() {
@@ -508,8 +550,8 @@ function readGame(ResponsiveCanvas) {
 			addSticker(stickerElement, canvasPlay);
 
 
-			canvasPlay.setActiveObject((canvasPlay.getObjects()[canvasPlay.getObjects().length - 1]));
-			canvasPlay.renderAll();
+			// canvasPlay.setActiveObject((canvasPlay.getObjects()[canvasPlay.getObjects().length - 1]));
+			// canvasPlay.renderAll();
 		})
 		.fail(function(error) {
 			console.log(error);
@@ -541,8 +583,10 @@ function readGame(ResponsiveCanvas) {
   		console.log('sleeping');
 	 	});
 
-		canvasPlay.renderAll();
-		// sticker.trigger('click');
+		setTimeout(function() { 
+			canvasPlay.renderAll();
+		}, 500);
+		
 	};
 
 };
