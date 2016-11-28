@@ -16,6 +16,21 @@ canvas {
   display: inline;
 }
 
+.game-name {
+  text-align: center;
+}
+
+
+
+/* WELCOME */
+
+.title {
+  text-align: center;
+}
+
+.game-cards {
+  text-align: center;
+}
 
 .read-game {
   background: url("https://s-media-cache-ak0.pinimg.com/originals/d8/d5/9f/d8d59f1836f374864bb58a2a68c6c304.png");
@@ -23,4 +38,78 @@ canvas {
   background-size: 100% auto;
 }
 
+.game-logo {
+  width: 28%;
+  padding: 2%;
 
+}
+
+
+
+/* DRAWING */
+
+.draw-game {
+  background-color: #72DEEA;
+}
+
+.drawing-options {
+  text-align: center;
+  margin-top: 3%;
+}
+
+#drawing-mode-options label {
+  font-size: 200%;
+}
+
+#drawing-mode-options {
+  display: inline-block;
+  margin-right: 5%;
+  margin-left: 5%;
+}
+
+#drawing-mode {
+  display: inline-block;
+  vertical-align: top;
+}
+
+#drawing-mode-btn {
+  width: 120px;
+}
+
+#undo-btn {
+  display: none;
+  width: 120px;  
+}
+
+#redo-btn {
+  display: none;
+  width: 120px;
+}
+
+#clear-drawing-btn {
+  display: none;
+  width: 120px;
+}
+
+.drawing-bg-images-header {
+  text-align: center;
+  margin-bottom: -10px;
+}
+
+#drawing-bg-images {
+  display: inline-block;
+  vertical-align: top;
+  text-align: center;
+  background-color: white;
+  border: 1px solid black;
+  width: 40%;
+  height: 9em;
+  overflow: auto;
+  white-space: nowrap;
+}
+
+.drawing-bg {
+  width: 12em;
+  height: 7em;
+  padding: 1%;
+}
