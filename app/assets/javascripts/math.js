@@ -1,13 +1,9 @@
 function mathGame(){
-  // $(function(){
-  //   if($('body').is('.mathgame')){
-  //     playGame();
-  //   }
-  // });
-// var playGame = function(){
-var game = new Phaser.Game(500, 500, Phaser.auto, 'math', {
+
+var game = new Phaser.Game("100%","100%", Phaser.auto, 'math', {
     preload: onPreload,
-    create: onCreate
+    create: onCreate,
+    // resize:onResize
   });
   var sumsArray = [];
   var questionText;
@@ -32,15 +28,29 @@ var game = new Phaser.Game(500, 500, Phaser.auto, 'math', {
       }
     }
   }
+  // sets full screen
+  function goFullScreen(){
+    // setting a background color
+    game.stage.backgroundColor = "#555555";
+    game.scale.pageAlignHorizontally = true;
+    game.scale.pageAlignVertically = true;
+    // using RESIZE scale mode
+    game.scale.scaleMode = Phaser.ScaleManager.RESIZE;
+    game.scale.setScreenSize(true);
+  }
   function onPreload() {
-    game.load.image("timebar", "timebar.png");
-    game.load.image("buttonmask", "buttonmask.png");
-    game.load.spritesheet("buttons", "buttons.png",400,50);
+    game.load.image("timebar", "/images/math/timebar.png");
+    game.load.image("buttonmask", "/images/math/buttonmask.png");
+    game.load.spritesheet("buttons", "/images/math/buttons.png",400,50);
+    game.load.spritesheet('myguy', 'images/math/dance.png', 70, 120);
   }
   function onCreate() {
     topScore = localStorage.getItem("topScore")==null?0:localStorage.getItem("topScore");
     game.stage.backgroundColor = "#cccccc";
     game.stage.disableVisibilityChange = true;
+    gameOverSprite = this.game.add.sprite(600, 300, 'myguy');
+    gameOverSprite.frame = 0;
+    gameOverSprite.animations.add('left', [0, 1, 2, 3, 4, 5, 6, 7, 8, 9,10,11,12,13], 10, true);
     for(var i=1;i<5;i++){
       sumsArray[i]=[[],[],[]];
       for(var j=1;j<=3;j++){
@@ -65,6 +75,15 @@ var game = new Phaser.Game(500, 500, Phaser.auto, 'math', {
     questionText.text = questionText.text+" = "+gameOverString;
           isGameOver = true;
     localStorage.setItem("topScore",Math.max(score,topScore));
+
+    // gameOverSprite
+   gameOverSprite.animations.play('left');
+
+    // RESTARTS GAME MOVE INTO STAND ALONE FUNCTION TO BE TRIGGERED BY BUTTON DISPLAYED ON GAMEOVER
+    // game.world.removeAll();
+    // $(".mathgame").html("");
+    //  mathGame();
+
   }
   function checkAnswer(button){
     if(!isGameOver){

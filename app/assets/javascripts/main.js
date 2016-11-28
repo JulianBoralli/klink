@@ -21,14 +21,13 @@ $( document ).on('turbolinks:load', function() {
 
   }
   });
-
-	// canvasPalette.selectable = true;
+  // runs mathGame on page load of math#Index
  $(function(){
     if($('body').is('.mathgame')){
       mathGame();
     }
   });
 
-  // mathGame();
+
 
 });
