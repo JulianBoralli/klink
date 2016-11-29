@@ -30,8 +30,8 @@ function drawGame(ResponsiveCanvas) {
             $('#redo-btn').addClass('animated pulse').fadeIn();
             $('#clear-drawing-btn').addClass('animated pulse').fadeIn();
             clearDrawing.onclick = function() {
+              $(this).addClass('animated rubberBand');
               canvasDraw.clear();
-              // canvasDraw.setBackgroundColor('white');
             };
           };
         };
@@ -54,15 +54,16 @@ function drawGame(ResponsiveCanvas) {
       var isRedoing = false;
       var h = [];
 
-
       $(undoButton).click(function() {
+        $(this).addClass('animated rubberBand');
         if(canvasDraw._objects.length>0) {
           h.push(canvasDraw._objects.pop());
           canvasDraw.renderAll();
         };
       });
 
-      $(redoButton).on('click', function() {
+      $(redoButton).click(function() {
+        $(this).addClass('animated rubberBand');
         if(h.length>0) {
           isRedoing = true;
           canvasDraw.add(h.pop());
