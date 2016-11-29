@@ -14,7 +14,6 @@ RSpec.feature "Drawings", type: :feature do
         visit draw_path
         expect('<img src="images/landscape.png" class="drawing-bg" id="land-bg">').to have_tag('img')
       end
-
     end
   end
 end
