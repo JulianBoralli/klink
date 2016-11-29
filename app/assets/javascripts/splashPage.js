@@ -1,11 +1,17 @@
 $( document ).on('turbolinks:load', function() {
 
+  var audio = new Audio('audio/type.wav');
+  $(audio).prop("currentTime", 1);
+  audio.play();
+
   $('#game-logo').hide();
 
   setTimeout(function(){
     $('#fade').fadeTo(0).hide();
     var fade = $('#banner').fadeIn('slow')
     fade.addClass('small').animate({'margin-top':'0'})
+    var swoosh = new Audio('audio/swoosh.wav');
+    swoosh.play();
   }, 2400);
 
   setTimeout(function(){
