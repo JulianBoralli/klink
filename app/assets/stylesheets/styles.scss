@@ -55,10 +55,12 @@ canvas {
 body {
   background-repeat: no-repeat;
   background-size: 100% 100vh;
+
 }
 
 .draw-game {
   background-color: #72DEEA;
+  overflow: hidden;
 }
 
 .drawing-options {
