@@ -44,7 +44,8 @@ group :development, :test do
   gem 'pry-byebug'
   gem 'binding_of_caller'
   gem 'awesome_print'
-
+  gem 'jasmine'
+  gem 'jasminerice', github: 'bradphelan/jasminerice'
 end
 
 group :production do
