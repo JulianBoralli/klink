@@ -24,7 +24,9 @@ function writeGame(ResponsiveCanvas) {
   boundCanvas();
   wiggleLetter();
   createBroom();
-  canvasPalette.renderAll();
+  createGreenPencil();
+  createRedPencil();
+
 
   function createBroom(){
     var broomElement = document.getElementById('clear-img');
@@ -93,51 +95,8 @@ function moveBroom(broom) {
 
 	};
 
-  function trace(clone){
-    var percentage = 0.04
-    var greenPencilElement = document.getElementById('green-pencil');
 
-    var greenPencilButton = new fabric.Image(greenPencilElement, {
-      left: 850,
-      top: 10,
-      width: canvasPalette.width*(percentage*1.3),
-      height: canvasPalette.width*(percentage*1.3)
-    })
-
-    greenPencilButton.lockMovementX = true;
-    greenPencilButton.lockMovementY = true;
-    greenPencilButton.lockScalingX = greenPencilButton.lockScalingY = true;
-    greenPencilButton.lockRotation = true;
-
-    var redPencilElement = document.getElementById('red-pencil');
-
-    var redPencilButton = new fabric.Image(redPencilElement, {
-      left: 850,
-      top: 65,
-      width: canvasPalette.width*(percentage*1.3),
-      height: canvasPalette.width*(percentage*1.3)
-    })
-
-    redPencilButton.lockMovementX = true;
-    redPencilButton.lockMovementY = true;
-    redPencilButton.lockScalingX = redPencilButton.lockScalingY = true;
-    redPencilButton.lockRotation = true;
-
-    canvasPalette.add(greenPencilButton, redPencilButton);
-
-    greenPencilButton.on('selected', function(){
-      canvasPlay.isDrawingMode = true;
-      canvasPlay.freeDrawingBrush.color = 'red';
-      canvasPlay.freeDrawingBrush.width = 10;
-    });
-    redPencilButton.on('selected', function(){
-      canvasPlay.isDrawingMode = false;
-      clone.animate('left', '+=380', { onChange: canvasPlay.renderAll.bind(canvasPlay) });
-    });
-    responsiveVoice.speak(this.char);
-  };
-
-function generatePalette() {
+  function generatePalette() {
 
   var letterImages = $('#letter-images').children();
 	var percentage = 0.04;
@@ -184,8 +143,6 @@ function generatePalette() {
 
         canvasPalette.deactivateAll().renderAll();
         canvasPlay.add(clone);
-
-        trace(clone);
 			}
 		});
 		canvasPalette.add(letter);
@@ -195,6 +152,57 @@ function generatePalette() {
     canvasPalette.renderAll();
   }, 500);
 
+};
+
+function createGreenPencil(){
+  var percentage = 0.04
+  var greenPencilElement = document.getElementById('green-pencil');
+
+  var greenPencilButton = new fabric.Image(greenPencilElement, {
+    left: 850,
+    top: 10,
+    width: canvasPalette.width*(percentage*1.3),
+    height: canvasPalette.width*(percentage*1.3)
+  })
+
+  greenPencilButton.lockMovementX = true;
+  greenPencilButton.lockMovementY = true;
+  greenPencilButton.lockScalingX = greenPencilButton.lockScalingY = true;
+  greenPencilButton.lockRotation = true;
+
+  canvasPalette.add(greenPencilButton);
+
+  // greenPencilButton.on('selected', function(){
+  //   canvasPlay.isDrawingMode = true;
+  //   canvasPlay.freeDrawingBrush.color = 'red';
+  //   canvasPlay.freeDrawingBrush.width = 10;
+  // });
+  // responsiveVoice.speak(this.char);
+};
+
+function createRedPencil(){
+  var percentage = 0.04
+  var redPencilElement = document.getElementById('red-pencil');
+
+  var redPencilButton = new fabric.Image(redPencilElement, {
+    left: 850,
+    top: 65,
+    width: canvasPalette.width*(percentage*1.3),
+    height: canvasPalette.width*(percentage*1.3)
+  })
+
+  redPencilButton.lockMovementX = true;
+  redPencilButton.lockMovementY = true;
+  redPencilButton.lockScalingX = redPencilButton.lockScalingY = true;
+  redPencilButton.lockRotation = true;
+
+  canvasPalette.add(redPencilButton);
+
+  // redPencilButton.on('selected', function(){
+  //   canvasPlay.isDrawingMode = false;
+  //   clone.animate('left', '+=380', { onChange: canvasPlay.renderAll.bind(canvasPlay) });
+  // });
+  // responsiveVoice.speak(this.char);
 };
 
 function boundCanvas() {
