@@ -32,6 +32,15 @@ canvas {
   background-size: 100% auto;
 }
 
+#read-home {
+  margin-top: -20%;
+  width: 12vw;
+  height: 13vh;
+}
+
+#read-home:hover{
+  opacity: 0.4;
+}
 
 
 
@@ -60,8 +69,6 @@ body {
   display: inline-block;
   background-color: white;
   border: 1px solid black;
-  // margin-right: 5%;
-  // margin-left: 5%;
   padding-bottom: 1%;
   padding-right: .5%;
   padding-left: .5%;
@@ -83,6 +90,10 @@ body {
 
 #draw-home {
   width: 120px;
+}
+
+#draw-home:hover{
+  opacity: 0.4;
 }
 
 #redo-btn {
@@ -126,19 +137,16 @@ body {
 }
 
 #write-head{
-  font-size: 330%;
+  font-size: 5vw;
   margin: auto;
 }
 
 .home{
-  width: 7vw;
-  height: 8vh;
+  width: 8vw;
+  height: 9vh;
   margin: auto;
 }
 
 .home:hover{
   opacity: 0.4;
 }
-
-
-

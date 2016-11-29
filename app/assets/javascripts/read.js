@@ -7,7 +7,7 @@ function readGame(ResponsiveCanvas) {
 	var canvasPlay = new ResponsiveCanvas('canvas-play');
   var canvasPalette = new ResponsiveCanvas('canvas-palette');
 
-  canvasPlay.setDimensions({width: '98vw', height: '40vw'}, {
+  canvasPlay.setDimensions({width: '98vw', height: '35vw'}, {
     cssOnly: true
   });
 
