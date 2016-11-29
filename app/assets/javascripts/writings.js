@@ -8,7 +8,7 @@ function writeGame(ResponsiveCanvas) {
 
   fabric.Object.prototype.hasControls = false;
 
-  canvasPlay.setDimensions({width: '98vw', height: '30vw'}, {
+  canvasPlay.setDimensions({width: '98vw', height: '35vw'}, {
     cssOnly: true
   });
 
@@ -24,8 +24,7 @@ function writeGame(ResponsiveCanvas) {
   boundCanvas();
   wiggleLetter();
   createBroom();
-  createGreenPencil();
-  createRedPencil();
+  createPencils();
 
 
   function createBroom(){
@@ -122,14 +121,12 @@ function moveBroom(broom) {
       responsiveVoice.speak(this.char);
 			if (this.canvas.lowerCanvasEl.id === "canvas-palette") {
 				var clone = fabric.util.object.clone(this);
-				clone.width = 360;
-				clone.height = 385;
         clone.left =  230;
         clone.top = 0;
 	    	clone.lockMovementX = true;
 				clone.lockMovementY = true;
 
-				clone.animate('height', 420, {
+				clone.animate('height', 320, {
 				  onChange: canvasPlay.renderAll.bind(canvasPlay),
 				  duration: 1000,
 				  easing: fabric.util.ease.easeOutBounce
@@ -143,6 +140,7 @@ function moveBroom(broom) {
 
         canvasPalette.deactivateAll().renderAll();
         canvasPlay.add(clone);
+        createPencils(clone);
 			}
 		});
 		canvasPalette.add(letter);
@@ -154,7 +152,7 @@ function moveBroom(broom) {
 
 };
 
-function createGreenPencil(){
+function createPencils(clone){
   var percentage = 0.04
   var greenPencilElement = document.getElementById('green-pencil');
 
@@ -172,16 +170,12 @@ function createGreenPencil(){
 
   canvasPalette.add(greenPencilButton);
 
-  // greenPencilButton.on('selected', function(){
-  //   canvasPlay.isDrawingMode = true;
-  //   canvasPlay.freeDrawingBrush.color = 'red';
-  //   canvasPlay.freeDrawingBrush.width = 10;
-  // });
-  // responsiveVoice.speak(this.char);
-};
+  greenPencilButton.on('selected', function(){
+    canvasPlay.isDrawingMode = true;
+    canvasPlay.freeDrawingBrush.color = 'red';
+    canvasPlay.freeDrawingBrush.width = 10;
+  });
 
-function createRedPencil(){
-  var percentage = 0.04
   var redPencilElement = document.getElementById('red-pencil');
 
   var redPencilButton = new fabric.Image(redPencilElement, {
@@ -198,11 +192,11 @@ function createRedPencil(){
 
   canvasPalette.add(redPencilButton);
 
-  // redPencilButton.on('selected', function(){
-  //   canvasPlay.isDrawingMode = false;
-  //   clone.animate('left', '+=380', { onChange: canvasPlay.renderAll.bind(canvasPlay) });
-  // });
-  // responsiveVoice.speak(this.char);
+  redPencilButton.on('selected', function(){
+    canvasPlay.isDrawingMode = false;
+    clone.animate('left', '+=380', { onChange: canvasPlay.renderAll.bind(canvasPlay) });
+  });
+  responsiveVoice.speak(this.char);
 };
 
 function boundCanvas() {
