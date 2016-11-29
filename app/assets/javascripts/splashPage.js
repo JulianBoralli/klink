@@ -1,13 +1,12 @@
 $( document ).on('turbolinks:load', function() {
 
   $('#game-logo').hide();
+
   setTimeout(function(){
-    document.getElementById('fade').className = 'disappear';
-    
-    $('#fade').hide();
+    $('#fade').fadeTo(0).hide();
     var fade = $('#banner').fadeIn('slow')
     fade.addClass('small').animate({'margin-top':'0'})
-  }, 2200);
+  }, 2400);
 
   setTimeout(function(){
     $('#game-logo').fadeIn();
