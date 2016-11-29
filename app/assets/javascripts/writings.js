@@ -1,6 +1,7 @@
 function writeGame(ResponsiveCanvas) {
 
   var canvasPlay = new ResponsiveCanvas('canvas-play');
+
   var canvasPalette = new ResponsiveCanvas('canvas-palette');
 
   fabric.Object.prototype.hasControls = false;
@@ -18,24 +19,19 @@ function writeGame(ResponsiveCanvas) {
   wiggleLetter();
 
 function generatePalette() {
-  canvasPlay.setBackgroundImage('images/chalkboard.png')
-  canvasPlay.selection = false;
-  canvasPlay.freeDrawingBrush.color = 'blue';
-  canvasPlay.freeDrawingBrush.width = 10;
-  canvasPalette.renderAll();
-  canvasPalette.selectable = false;
-  canvasPalette.selection = false;
-};
+    canvasPlay.selection = false;
+    canvasPalette.selectable = false;
+    canvasPalette.selection = false;
 
-	var letterImages = $('#letter-images').children();
-	var percentage = 0.05;
+  var letterImages = $('#letter-images').children();
+	var percentage = 0.04;
 
 	$.each(letterImages, function(i, el) {
 
 		var letter = new fabric.Image(el, {
       char: String.fromCharCode(65 + i),
-		  left: i >= 13 ? ((55 * (i - 11.1)) + (5 * (i - 10))) : ((50 * (i + 2)) + (10 * (i + 2))),
-		  top: i >= 13 ? 70 : 10,
+		  left: i >= 13 ? ((40 * (i - 9)) + (9 * (i - 10))) : ((40 * (i + 4)) + (10 * (i + 2))),
+		  top: i >= 13 ? 64 : 13,
 		  width: canvasPalette.width*percentage,
 		  height: canvasPalette.width*percentage
 		});
@@ -53,18 +49,18 @@ function generatePalette() {
 				var clone = fabric.util.object.clone(this);
 				clone.width = 360;
 				clone.height = 385;
-        clone.left =  100;
-        clone.top = 25;
+        clone.left =  230;
+        clone.top = 0;
 	    	clone.lockMovementX = true;
 				clone.lockMovementY = true;
 
-				clone.animate('height', 520, {
+				clone.animate('height', 420, {
 				  onChange: canvasPlay.renderAll.bind(canvasPlay),
 				  duration: 1000,
 				  easing: fabric.util.ease.easeOutBounce
 				});
 
-				clone.animate('width', 300,  {
+				clone.animate('width', 200,  {
 					onChange: canvasPlay.renderAll.bind(canvasPlay),
 					duration: 1000,
 					easing: fabric.util.ease.easeOutBounce
@@ -77,35 +73,15 @@ function generatePalette() {
 			}
 		});
 		canvasPalette.add(letter);
-		canvasPalette.renderAll();
+		// canvasPalette.renderAll();
 	});
 
-  var clicks = 0
+  setTimeout(function() {
+    canvasPalette.renderAll();
+  }, 500);
 
-  $('#drawing-mode').on('click', function(event){
-    clicks += 1;
-  });
+};
 
-  function trace(clone) {
-    var traceMode = document.getElementById('drawing-mode')
-    traceMode.onclick = function() {
-
-    clone.on('selected', function(){
-      if (clicks < 3){
-        clone.animate('left', '+=450', { onChange: canvasPlay.renderAll.bind(canvasPlay) });
-      }
-      // responsiveVoice.speak(this.char);
-    })
-
-    canvasPlay.isDrawingMode = !canvasPlay.isDrawingMode;
-      if (canvasPlay.isDrawingMode) {
-        traceMode.innerHTML = 'Exit Trace';
-      }
-      else {
-        traceMode.innerHTML = 'Trace';
-      };
-    };
-  };
 
 function boundCanvas() {
 	canvasPlay.on ("object:moving", function(event) {
@@ -123,12 +99,14 @@ function boundCanvas() {
 };
 
   var clearElement = document.getElementById('clear-img');
+  var percentage = 0.04
 
   var clearButton = new fabric.Image(clearElement, {
-    left: 10,
-    top: 25,
-    width: canvasPalette.width*(percentage*1.6),
-    height: canvasPalette.width*(percentage*1.6)
+    button: true,
+    left: 80,
+    top: 20,
+    width: canvasPalette.width*(percentage*2.3),
+    height: canvasPalette.width*(percentage*2.3)
   });
 
   clearButton.lockMovementX = true;
@@ -140,7 +118,59 @@ function boundCanvas() {
     canvasPlay.clear();
   });
 
-	canvasPalette.add(clearButton);
+  var greenPencilElement = document.getElementById('green-pencil');
+
+  var greenPencilButton = new fabric.Image(greenPencilElement, {
+    left: 850,
+    top: 10,
+    width: canvasPalette.width*(percentage*1.3),
+    height: canvasPalette.width*(percentage*1.3)
+  })
+
+  greenPencilButton.lockMovementX = true;
+  greenPencilButton.lockMovementY = true;
+  greenPencilButton.lockScalingX = greenPencilButton.lockScalingY = true;
+  greenPencilButton.lockRotation = true;
+
+  var redPencilElement = document.getElementById('red-pencil');
+
+  var redPencilButton = new fabric.Image(redPencilElement, {
+    left: 850,
+    top: 65,
+    width: canvasPalette.width*(percentage*1.3),
+    height: canvasPalette.width*(percentage*1.3)
+  })
+
+  redPencilButton.lockMovementX = true;
+  redPencilButton.lockMovementY = true;
+  redPencilButton.lockScalingX = redPencilButton.lockScalingY = true;
+  redPencilButton.lockRotation = true;
+
+	canvasPalette.add(clearButton, greenPencilButton, redPencilButton);
+
+  // var clicks = 0
+  //
+  // $('#green-pencil').on('click', function(event){
+  //   clicks += 1;
+  // });
+
+  function trace(clone) {
+    greenPencilButton.on('selected', function(){
+      canvasPlay.isDrawingMode = true;
+      canvasPlay.freeDrawingBrush.color = 'red';
+      canvasPlay.freeDrawingBrush.width = 10;
+      // clone.on('selected', function(){
+      //   if (clicks <= 1){
+      //     clone.animate('left', '+=380', { onChange: canvasPlay.renderAll.bind(canvasPlay) });
+      //   }
+      // });
+    });
+    redPencilButton.on('selected', function(){
+      canvasPlay.isDrawingMode = false;
+      clone.animate('left', '+=380', { onChange: canvasPlay.renderAll.bind(canvasPlay) });
+    });
+    responsiveVoice.speak(this.char);
+  };
 
 function wiggleLetter(){
 	canvasPlay.hoverCursor = 'pointer';

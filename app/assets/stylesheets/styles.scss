@@ -26,28 +26,21 @@ canvas {
 
 
 
-/* WELCOME */
-
-.title {
-  text-align: center;
-}
-
-.game-cards {
-  text-align: center;
-}
-
 .read-game {
   background: url("https://s-media-cache-ak0.pinimg.com/originals/d8/d5/9f/d8d59f1836f374864bb58a2a68c6c304.png");
   background-repeat: no-repeat;
   background-size: 100% auto;
 }
 
+<<<<<<< HEAD
 .game-logo {
   width: 28%;
   padding: 2%;
 
 }
 
+=======
+>>>>>>> fd3c9d9461bcc7fcf95c7dd58a0af02c1bbd8637
 
 
 /* DRAWING */
@@ -130,4 +123,12 @@ body {
   width: 12em;
   height: 7em;
   padding: 1%;
+}
+
+
+// writing
+.write-game {
+  background: url("http://clipartix.com/wp-content/uploads/2016/06/Chalkboard-blackboard-clipart-2-new-hd-template-images.jpg");
+  background-repeat: no-repeat;
+  background-size: 100% auto;
 }
