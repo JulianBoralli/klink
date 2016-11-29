@@ -1,6 +1,5 @@
 function writeGame(ResponsiveCanvas) {
 
-  // Load Mobile Text2Speech feature
   document.addEventListener("click", responsiveVoice.clickEvent);
 
   var canvasPlay = new ResponsiveCanvas('canvas-play');
@@ -52,7 +51,7 @@ function writeGame(ResponsiveCanvas) {
 		canvasPalette.add(broom);
   };
 
-function moveBroom(broom) {
+  function moveBroom(broom) {
 		broom.bringToFront();
 
 		setTimeout(function() {
@@ -71,7 +70,6 @@ function moveBroom(broom) {
 
 
 	function animateBroom() {
-
 		var clearElement = document.getElementById('clear-img');
 
 		var broom = new fabric.Image(clearElement, {
@@ -90,16 +88,14 @@ function moveBroom(broom) {
 		canvasPlay.renderAll();
 
 		moveBroom(broom);
-
 	};
 
 
   function generatePalette() {
+    var letterImages = $('#letter-images').children();
+	  var percentage = 0.04;
 
-  var letterImages = $('#letter-images').children();
-	var percentage = 0.04;
-
-	$.each(letterImages, function(i, el) {
+	  $.each(letterImages, function(i, el) {
 
 		var letter = new fabric.Image(el, {
       char: String.fromCharCode(65 + i),
@@ -147,108 +143,108 @@ function moveBroom(broom) {
 
   setTimeout(function() {
     canvasPalette.renderAll();
-  }, 500);
+    }, 500);
+  };
 
-};
+  function createPencils(clone){
+    var percentage = 0.04
+    var greenPencilElement = document.getElementById('green-pencil');
 
-function createPencils(clone){
-  var percentage = 0.04
-  var greenPencilElement = document.getElementById('green-pencil');
+    var greenPencilButton = new fabric.Image(greenPencilElement, {
+      left: 850,
+      top: 10,
+      width: canvasPalette.width*(percentage*1.3),
+      height: canvasPalette.width*(percentage*1.3)
+    })
 
-  var greenPencilButton = new fabric.Image(greenPencilElement, {
-    left: 850,
-    top: 10,
-    width: canvasPalette.width*(percentage*1.3),
-    height: canvasPalette.width*(percentage*1.3)
-  })
+    greenPencilButton.lockMovementX = true;
+    greenPencilButton.lockMovementY = true;
+    greenPencilButton.lockScalingX = greenPencilButton.lockScalingY = true;
+    greenPencilButton.lockRotation = true;
 
-  greenPencilButton.lockMovementX = true;
-  greenPencilButton.lockMovementY = true;
-  greenPencilButton.lockScalingX = greenPencilButton.lockScalingY = true;
-  greenPencilButton.lockRotation = true;
+    canvasPalette.add(greenPencilButton);
 
-  canvasPalette.add(greenPencilButton);
+    greenPencilButton.on('selected', function(){
+      canvasPlay.isDrawingMode = true;
+      canvasPlay.freeDrawingBrush.color = 'red';
+      canvasPlay.freeDrawingBrush.width = 10;
+    });
 
-  greenPencilButton.on('selected', function(){
-    canvasPlay.isDrawingMode = true;
-    canvasPlay.freeDrawingBrush.color = 'red';
-    canvasPlay.freeDrawingBrush.width = 10;
-  });
+    var redPencilElement = document.getElementById('red-pencil');
 
-  var redPencilElement = document.getElementById('red-pencil');
+    var redPencilButton = new fabric.Image(redPencilElement, {
+      left: 850,
+      top: 65,
+      width: canvasPalette.width*(percentage*1.3),
+      height: canvasPalette.width*(percentage*1.3)
+    })
 
-  var redPencilButton = new fabric.Image(redPencilElement, {
-    left: 850,
-    top: 65,
-    width: canvasPalette.width*(percentage*1.3),
-    height: canvasPalette.width*(percentage*1.3)
-  })
+    redPencilButton.lockMovementX = true;
+    redPencilButton.lockMovementY = true;
+    redPencilButton.lockScalingX = redPencilButton.lockScalingY = true;
+    redPencilButton.lockRotation = true;
 
-  redPencilButton.lockMovementX = true;
-  redPencilButton.lockMovementY = true;
-  redPencilButton.lockScalingX = redPencilButton.lockScalingY = true;
-  redPencilButton.lockRotation = true;
+    canvasPalette.add(redPencilButton);
 
-  canvasPalette.add(redPencilButton);
-
-  redPencilButton.on('selected', function(){
-    canvasPlay.isDrawingMode = false;
-    clone.animate('left', '+=380', { onChange: canvasPlay.renderAll.bind(canvasPlay) });
-  });
-  responsiveVoice.speak(this.char);
-};
-
-function boundCanvas() {
-	canvasPlay.on ("object:moving", function(event) {
-		     var el = event.target;
-
-		el.left = el.left < el.getBoundingRectWidth() / 2 ? el.getBoundingRectWidth() / 5 : el.left;
-		el.top = el.top < el.getBoundingRectHeight () / 2 ? el.getBoundingRectHeight() / 5 : el.top;
-
-		var right = el.left + el.getBoundingRectWidth() / 2;
-		var bottom = el.top + el.getBoundingRectHeight() / 2;
-
-		el.left = right > canvasPlay.width - el.getBoundingRectWidth() / 2 ? canvasPlay.width - el.getBoundingRectWidth() / 1 : el.left;
-		el.top = bottom > canvasPlay.height - el.getBoundingRectHeight() / 2 ? canvasPlay.height - el.getBoundingRectHeight() / 1 : el.top;
-	});
-};
-
-
-function wiggleLetter(){
-	canvasPlay.hoverCursor = 'pointer';
-	function animate(e, dir){
-	if (e.target) {
-		fabric.util.animate({
-			startValue: e.target.get('scaleY'),
-			endValue: e.target.get('scaleY') + (dir ? 0 : -1 ),
-			duration: 100,
-			onChange: function(value) {
-				e.target.setAngle(value);
-				canvasPlay.renderAll();
-			},
-			onComplete: function() {
-				e.target.setCoords();
-			}
-		});
-		fabric.util.animate({
-			startValue: e.target.get('scaleX'),
-			endValue: e.target.get('scaleX') + (dir ?  -1 : 0  ),
-			duration: 100,
-			onChange: function(value) {
-				e.target.scale(value);
-				canvasPlay.renderAll();
-			},
-			onComplete: function() {
-				e.target.setCoords();
-			}
-	  });
-	 }
- };
- canvasPlay.on('mouse:down', function(e) { animate(e, 0); });
- canvasPlay.on('mouse:up', function(e) { animate(e, 0); });
-	};
-
-  canvasPlay.on('selected', function(){
+    redPencilButton.on('selected', function(){
+      canvasPlay.isDrawingMode = false;
+      clone.animate('left', '+=380', { onChange: canvasPlay.renderAll.bind(canvasPlay) });
+    });
     responsiveVoice.speak(this.char);
-  });
+  };
+
+  function boundCanvas() {
+	   canvasPlay.on ("object:moving", function(event) {
+       var el = event.target;
+
+       el.left = el.left < el.getBoundingRectWidth() / 2 ? el.getBoundingRectWidth() / 5 : el.left;
+       el.top = el.top < el.getBoundingRectHeight () / 2 ? el.getBoundingRectHeight() / 5 : el.top;
+
+       var right = el.left + el.getBoundingRectWidth() / 2;
+       var bottom = el.top + el.getBoundingRectHeight() / 2;
+
+       el.left = right > canvasPlay.width - el.getBoundingRectWidth() / 2 ? canvasPlay.width - el.getBoundingRectWidth() / 1 : el.left;
+       el.top = bottom > canvasPlay.height - el.getBoundingRectHeight() / 2 ? canvasPlay.height - el.getBoundingRectHeight() / 1 : el.top;
+	  });
+  };
+
+  function wiggleLetter(){
+	   canvasPlay.hoverCursor = 'pointer';
+
+    function animate(e, dir){
+	     if (e.target) {
+         fabric.util.animate({
+           startValue: e.target.get('scaleY'),
+           endValue: e.target.get('scaleY') + (dir ? 0 : -1 ),
+           duration: 100,
+           onChange: function(value) {
+             e.target.setAngle(value);
+             canvasPlay.renderAll();
+           },
+           onComplete: function() {
+             e.target.setCoords();
+           }
+         });
+
+         fabric.util.animate({
+           startValue: e.target.get('scaleX'),
+           endValue: e.target.get('scaleX') + (dir ?  -1 : 0  ),
+           duration: 100,
+           onChange: function(value) {
+             e.target.scale(value);
+             canvasPlay.renderAll();
+           },
+           onComplete: function() {
+             e.target.setCoords();
+           }
+         });
+       }
+     };
+     canvasPlay.on('mouse:down', function(e) { animate(e, 0); });
+     canvasPlay.on('mouse:up', function(e) { animate(e, 0); });
+   };
+
+   canvasPlay.on('selected', function(){
+     responsiveVoice.speak(this.char);
+   });
 };
