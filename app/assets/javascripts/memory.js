@@ -55,7 +55,7 @@ var memoryPanda = function(){
             $('.selected').each(function() {
               $(this).html('').removeClass('selected animated flipInY').addClass('animated flipInX');
             });
-          }, 800);
+          }, 1000);
         }
       }
     },
