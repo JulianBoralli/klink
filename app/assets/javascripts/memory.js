@@ -44,18 +44,18 @@ var memoryPanda = function(){
           $('.selected').each(function() {
             $(this).animate({
               opacity: 0
-            }).removeClass('unmatched animated flipInY');
+            }).removeClass('unmatched animated flipInY').addClass('animated flipInX');
           });
           $('.selected').each(function() {
-            $(this).removeClass('selected animated flipInY');
+            $(this).removeClass('selected animated flipInY').addClass('animated flipInX');
           });
           memoryGame.checkWin();
         } else {
           setTimeout(function() {
             $('.selected').each(function() {
-              $(this).html('').removeClass('selected animated flipInY');
+              $(this).html('').removeClass('selected animated flipInY').addClass('animated flipInX');
             });
-          }, 900);
+          }, 800);
         }
       }
     },
