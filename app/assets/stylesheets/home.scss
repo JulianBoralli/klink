@@ -1,0 +1,36 @@
+/* WELCOME */
+
+.home-container{
+  margin: auto;
+  padding-top: 5%;
+  width: 100vw;
+  min-width: 375px;
+  min-height: 667px;
+  text-align: center;
+}
+
+body{
+  background: #ed1c24;
+  overflow: hidden;
+  min-width: 50%;
+}
+
+.hgame-logo{
+  width: 15%;
+  margin: auto;
+  text-align: center;
+}
+
+#home-banner{
+  margin: auto;
+  height: 20vh;
+  width: auto;
+  // margin-top: 20vh;
+  text-align: center;
+}
+
+#home-logos{
+  margin: auto;
+  // margin-top: -5%;
+  text-align: center;
+}
