@@ -1,7 +1,9 @@
 function writeGame(ResponsiveCanvas) {
 
-  var canvasPlay = new ResponsiveCanvas('canvas-play');
+  // Load Mobile Text2Speech feature
+  document.addEventListener("click", responsiveVoice.clickEvent);
 
+  var canvasPlay = new ResponsiveCanvas('canvas-play');
   var canvasPalette = new ResponsiveCanvas('canvas-palette');
 
   fabric.Object.prototype.hasControls = false;
@@ -14,14 +16,15 @@ function writeGame(ResponsiveCanvas) {
     cssOnly: true
   });
 
+  canvasPlay.selection = false;
+  canvasPalette.selectable = false;
+  canvasPalette.selection = false;
+
   generatePalette();
   boundCanvas();
   wiggleLetter();
 
 function generatePalette() {
-    canvasPlay.selection = false;
-    canvasPalette.selectable = false;
-    canvasPalette.selection = false;
 
   var letterImages = $('#letter-images').children();
 	var percentage = 0.04;
@@ -73,7 +76,6 @@ function generatePalette() {
 			}
 		});
 		canvasPalette.add(letter);
-		// canvasPalette.renderAll();
 	});
 
   setTimeout(function() {
@@ -118,6 +120,7 @@ function boundCanvas() {
     canvasPlay.clear();
   });
 
+// put this in a function
   var greenPencilElement = document.getElementById('green-pencil');
 
   var greenPencilButton = new fabric.Image(greenPencilElement, {
@@ -148,22 +151,12 @@ function boundCanvas() {
 
 	canvasPalette.add(clearButton, greenPencilButton, redPencilButton);
 
-  // var clicks = 0
-  //
-  // $('#green-pencil').on('click', function(event){
-  //   clicks += 1;
-  // });
 
   function trace(clone) {
     greenPencilButton.on('selected', function(){
       canvasPlay.isDrawingMode = true;
       canvasPlay.freeDrawingBrush.color = 'red';
       canvasPlay.freeDrawingBrush.width = 10;
-      // clone.on('selected', function(){
-      //   if (clicks <= 1){
-      //     clone.animate('left', '+=380', { onChange: canvasPlay.renderAll.bind(canvasPlay) });
-      //   }
-      // });
     });
     redPencilButton.on('selected', function(){
       canvasPlay.isDrawingMode = false;
