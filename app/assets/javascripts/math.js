@@ -105,7 +105,7 @@ WebFontConfig = {
 
   function gameOver(gameOverString){
     // game.stage.backgroundColor = "#ff0000";
-    questionText.text = questionText.text+" = "+gameOverString;
+    questionText.text = gameOverString;
           isGameOver = true;
     localStorage.setItem("topScore",Math.max(score,topScore));
     numberTimer.destroy();
@@ -126,7 +126,7 @@ WebFontConfig = {
           if(score>0) {
             timeTween.stop();
           }
-          gameOver(button.frame+1);
+          gameOver("Woops, try again!");
         }
           }
   }
