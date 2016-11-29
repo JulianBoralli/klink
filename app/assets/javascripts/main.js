@@ -36,5 +36,11 @@ $( document ).on('turbolinks:load', function() {
     }
   });
 
+  $(function(){
+    if($('body').is('.math-game')){
+     mathGame();
+    }
+  });
+
 
 });
