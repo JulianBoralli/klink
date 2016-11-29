@@ -394,17 +394,17 @@ function readGame(ResponsiveCanvas) {
 
 		  animateBroom();
 
-		  setTimeout(function() { 
+		  setTimeout(function() {
 				clearPlayCanvas();
 			}, 1500);
-	    
+
 		});
 
 		canvasPalette.add(searchButton, clearButton);
-		setTimeout(function() { 
+		setTimeout(function() {
 			canvasPalette.renderAll();
 		}, 500);
-		
+
 		// canvasPalette.setActiveObject(searchButton);
 	};
 
@@ -428,23 +428,23 @@ function readGame(ResponsiveCanvas) {
       });
     }
     canvasPalette.discardActiveObject();
-		canvasPalette.renderAll();		
+		canvasPalette.renderAll();
 	};
 
 
 	function moveBroom(broom) {
 		broom.bringToFront();
 
-		setTimeout(function() { 
+		setTimeout(function() {
 			console.log('timeout', broom);
 			broom.animate('left', -250, {
 			  onChange: canvasPlay.renderAll.bind(canvasPlay),
 			  duration: 1000,
 			  onComplete: function() { canvasPlay.remove(broom); }
-			}); 
+			});
 		}, 1000);
 
-		setTimeout(function() { 
+		setTimeout(function() {
 			var audio = new Audio('audio/Swish.m4a');
 			audio.play();
 		}, 1500);
@@ -454,7 +454,7 @@ function readGame(ResponsiveCanvas) {
 	function animateBroom() {
 
 		var clearElement = document.getElementById('clear-img');
-		
+
 		var broom = new fabric.Image(clearElement, {
 		  left: 1000,
 		  top: 0,
@@ -469,7 +469,7 @@ function readGame(ResponsiveCanvas) {
 
 		canvasPlay.add(broom);
 		canvasPlay.renderAll();
-		
+
 		moveBroom(broom);
 
 		// // canvasPlay.remove(broom);
@@ -483,18 +483,18 @@ function readGame(ResponsiveCanvas) {
 		dog.animate('height', 500, {
 		  onChange: canvasPlay.renderAll.bind(canvasPlay),
 		  duration: 1000
-		}); 
+		});
 		dog.animate('width', 500, {
 		  onChange: canvasPlay.renderAll.bind(canvasPlay),
 		  duration: 1000
-		}); 
-		setTimeout(function() { 
+		});
+		setTimeout(function() {
 			console.log('timeout', dog);
-			
+
 			dog.animate('height', 0, {
 			  onChange: canvasPlay.renderAll.bind(canvasPlay),
 			  duration: 1000
-			}); 
+			});
 
 			dog.animate('width', 0, {
 			  onChange: canvasPlay.renderAll.bind(canvasPlay),
@@ -503,7 +503,7 @@ function readGame(ResponsiveCanvas) {
 			});
 
 			var audio = new Audio('audio/tweet_sent.m4a');
-			audio.play(); 
+			audio.play();
 
 		}, 1000);
 	};
@@ -512,7 +512,7 @@ function readGame(ResponsiveCanvas) {
 	function animateDog() {
 
 		var dogElement = document.getElementById('puppy-smiling-img');
-		
+
 		var dog = new fabric.Image(dogElement, {
 		  left: 500,
 		  top: 0,
@@ -527,7 +527,7 @@ function readGame(ResponsiveCanvas) {
 
 		canvasPlay.add(dog);
 		canvasPlay.renderAll();
-		
+
 		moveDog(dog);
 
 	};
@@ -570,7 +570,7 @@ function readGame(ResponsiveCanvas) {
 
 
 	function wigglePalette() {
-		
+
 		function animate(e, dir) {
 			if (e.target) {
 				fabric.util.animate({
@@ -640,7 +640,7 @@ function readGame(ResponsiveCanvas) {
 
 			console.log('response:', response)
 			var textSpeak = JSON.stringify(response[1])
-		
+
 			responsiveVoice.speak(textSpeak, "UK English Female");
 
 			$("#image-result").append("<img src=" + "\"" + response[0] + "\"" + "id=" + textSpeak + " />");
@@ -669,18 +669,18 @@ function readGame(ResponsiveCanvas) {
 
 		sticker.hasControls = true;
 
-		
+
 
 		animateDog();
 
-		setTimeout(function() { 
+		setTimeout(function() {
 			canvasPlay.add(sticker);
 		}, 1000);
 
-		setTimeout(function() { 
+		setTimeout(function() {
 			canvasPlay.renderAll();
 		}, 2000);
-		
+
 	};
 
 };
