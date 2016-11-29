@@ -46,6 +46,11 @@ group :development, :test do
   gem 'awesome_print'
   gem 'jasmine'
   gem 'jasminerice', github: 'bradphelan/jasminerice'
+  gem 'rspec-rails'
+  gem 'capybara'
+  gem 'selenium-webdriver'
+  gem 'database_cleaner'
+  gem 'rspec-html-matchers'
 end
 
 group :production do
