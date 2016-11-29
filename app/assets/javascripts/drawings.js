@@ -1,7 +1,6 @@
 function drawGame(ResponsiveCanvas) {
 
     var canvasDraw = new ResponsiveCanvas('canvas-draw', {
-      // backgroundColor : "#fff"
     });
       canvasDraw.setDimensions({width: '98vw', height: '48vw'}, {
       cssOnly: true
@@ -13,13 +12,6 @@ function drawGame(ResponsiveCanvas) {
         $(img).on('click', function() {
           var imgURL = $(this).attr('src')
           $('body').css('backgroundImage', 'url('+ imgURL + ')');
-          // canvasDraw.setBackgroundImage($(this).attr('src'),
-          //   canvasDraw.renderAll.bind(canvasDraw), {
-          //   width: canvasDraw.width,
-          //   height: canvasDraw.height,
-          //   originX: 'left',
-          //   originY: 'top'
-          // });
         });
     });
 
@@ -69,8 +61,6 @@ function drawGame(ResponsiveCanvas) {
           canvasDraw.renderAll();
         };
       });
-
-
 
       $(redoButton).on('click', function() {
         if(h.length>0) {
