@@ -40,7 +40,6 @@ canvas {
 body {
   background-repeat: no-repeat;
   background-size: 100% 100vh;
-
 }
 
 .draw-game {
@@ -61,8 +60,8 @@ body {
   display: inline-block;
   background-color: white;
   border: 1px solid black;
-  margin-right: 5%;
-  margin-left: 5%;
+  // margin-right: 5%;
+  // margin-left: 5%;
   padding-bottom: 1%;
   padding-right: .5%;
   padding-left: .5%;
@@ -79,6 +78,10 @@ body {
 
 #undo-btn {
   display: none;
+  width: 120px;
+}
+
+#draw-home {
   width: 120px;
 }
 
