@@ -5,6 +5,16 @@ var game = new Phaser.Game("100%","100%", Phaser.auto, 'math', {
     create: onCreate,
     // resize:onResize
   });
+
+
+WebFontConfig = {
+
+    active: function() { game.time.events.add(Phaser.Timer.SECOND, createText, this); },
+    google: {
+      families: ['Fredericka the Great']
+    }
+
+};
   var sumsArray = [];
   var questionText;
   var randomSum;
@@ -39,6 +49,7 @@ var game = new Phaser.Game("100%","100%", Phaser.auto, 'math', {
     game.scale.setScreenSize(true);
   }
   function onPreload() {
+    game.load.script('webfont', '//ajax.googleapis.com/ajax/libs/webfont/1.4.7/webfont.js');
     game.load.image("timebar", "/images/math/timebar.png");
     game.load.image("buttonmask", "/images/math/buttonmask.png");
     game.load.spritesheet("buttons", "/images/math/buttons.png",400,50);
@@ -55,6 +66,7 @@ var game = new Phaser.Game("100%","100%", Phaser.auto, 'math', {
     chalkBoard.width = game.width;
     game.stage.disableVisibilityChange = true;
     gameOverSprite = this.game.add.sprite(600, 300, 'myguy');
+    gameOverSprite.visible = false;
     gameOverSprite.frame = 0;
     gameOverSprite.animations.add('left', [0, 1, 2, 3, 4, 5, 6, 7, 8, 9,10,11,12,13], 10, true);
     for(var i=1;i<5;i++){
@@ -63,27 +75,39 @@ var game = new Phaser.Game("100%","100%", Phaser.auto, 'math', {
         buildThrees(j,1,i,j);
       }
     }
-    questionText = game.add.text(250,180,"-",{
-      font:"bold 72px Arial"
-    });
+    questionText = game.add.text(485,300,"-");
+
     questionText.anchor.set(0.5);
-    scoreText = game.add.text(100,80,"-",{
-      font:"bold 24px Arial"
-    });
+    scoreText = game.add.text(100,80,"-");
+
+
     for(var i=0;i<3;i++){
-      var numberButton = game.add.button(50,250+i*75,"buttons",checkAnswer,this).frame=i;
+      var numberButton = game.add.button(285,380+i*75,"buttons",checkAnswer,this).frame=i;
     }
-    numberTimer =  game.add.sprite(50,250,"timebar");
+    numberTimer =  game.add.sprite(285,380,"timebar");
     nextNumber();
   }
+
+  function createText() {
+    questionText.font = 'Fredericka the Great';
+    questionText.fontSize = 37;
+    questionText.addColor('#edf0f3',0);
+    scoreText.font = 'Fredericka the Great';
+    scoreText.fontSize = 37;
+    scoreText.addColor('#edf0f3',0);
+  };
+
   function gameOver(gameOverString){
     game.stage.backgroundColor = "#ff0000";
     questionText.text = questionText.text+" = "+gameOverString;
           isGameOver = true;
     localStorage.setItem("topScore",Math.max(score,topScore));
+    numberTimer
+    buttonMask
+    numberButton
+    gameOverSprite.visible = true;
 
-    // gameOverSprite
-   gameOverSprite.animations.play('left');
+    gameOverSprite.animations.play('left');
 
     // RESTARTS GAME MOVE INTO STAND ALONE FUNCTION TO BE TRIGGERED BY BUTTON DISPLAYED ON GAMEOVER
     // game.world.removeAll();
@@ -111,7 +135,7 @@ var game = new Phaser.Game("100%","100%", Phaser.auto, 'math', {
       buttonMask.destroy();
                game.tweens.removeAll();
     }
-    buttonMask = game.add.graphics(50, 250);
+    buttonMask = game.add.graphics(285, 380);
     buttonMask.beginFill(0xffffff);
     buttonMask.drawRect(0, 0, 400, 200);
     buttonMask.endFill();
@@ -120,7 +144,7 @@ var game = new Phaser.Game("100%","100%", Phaser.auto, 'math', {
       timeTween=game.add.tween(buttonMask);
       timeTween.to({
         x: -350
-      }, 3000, "Linear",true);
+      }, 9000, "Linear",true);
       timeTween.onComplete.addOnce(function(){
                  gameOver("?");
             }, this);
