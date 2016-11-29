@@ -12,5 +12,9 @@ Rails.application.routes.draw do
   get '/draw' => 'drawings#index'
 
   get '/memory' => 'memory#index'
+  
+  get '/math' => 'math#index'
+
+  get '/home' => 'welcome#show'
 
 end
