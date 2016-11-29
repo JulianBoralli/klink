@@ -60,12 +60,15 @@ function drawGame(ResponsiveCanvas) {
       var isRedoing = false;
       var h = [];
 
-      $(undoButton).on('click', function() {
+
+      $(undoButton).click(function() {
         if(canvasDraw._objects.length>0) {
           h.push(canvasDraw._objects.pop());
           canvasDraw.renderAll();
         };
       });
+
+
 
       $(redoButton).on('click', function() {
         if(h.length>0) {
