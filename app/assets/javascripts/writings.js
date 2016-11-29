@@ -56,7 +56,6 @@ function moveBroom(broom) {
 		broom.bringToFront();
 
 		setTimeout(function() {
-			console.log('timeout', broom);
 			broom.animate('left', -250, {
 			  onChange: canvasPlay.renderAll.bind(canvasPlay),
 			  duration: 1000,
