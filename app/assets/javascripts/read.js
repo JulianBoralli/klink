@@ -434,6 +434,7 @@ function readGame(ResponsiveCanvas) {
 
 	function moveBroom(broom) {
 		broom.bringToFront();
+
 		setTimeout(function() { 
 			console.log('timeout', broom);
 			broom.animate('left', -250, {
@@ -442,6 +443,11 @@ function readGame(ResponsiveCanvas) {
 			  onComplete: function() { canvasPlay.remove(broom); }
 			}); 
 		}, 1000);
+
+		setTimeout(function() { 
+			var audio = new Audio('audio/Swish.m4a');
+			audio.play();
+		}, 1500);
 	};
 
 
@@ -488,6 +494,10 @@ function readGame(ResponsiveCanvas) {
 			  onChange: canvasPlay.renderAll.bind(canvasPlay),
 			  duration: 1000
 			}); 
+
+			var audio = new Audio('audio/tweet_sent.m4a');
+			audio.play();
+
 			dog.animate('width', 0, {
 			  onChange: canvasPlay.renderAll.bind(canvasPlay),
 			  duration: 1000,
@@ -656,6 +666,8 @@ function readGame(ResponsiveCanvas) {
 		});
 
 		sticker.hasControls = true;
+
+		
 
 		animateDog();
 
