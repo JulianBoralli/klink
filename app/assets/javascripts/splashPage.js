@@ -1,5 +1,4 @@
-$( document ).on('turbolinks:load', function() {
-
+function splash(ResponsiveCanvas) {
   var audio = new Audio('audio/type.wav');
   $(audio).prop("currentTime", 1);
   audio.play();
@@ -32,4 +31,4 @@ $( document ).on('turbolinks:load', function() {
     }, 300)
   });
 
-});
+};

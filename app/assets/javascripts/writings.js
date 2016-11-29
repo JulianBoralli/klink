@@ -116,11 +116,13 @@ function boundCanvas() {
   clearButton.lockScalingX = clearButton.lockScalingY = true;
   clearButton.lockRotation = true;
 
+  canvasPalette.add(clearButton);
+
   clearButton.on('selected', function() {
     canvasPlay.clear();
   });
 
-// put this in a function
+function createPencils(){
   var greenPencilElement = document.getElementById('green-pencil');
 
   var greenPencilButton = new fabric.Image(greenPencilElement, {
@@ -149,7 +151,8 @@ function boundCanvas() {
   redPencilButton.lockScalingX = redPencilButton.lockScalingY = true;
   redPencilButton.lockRotation = true;
 
-	canvasPalette.add(clearButton, greenPencilButton, redPencilButton);
+	canvasPalette.add(greenPencilButton, redPencilButton);
+};
 
 
   function trace(clone) {
