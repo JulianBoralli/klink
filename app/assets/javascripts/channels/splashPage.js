@@ -2,10 +2,11 @@ $( document ).on('turbolinks:load', function() {
 
   setTimeout(function(){
    document.getElementById('fade').className = 'disappear';
-  }, 3000);
+ }, 2800);
 
   setTimeout(function(){
-    $('#banner').fadeIn('slow');
-  }, 3600);
+    var fade = $('#banner').fadeIn('slow');
+    fade.addClass('small').animate({'margin-top':'-20'}, 1000);
+  }, 3500);
 
 });

@@ -12,10 +12,9 @@
   width: 28%;
   padding: 2%;
 }
-
-
 body{
   background: #ed1c24;
+  overflow: hidden;
 }
 
 // klink animation
@@ -23,6 +22,8 @@ body{
   max-width: 100%;
   height: auto;
   padding-left: 26%;
+  overflow-x: hidden;
+  overflow-y: hidden;
 }
 
 p{
@@ -49,7 +50,7 @@ span{
 }
 
 @keyframes blink{
-  to{opacity: .0;}
+  to{opacity: 0;}
 }
 
 #banner{
@@ -58,4 +59,10 @@ span{
   height: 40vh;
   margin: auto;
   margin-top: 25vh;
+  transform: scale(2);
+  transition: all 1.5s;
+}
+
+#banner.small{
+  transform: scale(.5);
 }
