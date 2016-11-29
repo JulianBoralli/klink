@@ -1,3 +1,7 @@
+body {
+  font-family: 'Arial Rounded MT Bold';
+}
+
 .logo {
   width: 8%;
 }
@@ -38,7 +42,6 @@ canvas {
   background-size: 100% auto;
 }
 
-
 .game-logo {
   width: 28%;
   padding: 2%;
@@ -49,8 +52,15 @@ canvas {
 
 /* DRAWING */
 
+body {
+  background-repeat: no-repeat;
+  background-size: 100% 100vh;
+
+}
+
 .draw-game {
   background-color: #72DEEA;
+  overflow: hidden;
 }
 
 .drawing-options {
@@ -64,8 +74,13 @@ canvas {
 
 #drawing-mode-options {
   display: inline-block;
+  background-color: white;
+  border: 1px solid black;
   margin-right: 5%;
   margin-left: 5%;
+  padding-bottom: 1%;
+  padding-right: .5%;
+  padding-left: .5%;
 }
 
 #drawing-mode {
@@ -93,8 +108,9 @@ canvas {
 }
 
 .drawing-bg-images-header {
-  text-align: center;
-  margin-bottom: -10px;
+  font-size: 150%;
+  position: absolute;
+  margin-left: -6%;
 }
 
 #drawing-bg-images {
@@ -104,7 +120,8 @@ canvas {
   background-color: white;
   border: 1px solid black;
   width: 40%;
-  height: 9em;
+  min-width: 360px;
+  height: 10em;
   overflow: auto;
   white-space: nowrap;
 }
