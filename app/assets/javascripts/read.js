@@ -490,19 +490,21 @@ function readGame(ResponsiveCanvas) {
 		}); 
 		setTimeout(function() { 
 			console.log('timeout', dog);
+			
 			dog.animate('height', 0, {
 			  onChange: canvasPlay.renderAll.bind(canvasPlay),
 			  duration: 1000
 			}); 
 
-			var audio = new Audio('audio/tweet_sent.m4a');
-			audio.play();
-
 			dog.animate('width', 0, {
 			  onChange: canvasPlay.renderAll.bind(canvasPlay),
 			  duration: 1000,
 			  onComplete: function() { canvasPlay.remove(dog); }
-			}); 
+			});
+
+			var audio = new Audio('audio/tweet_sent.m4a');
+			audio.play(); 
+
 		}, 1000);
 	};
 
