@@ -97,8 +97,6 @@ body {
 
 .drawing-bg-images-header {
   font-size: 150%;
-  position: absolute;
-  margin-left: -6%;
 }
 
 #drawing-bg-images {
@@ -108,7 +106,6 @@ body {
   background-color: white;
   border: 1px solid black;
   width: 40%;
-  min-width: 360px;
   height: 10em;
   overflow: auto;
   white-space: nowrap;
@@ -142,3 +139,6 @@ body {
 .home:hover{
   opacity: 0.4;
 }
+
+
+
