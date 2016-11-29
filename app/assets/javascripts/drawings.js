@@ -32,11 +32,11 @@ function drawGame(ResponsiveCanvas) {
         drawingModeEl.onclick = function() {
           canvasDraw.isDrawingMode = !canvasDraw.isDrawingMode;
           if (canvasDraw.isDrawingMode) {
-            $('#drawing-mode-btn').fadeOut();
+            $('#drawing-mode-btn').addClass('animated rubberBand').fadeOut();
             drawingOptionsEl.style.display = '';
-            $('#undo-btn').fadeIn();
-            $('#redo-btn').fadeIn();
-            $('#clear-drawing-btn').fadeIn();
+            $('#undo-btn').addClass('animated pulse').fadeIn();
+            $('#redo-btn').addClass('animated pulse').fadeIn();
+            $('#clear-drawing-btn').addClass('animated pulse').fadeIn();
             clearDrawing.onclick = function() {
               canvasDraw.clear();
               // canvasDraw.setBackgroundColor('white');
@@ -62,12 +62,15 @@ function drawGame(ResponsiveCanvas) {
       var isRedoing = false;
       var h = [];
 
-      $(undoButton).on('click', function() {
+
+      $(undoButton).click(function() {
         if(canvasDraw._objects.length>0) {
           h.push(canvasDraw._objects.pop());
           canvasDraw.renderAll();
         };
       });
+
+
 
       $(redoButton).on('click', function() {
         if(h.length>0) {
