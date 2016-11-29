@@ -31,7 +31,7 @@ var memoryPanda = function(){
       var number = 0;
       var matchEvent = function(){
         $('.card').on('click', function(event) {
-        $(this).html('<img src=' + $(this).data('cardValue') + ' style="height: 190px; width: 200px;"/>').addClass('selected');
+        $(this).html('<img src=' + $(this).data('cardValue') + ' style="height: 190px; width: 200px;"/>').addClass('selected animated flipInY');
           number++;
         memoryGame.checkMatch();
       });
@@ -44,18 +44,18 @@ var memoryPanda = function(){
           $('.selected').each(function() {
             $(this).animate({
               opacity: 0
-            }).removeClass('unmatched');
+            }).removeClass('unmatched animated flipInY').addClass('animated flipInX');
           });
           $('.selected').each(function() {
-            $(this).removeClass('selected');
+            $(this).removeClass('selected animated flipInY').addClass('animated flipInX');
           });
           memoryGame.checkWin();
         } else {
           setTimeout(function() {
             $('.selected').each(function() {
-              $(this).html('').removeClass('selected');
+              $(this).html('').removeClass('selected animated flipInY').addClass('animated flipInX');
             });
-          }, 480);
+          }, 800);
         }
       }
     },
