@@ -19,4 +19,11 @@ $( document ).on('turbolinks:load', function() {
     }, 300)
   });
 
+  $('.game-logo').on('click', function(){
+    $(this).addClass('animated tada')
+      setTimeout(function(){
+        $('#banner').removeClass('animated tada')
+    }, 300)
+  });
+
 });
