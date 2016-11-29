@@ -21,6 +21,7 @@ WebFontConfig = {
   var timeTween;
   var numberTimer;
   var buttonMask;
+  var replay;
   var score=0;
   var scoreText;
      var isGameOver = false;
@@ -41,7 +42,7 @@ WebFontConfig = {
   // sets full screen
   function goFullScreen(){
     // setting a background color
-    game.stage.backgroundColor = "#555555";
+    // game.stage.backgroundColor = "#555555";
     game.scale.pageAlignHorizontally = true;
     game.scale.pageAlignVertically = true;
     // using RESIZE scale mode
@@ -54,11 +55,12 @@ WebFontConfig = {
     game.load.image("buttonmask", "/images/math/buttonmask.png");
     game.load.spritesheet("buttons", "/images/math/buttons.png",400,50);
     game.load.spritesheet('myguy', '/images/math/dance.png', 70, 120);
-    game.load.image("background", "/images/math/chalkboard.png");
+    game.load.image("background", "/images/math/board2.png");
+    game.load.image("replay", "images/math/replay.png");
   }
   function onCreate() {
     topScore = localStorage.getItem("topScore")==null?0:localStorage.getItem("topScore");
-    game.stage.backgroundColor = "#cccccc";
+    // game.stage.backgroundColor = "#cccccc";
     chalkBoard = game.add.sprite(1100,850,"background");
     chalkBoard.x = 0;
     chalkBoard.y = 0;
@@ -69,6 +71,9 @@ WebFontConfig = {
     gameOverSprite.visible = false;
     gameOverSprite.frame = 0;
     gameOverSprite.animations.add('left', [0, 1, 2, 3, 4, 5, 6, 7, 8, 9,10,11,12,13], 10, true);
+    replay = game.add.button(585,100,"replay",replay,this);
+    replay.visable = false;
+
     for(var i=1;i<5;i++){
       sumsArray[i]=[[],[],[]];
       for(var j=1;j<=3;j++){
@@ -81,10 +86,11 @@ WebFontConfig = {
     scoreText = game.add.text(100,80,"-");
 
 
-    for(var i=0;i<3;i++){
+      for(var i=0;i<3;i++){
+
       var numberButton = game.add.button(285,380+i*75,"buttons",checkAnswer,this).frame=i;
     }
-    numberTimer =  game.add.sprite(285,380,"timebar");
+    numberTimer = game.add.sprite(285,380,"timebar");
     nextNumber();
   }
 
@@ -98,23 +104,18 @@ WebFontConfig = {
   };
 
   function gameOver(gameOverString){
-    game.stage.backgroundColor = "#ff0000";
+    // game.stage.backgroundColor = "#ff0000";
     questionText.text = questionText.text+" = "+gameOverString;
           isGameOver = true;
     localStorage.setItem("topScore",Math.max(score,topScore));
-    numberTimer
-    buttonMask
-    numberButton
-    gameOverSprite.visible = true;
-
-    gameOverSprite.animations.play('left');
-
-    // RESTARTS GAME MOVE INTO STAND ALONE FUNCTION TO BE TRIGGERED BY BUTTON DISPLAYED ON GAMEOVER
-    // game.world.removeAll();
-    // $(".mathgame").html("");
-    //  mathGame();
+    numberTimer.destroy();
+    buttonMask.destroy();
+    replay.visible = true;
+    // gameOverSprite.visible = true;
+    // gameOverSprite.animations.play('left');
 
   }
+
   function checkAnswer(button){
     if(!isGameOver){
                if(button.frame==randomSum){
@@ -128,6 +129,11 @@ WebFontConfig = {
           gameOver(button.frame+1);
         }
           }
+  }
+  function replay(){
+
+    $("#math").html("");
+     mathGame();
   }
   function nextNumber(){
     scoreText.text = "Score: "+score.toString()+"\nBest Score: "+topScore.toString();
