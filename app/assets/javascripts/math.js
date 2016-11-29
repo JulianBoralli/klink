@@ -105,6 +105,7 @@ WebFontConfig = {
 
   function gameOver(gameOverString){
     // game.stage.backgroundColor = "#ff0000";
+    console.log(gameOverString)
     questionText.text = gameOverString;
           isGameOver = true;
     localStorage.setItem("topScore",Math.max(score,topScore));
@@ -117,16 +118,19 @@ WebFontConfig = {
   }
 
   function checkAnswer(button){
+    var correctAnswer;
     if(!isGameOver){
                if(button.frame==randomSum){
           score+=Math.floor((buttonMask.x+350)/4);
+
         nextNumber();
         }
         else{
           if(score>0) {
             timeTween.stop();
           }
-          gameOver("Woops, try again!");
+          correctAnswer = randomSum;
+          gameOver(correctAnswer);
         }
           }
   }
