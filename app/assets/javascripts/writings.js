@@ -23,6 +23,119 @@ function writeGame(ResponsiveCanvas) {
   generatePalette();
   boundCanvas();
   wiggleLetter();
+  createBroom();
+  canvasPalette.renderAll();
+
+  function createBroom(){
+    var broomElement = document.getElementById('clear-img');
+
+		var broom = new fabric.Image(broomElement, {
+		  button: true,
+		  left: 80,
+		  top: 20,
+		  width: 80,
+		  height: 100
+		});
+
+		broom.lockMovementX = true;
+		broom.lockMovementY = true;
+		broom.lockScalingX = broom.lockScalingY = true;
+		broom.lockRotation = true;
+
+		broom.on('selected', function() {
+      animateBroom();
+      setTimeout(function() {
+        canvasPlay.clear();
+      }, 1600);
+	});
+		canvasPalette.add(broom);
+  };
+
+function moveBroom(broom) {
+		broom.bringToFront();
+
+		setTimeout(function() {
+			console.log('timeout', broom);
+			broom.animate('left', -250, {
+			  onChange: canvasPlay.renderAll.bind(canvasPlay),
+			  duration: 1000,
+			  onComplete: function() { canvasPlay.remove(broom); }
+			});
+		}, 1000);
+
+		setTimeout(function() {
+			var audio = new Audio('audio/Swish.m4a');
+			audio.play();
+		}, 1500);
+	};
+
+
+	function animateBroom() {
+
+		var clearElement = document.getElementById('clear-img');
+
+		var broom = new fabric.Image(clearElement, {
+		  left: 1000,
+		  top: 0,
+			width: 250,
+			height: 500
+		});
+
+		broom.lockMovementX = true;
+		broom.lockMovementY = true;
+		broom.lockScalingX = broom.lockScalingY = true;
+		broom.lockRotation = true;
+
+		canvasPlay.add(broom);
+		canvasPlay.renderAll();
+
+		moveBroom(broom);
+
+	};
+
+  function trace(clone){
+    var percentage = 0.04
+    var greenPencilElement = document.getElementById('green-pencil');
+
+    var greenPencilButton = new fabric.Image(greenPencilElement, {
+      left: 850,
+      top: 10,
+      width: canvasPalette.width*(percentage*1.3),
+      height: canvasPalette.width*(percentage*1.3)
+    })
+
+    greenPencilButton.lockMovementX = true;
+    greenPencilButton.lockMovementY = true;
+    greenPencilButton.lockScalingX = greenPencilButton.lockScalingY = true;
+    greenPencilButton.lockRotation = true;
+
+    var redPencilElement = document.getElementById('red-pencil');
+
+    var redPencilButton = new fabric.Image(redPencilElement, {
+      left: 850,
+      top: 65,
+      width: canvasPalette.width*(percentage*1.3),
+      height: canvasPalette.width*(percentage*1.3)
+    })
+
+    redPencilButton.lockMovementX = true;
+    redPencilButton.lockMovementY = true;
+    redPencilButton.lockScalingX = redPencilButton.lockScalingY = true;
+    redPencilButton.lockRotation = true;
+
+    canvasPalette.add(greenPencilButton, redPencilButton);
+
+    greenPencilButton.on('selected', function(){
+      canvasPlay.isDrawingMode = true;
+      canvasPlay.freeDrawingBrush.color = 'red';
+      canvasPlay.freeDrawingBrush.width = 10;
+    });
+    redPencilButton.on('selected', function(){
+      canvasPlay.isDrawingMode = false;
+      clone.animate('left', '+=380', { onChange: canvasPlay.renderAll.bind(canvasPlay) });
+    });
+    responsiveVoice.speak(this.char);
+  };
 
 function generatePalette() {
 
@@ -84,7 +197,6 @@ function generatePalette() {
 
 };
 
-
 function boundCanvas() {
 	canvasPlay.on ("object:moving", function(event) {
 		     var el = event.target;
@@ -100,73 +212,6 @@ function boundCanvas() {
 	});
 };
 
-  var clearElement = document.getElementById('clear-img');
-  var percentage = 0.04
-
-  var clearButton = new fabric.Image(clearElement, {
-    button: true,
-    left: 80,
-    top: 20,
-    width: canvasPalette.width*(percentage*2.3),
-    height: canvasPalette.width*(percentage*2.3)
-  });
-
-  clearButton.lockMovementX = true;
-  clearButton.lockMovementY = true;
-  clearButton.lockScalingX = clearButton.lockScalingY = true;
-  clearButton.lockRotation = true;
-
-  canvasPalette.add(clearButton);
-
-  clearButton.on('selected', function() {
-    canvasPlay.clear();
-  });
-
-function createPencils(){
-  var greenPencilElement = document.getElementById('green-pencil');
-
-  var greenPencilButton = new fabric.Image(greenPencilElement, {
-    left: 850,
-    top: 10,
-    width: canvasPalette.width*(percentage*1.3),
-    height: canvasPalette.width*(percentage*1.3)
-  })
-
-  greenPencilButton.lockMovementX = true;
-  greenPencilButton.lockMovementY = true;
-  greenPencilButton.lockScalingX = greenPencilButton.lockScalingY = true;
-  greenPencilButton.lockRotation = true;
-
-  var redPencilElement = document.getElementById('red-pencil');
-
-  var redPencilButton = new fabric.Image(redPencilElement, {
-    left: 850,
-    top: 65,
-    width: canvasPalette.width*(percentage*1.3),
-    height: canvasPalette.width*(percentage*1.3)
-  })
-
-  redPencilButton.lockMovementX = true;
-  redPencilButton.lockMovementY = true;
-  redPencilButton.lockScalingX = redPencilButton.lockScalingY = true;
-  redPencilButton.lockRotation = true;
-
-	canvasPalette.add(greenPencilButton, redPencilButton);
-};
-
-
-  function trace(clone) {
-    greenPencilButton.on('selected', function(){
-      canvasPlay.isDrawingMode = true;
-      canvasPlay.freeDrawingBrush.color = 'red';
-      canvasPlay.freeDrawingBrush.width = 10;
-    });
-    redPencilButton.on('selected', function(){
-      canvasPlay.isDrawingMode = false;
-      clone.animate('left', '+=380', { onChange: canvasPlay.renderAll.bind(canvasPlay) });
-    });
-    responsiveVoice.speak(this.char);
-  };
 
 function wiggleLetter(){
 	canvasPlay.hoverCursor = 'pointer';
@@ -201,4 +246,8 @@ function wiggleLetter(){
  canvasPlay.on('mouse:down', function(e) { animate(e, 0); });
  canvasPlay.on('mouse:up', function(e) { animate(e, 0); });
 	};
+
+  canvasPlay.on('selected', function(){
+    responsiveVoice.speak(this.char);
+  });
 };
