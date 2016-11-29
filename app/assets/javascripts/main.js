@@ -1,6 +1,18 @@
 $( document ).on('turbolinks:load', function() {
 
   $(function(){
+    if($('body').is('.splash')){
+      splash();
+    }
+  });
+
+  $(function(){
+    if($('body').is('.home-page')){
+      home();
+    }
+  });
+
+  $(function(){
    if($('body').is('.write-game')){
      writeGame(createResponsiveCanvas());
    }
@@ -23,5 +35,6 @@ $( document ).on('turbolinks:load', function() {
       drawGame(createResponsiveCanvas());
     }
   });
+
 
 });
