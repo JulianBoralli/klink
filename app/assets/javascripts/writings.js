@@ -1,9 +1,5 @@
 function writeGame(ResponsiveCanvas) {
 
-  setTimeout(function() {
-	canvasPlay.renderAll();
-  }, 500);
-
   var canvasPlay = new ResponsiveCanvas('canvas-play');
 
   var canvasPalette = new ResponsiveCanvas('canvas-palette');
@@ -23,13 +19,11 @@ function writeGame(ResponsiveCanvas) {
   wiggleLetter();
 
 function generatePalette() {
-  canvasPlay.selection = false;
-  canvasPalette.renderAll();
-  canvasPalette.selectable = false;
-  canvasPalette.selection = false;
-};
+    canvasPlay.selection = false;
+    canvasPalette.selectable = false;
+    canvasPalette.selection = false;
 
-	var letterImages = $('#letter-images').children();
+  var letterImages = $('#letter-images').children();
 	var percentage = 0.04;
 
 	$.each(letterImages, function(i, el) {
@@ -79,8 +73,14 @@ function generatePalette() {
 			}
 		});
 		canvasPalette.add(letter);
-		canvasPalette.renderAll();
+		// canvasPalette.renderAll();
 	});
+
+  setTimeout(function() {
+    canvasPalette.renderAll();
+  }, 500);
+
+};
 
 
 function boundCanvas() {
@@ -99,6 +99,7 @@ function boundCanvas() {
 };
 
   var clearElement = document.getElementById('clear-img');
+  var percentage = 0.04
 
   var clearButton = new fabric.Image(clearElement, {
     button: true,
