@@ -1,7 +1,6 @@
 function drawGame(ResponsiveCanvas) {
 
     var canvasDraw = new ResponsiveCanvas('canvas-draw', {
-      // backgroundColor : "#fff"
     });
       canvasDraw.setDimensions({width: '98vw', height: '48vw'}, {
       cssOnly: true
@@ -13,13 +12,6 @@ function drawGame(ResponsiveCanvas) {
         $(img).on('click', function() {
           var imgURL = $(this).attr('src')
           $('body').css('backgroundImage', 'url('+ imgURL + ')');
-          // canvasDraw.setBackgroundImage($(this).attr('src'),
-          //   canvasDraw.renderAll.bind(canvasDraw), {
-          //   width: canvasDraw.width,
-          //   height: canvasDraw.height,
-          //   originX: 'left',
-          //   originY: 'top'
-          // });
         });
     });
 
@@ -38,8 +30,8 @@ function drawGame(ResponsiveCanvas) {
             $('#redo-btn').addClass('animated pulse').fadeIn();
             $('#clear-drawing-btn').addClass('animated pulse').fadeIn();
             clearDrawing.onclick = function() {
+              $(this).addClass('animated rubberBand');
               canvasDraw.clear();
-              // canvasDraw.setBackgroundColor('white');
             };
           };
         };
@@ -62,17 +54,16 @@ function drawGame(ResponsiveCanvas) {
       var isRedoing = false;
       var h = [];
 
-
       $(undoButton).click(function() {
+        $(this).addClass('animated rubberBand');
         if(canvasDraw._objects.length>0) {
           h.push(canvasDraw._objects.pop());
           canvasDraw.renderAll();
         };
       });
 
-
-
-      $(redoButton).on('click', function() {
+      $(redoButton).click(function() {
+        $(this).addClass('animated rubberBand');
         if(h.length>0) {
           isRedoing = true;
           canvasDraw.add(h.pop());
