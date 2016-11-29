@@ -3,7 +3,7 @@
 .home-container{
   margin: auto;
   padding-top: 5%;
-  width: 100vw;
+  width: auto;
   min-width: 375px;
   min-height: 667px;
   text-align: center;
@@ -13,6 +13,7 @@ body{
   background: #ed1c24;
   overflow: hidden;
   min-width: 50%;
+  text-align: center;
 }
 
 .hgame-logo{
@@ -25,12 +26,10 @@ body{
   margin: auto;
   height: 20vh;
   width: auto;
-  // margin-top: 20vh;
   text-align: center;
 }
 
 #home-logos{
   margin: auto;
-  // margin-top: -5%;
   text-align: center;
 }

@@ -1,4 +1,4 @@
-function splash(ResponsiveCanvas) {
+function splash() {
   var audio = new Audio('audio/type.wav');
   $(audio).prop("currentTime", 1);
   audio.play();

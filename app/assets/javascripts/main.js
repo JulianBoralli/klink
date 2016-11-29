@@ -2,7 +2,13 @@ $( document ).on('turbolinks:load', function() {
 
   $(function(){
     if($('body').is('.splash')){
-      splash(createResponsiveCanvas());
+      splash();
+    }
+  });
+
+  $(function(){
+    if($('body').is('.home-page')){
+      home();
     }
   });
 
@@ -29,5 +35,6 @@ $( document ).on('turbolinks:load', function() {
       drawGame(createResponsiveCanvas());
     }
   });
+
 
 });
