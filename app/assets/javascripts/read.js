@@ -37,8 +37,9 @@ function readGame(ResponsiveCanvas) {
 	// Configure Snapping and Intersecting
 	configureSnapIntersect();
 
-	// Wiggle Letter Effect
+	// Wiggle Effect
 	wiggleLetter();
+	wigglePalette()
 
 	// Create puppy and broom
 	// createPuppy();
@@ -469,6 +470,56 @@ function readGame(ResponsiveCanvas) {
 		// canvasPlay.renderAll();
 	};
 
+
+
+	function moveDog(dog) {
+		dog.bringToFront();
+		dog.animate('height', 500, {
+		  onChange: canvasPlay.renderAll.bind(canvasPlay),
+		  duration: 1000
+		}); 
+		dog.animate('width', 500, {
+		  onChange: canvasPlay.renderAll.bind(canvasPlay),
+		  duration: 1000
+		}); 
+		setTimeout(function() { 
+			console.log('timeout', dog);
+			dog.animate('height', 0, {
+			  onChange: canvasPlay.renderAll.bind(canvasPlay),
+			  duration: 1000
+			}); 
+			dog.animate('width', 0, {
+			  onChange: canvasPlay.renderAll.bind(canvasPlay),
+			  duration: 1000,
+			  onComplete: function() { canvasPlay.remove(dog); }
+			}); 
+		}, 1000);
+	};
+
+
+	function animateDog() {
+
+		var dogElement = document.getElementById('puppy-smiling-img');
+		
+		var dog = new fabric.Image(dogElement, {
+		  left: 500,
+		  top: 0,
+			width: 0,
+			height: 0
+		});
+
+		dog.lockMovementX = true;
+		dog.lockMovementY = true;
+		dog.lockScalingX = dog.lockScalingY = true;
+		dog.lockRotation = true;
+
+		canvasPlay.add(dog);
+		canvasPlay.renderAll();
+		
+		moveDog(dog);
+
+	};
+
 	function wiggleLetter() {
 		// letter wiggle
 		canvasPlay.hoverCursor = 'pointer';
@@ -506,6 +557,42 @@ function readGame(ResponsiveCanvas) {
 	};
 
 
+	function wigglePalette() {
+		
+		function animate(e, dir) {
+			if (e.target) {
+				fabric.util.animate({
+					startValue: e.target.get('scaleY'),
+					endValue: e.target.get('scaleY') + (dir ? 0 : -3 ),
+					duration: 100,
+					onChange: function(value) {
+						e.target.setAngle(value);
+						canvasPalette.renderAll();
+					},
+					onComplete: function() {
+						e.target.setCoords();
+					}
+				});
+				fabric.util.animate({
+					startValue: e.target.get('scaleX'),
+					endValue: e.target.get('scaleX') + (dir ?  3 : 0  ),
+					duration: 100,
+					onChange: function(value) {
+						e.target.scale(value);
+						canvasPalette.renderAll();
+					},
+					onComplete: function() {
+						e.target.setCoords();
+					}
+				});
+			}
+		};
+
+		canvasPalette.on('mouse:down', function(e) { animate(e); });
+		canvasPalette.on('mouse:up', function(e) { animate(e); });
+	};
+
+
 	function searchAjax(event, canvasPlay) {
 		console.log(canvasPlay);
 
@@ -530,15 +617,17 @@ function readGame(ResponsiveCanvas) {
 			dataType: 'json'
 		})
 		.done(function(response) {
+			console.log(response);
 			if (response[0] === response[1] || response[1] === "whoopsies") {
 				var textSpeak = JSON.stringify(response[1])
 				responsiveVoice.speak(textSpeak, "UK English Female");
+				return
+			} else if (response[1] === "") {
 				return
 			}
 
 			console.log('response:', response)
 			var textSpeak = JSON.stringify(response[1])
-			// function to call the APIs with response
 		
 			responsiveVoice.speak(textSpeak, "UK English Female");
 
@@ -549,14 +638,10 @@ function readGame(ResponsiveCanvas) {
 
 			addSticker(stickerElement, canvasPlay);
 
-
-			// canvasPlay.setActiveObject((canvasPlay.getObjects()[canvasPlay.getObjects().length - 1]));
-			// canvasPlay.renderAll();
 		})
 		.fail(function(error) {
 			console.log(error);
 			responsiveVoice.speak("Oh no!", "UK English Female");
-			// alert(error.status);
 		});
 	};
 
@@ -565,27 +650,22 @@ function readGame(ResponsiveCanvas) {
 
 		var sticker = new fabric.Image(stickerElement, {
 		  left: 750,
-      top: Math.floor((Math.random() * 500) + 1),
+      top: 250,
 			width: 100,
 			height: 100
 		});
 
-
 		sticker.hasControls = true;
 
-		canvasPlay.add(sticker);
+		animateDog();
 
-		function sleep(ms, callback) {
-	  	ms = ms || 0;
-	  	setTimeout(callback, ms);
-		}
-		sleep(1000, function() {
-  		console.log('sleeping');
-	 	});
+		setTimeout(function() { 
+			canvasPlay.add(sticker);
+		}, 1000);
 
 		setTimeout(function() { 
 			canvasPlay.renderAll();
-		}, 500);
+		}, 2000);
 		
 	};
 
