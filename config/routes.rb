@@ -13,4 +13,6 @@ Rails.application.routes.draw do
 
   get '/memory' => 'memory#index'
 
+  get '/math' => 'math#index'
+
 end
