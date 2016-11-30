@@ -1,6 +1,6 @@
 function mathGame(){
 
-var game = new Phaser.Game("100%","100%", Phaser.auto, 'math', {
+var game = new Phaser.Game(window.innerWidth, window.innerHeight, Phaser.auto, 'math', {
     preload: onPreload,
     create: onCreate,
     // resize:onResize
@@ -39,17 +39,9 @@ WebFontConfig = {
       }
     }
   }
-  // sets full screen
-  function goFullScreen(){
-    // setting a background color
-    // game.stage.backgroundColor = "#555555";
-    game.scale.pageAlignHorizontally = true;
-    game.scale.pageAlignVertically = true;
-    // using RESIZE scale mode
-    game.scale.scaleMode = Phaser.ScaleManager.RESIZE;
-    game.scale.setScreenSize(true);
-  }
+ 
   function onPreload() {
+    // responsiveScale();
     game.load.script('webfont', '//ajax.googleapis.com/ajax/libs/webfont/1.4.7/webfont.js');
     game.load.image("timebar", "/images/math/timebar.png");
     game.load.image("buttonmask", "/images/math/buttonmask.png");
@@ -60,9 +52,11 @@ WebFontConfig = {
     game.load.image("home", "images/home.png");
   }
   function onCreate() {
+    
+
     topScore = localStorage.getItem("topScore")==null?0:localStorage.getItem("topScore");
     // game.stage.backgroundColor = "#cccccc";
-    chalkBoard = game.add.sprite(1100,850,"background");
+    chalkBoard = game.add.sprite(1100, 850,"background");
     chalkBoard.x = 0;
     chalkBoard.y = 0;
     chalkBoard.height = game.height;
@@ -74,7 +68,8 @@ WebFontConfig = {
     gameOverSprite.animations.add('left', [0, 1, 2, 3, 4, 5, 6, 7, 8, 9,10,11,12,13], 10, true);
     replay = game.add.button(585,100,"replay",replay,this);
     replay.visable = false;
-    home = game.add.button(680,100, 'home', function onClick(){window.location.href ="/home"});
+    home = game.add.button(700,90, 'home', function onClick(){window.location.href ="/home"});
+    home.scale.setTo(0.2,0.2);
     for(var i=1;i<5;i++){
       sumsArray[i]=[[],[],[]];
       for(var j=1;j<=3;j++){
