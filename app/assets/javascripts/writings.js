@@ -146,6 +146,7 @@ function writeGame(ResponsiveCanvas) {
     }, 500);
   };
 
+
   function createPencils(clone){
     var percentage = 0.04
     var greenPencilElement = document.getElementById('green-pencil');
@@ -190,7 +191,6 @@ function writeGame(ResponsiveCanvas) {
       canvasPlay.isDrawingMode = false;
       clone.animate('left', '+=380', { onChange: canvasPlay.renderAll.bind(canvasPlay) });
     });
-    responsiveVoice.speak(this.char);
   };
 
   function boundCanvas() {
