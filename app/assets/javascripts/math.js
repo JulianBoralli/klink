@@ -66,9 +66,9 @@ WebFontConfig = {
     gameOverSprite.visible = false;
     gameOverSprite.frame = 0;
     gameOverSprite.animations.add('left', [0, 1, 2, 3, 4, 5, 6, 7, 8, 9,10,11,12,13], 10, true);
-    replay = game.add.button(585,100,"replay",replay,this);
+    replay = game.add.button(game.width*.6, game.height*.1,"replay",replay,this);
     replay.visable = false;
-    home = game.add.button(700,90, 'home', function onClick(){window.location.href ="/home"});
+    home = game.add.button(game.width*.75, game.height*.1, 'home', function onClick(){window.location.href ="/home"});
     home.scale.setTo(0.2,0.2);
     for(var i=1;i<5;i++){
       sumsArray[i]=[[],[],[]];
@@ -76,17 +76,18 @@ WebFontConfig = {
         buildThrees(j,1,i,j);
       }
     }
-    questionText = game.add.text(485,300,"-");
+    questionText = game.add.text(game.width*.5,game.height*.3,"-");
 
     questionText.anchor.set(0.5);
-    scoreText = game.add.text(100,80,"-");
+    scoreText = game.add.text(game.width*.1,game.height*.10,"-");
 
 
       for(var i=0;i<3;i++){
 
-      var numberButton = game.add.button(285,380+i*75,"buttons",checkAnswer,this).frame=i;
+      var numberButton = game.add.button(game.width*.3,game.height*.4+i*75,"buttons",checkAnswer,this).frame=i;
+      
     }
-    numberTimer = game.add.sprite(285,380,"timebar");
+    numberTimer = game.add.sprite(game.width*.3,game.height*.4,"timebar");
     nextNumber();
   }
 
@@ -142,7 +143,7 @@ WebFontConfig = {
       buttonMask.destroy();
                game.tweens.removeAll();
     }
-    buttonMask = game.add.graphics(285, 380);
+    buttonMask = game.add.graphics(game.width*.3,game.height*.4);
     buttonMask.beginFill(0xffffff);
     buttonMask.drawRect(0, 0, 400, 200);
     buttonMask.endFill();
