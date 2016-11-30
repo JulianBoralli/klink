@@ -102,7 +102,8 @@ WebFontConfig = {
   function gameOver(gameOverString){
     // game.stage.backgroundColor = "#ff0000";
     console.log(gameOverString)
-    questionText.text = gameOverString;
+    questionText.text = "Wrong Answer!";
+    questionText.addColor('#ff471a',0);
           isGameOver = true;
     localStorage.setItem("topScore",Math.max(score,topScore));
     numberTimer.destroy();
