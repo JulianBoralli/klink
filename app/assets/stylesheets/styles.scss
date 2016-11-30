@@ -1,3 +1,7 @@
+body {
+  font-family: 'Arial Rounded MT Bold';
+}
+
 .logo {
   width: 8%;
 }
@@ -11,10 +15,112 @@
 }
 
 canvas {
-  border: 1px solid #000000;
-  padding-bottom: 10px;
+  /*border: 1px solid #000000;*/
+  /*padding-bottom: 10px;*/
   display: inline;
+}
+
+.game-name {
+  text-align: center;
 }
 
 
 
+.read-game {
+  background: url("https://s-media-cache-ak0.pinimg.com/originals/d8/d5/9f/d8d59f1836f374864bb58a2a68c6c304.png");
+  background-repeat: no-repeat;
+  background-size: 100% auto;
+}
+
+
+
+
+/* DRAWING */
+
+body {
+  background-repeat: no-repeat;
+  background-size: 100% 100vh;
+
+}
+
+.draw-game {
+  background-color: #72DEEA;
+  overflow: hidden;
+}
+
+.drawing-options {
+  text-align: center;
+  margin-top: 3%;
+}
+
+#drawing-mode-options label {
+  font-size: 200%;
+}
+
+#drawing-mode-options {
+  display: inline-block;
+  background-color: white;
+  border: 1px solid black;
+  margin-right: 5%;
+  margin-left: 5%;
+  padding-bottom: 1%;
+  padding-right: .5%;
+  padding-left: .5%;
+}
+
+#drawing-mode {
+  display: inline-block;
+  vertical-align: top;
+}
+
+#drawing-mode-btn {
+  width: 120px;
+}
+
+#undo-btn {
+  display: none;
+  width: 120px;
+}
+
+#redo-btn {
+  display: none;
+  width: 120px;
+}
+
+#clear-drawing-btn {
+  display: none;
+  width: 120px;
+}
+
+.drawing-bg-images-header {
+  font-size: 150%;
+  position: absolute;
+  margin-left: -6%;
+}
+
+#drawing-bg-images {
+  display: inline-block;
+  vertical-align: top;
+  text-align: center;
+  background-color: white;
+  border: 1px solid black;
+  width: 40%;
+  min-width: 360px;
+  height: 10em;
+  overflow: auto;
+  white-space: nowrap;
+}
+
+.drawing-bg {
+  width: 12em;
+  height: 7em;
+  padding: 1%;
+}
+
+
+// writing
+.write-game {
+  background: url("http://clipartix.com/wp-content/uploads/2016/06/Chalkboard-blackboard-clipart-2-new-hd-template-images.jpg");
+  background-repeat: no-repeat;
+  background-size: 100% auto;
+}

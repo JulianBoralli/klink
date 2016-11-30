@@ -1,8 +1,6 @@
-var ResponsiveCanvas;
+function createResponsiveCanvas() {
 
- $( document ).on('turbolinks:load', function() {
-
-  ResponsiveCanvas = fabric.util.createClass(fabric.Canvas, {
+  var ResponsiveCanvas = fabric.util.createClass(fabric.Canvas, {
     getPointer: function () {
         this.calcOffset();
         return this.callSuper('getPointer');
@@ -63,6 +61,6 @@ var ResponsiveCanvas;
       return this;
     }
   });
+  return ResponsiveCanvas
 
-})
-  
+};
