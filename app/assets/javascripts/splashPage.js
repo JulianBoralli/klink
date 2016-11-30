@@ -1,4 +1,7 @@
-$( document ).on('turbolinks:load', function() {
+function splash() {
+  var audio = new Audio('audio/type.wav');
+  $(audio).prop("currentTime", 1);
+  audio.play();
 
   $('#game-logo').hide();
 
@@ -6,6 +9,8 @@ $( document ).on('turbolinks:load', function() {
     $('#fade').fadeTo(0).hide();
     var fade = $('#banner').fadeIn('slow')
     fade.addClass('small').animate({'margin-top':'0'})
+    var swoosh = new Audio('audio/swoosh.wav');
+    swoosh.play();
   }, 2400);
 
   setTimeout(function(){
@@ -19,6 +24,11 @@ $( document ).on('turbolinks:load', function() {
     }, 300)
   });
 
+  $('.game-logo').on('click', function(){
+    $(this).addClass('animated tada')
+      setTimeout(function(){
+        $('#banner').removeClass('animated tada')
+    }, 300)
+  });
 
-
-});
+};

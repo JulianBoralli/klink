@@ -27,6 +27,7 @@ gem 'jbuilder', '~> 2.5'
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 gem 'httparty'
+gem 'phaser-rails'
 
 
 # Use Capistrano for deployment
@@ -44,7 +45,13 @@ group :development, :test do
   gem 'pry-byebug'
   gem 'binding_of_caller'
   gem 'awesome_print'
-
+  gem 'jasmine'
+  gem 'jasminerice', github: 'bradphelan/jasminerice'
+  gem 'rspec-rails'
+  gem 'capybara'
+  gem 'selenium-webdriver'
+  gem 'database_cleaner'
+  gem 'rspec-html-matchers'
 end
 
 group :production do
