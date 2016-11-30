@@ -57,6 +57,7 @@ WebFontConfig = {
     game.load.spritesheet('myguy', '/images/math/dance.png', 70, 120);
     game.load.image("background", "/images/math/board2.png");
     game.load.image("replay", "images/math/replay.png");
+    game.load.image("home", "images/home.png");
   }
   function onCreate() {
     topScore = localStorage.getItem("topScore")==null?0:localStorage.getItem("topScore");
@@ -73,7 +74,7 @@ WebFontConfig = {
     gameOverSprite.animations.add('left', [0, 1, 2, 3, 4, 5, 6, 7, 8, 9,10,11,12,13], 10, true);
     replay = game.add.button(585,100,"replay",replay,this);
     replay.visable = false;
-
+    home = game.add.button(680,100, 'home', function onClick(){window.location.href ="/home"});
     for(var i=1;i<5;i++){
       sumsArray[i]=[[],[],[]];
       for(var j=1;j<=3;j++){
