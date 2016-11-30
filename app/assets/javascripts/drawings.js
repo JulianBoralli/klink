@@ -36,9 +36,9 @@ function drawGame(ResponsiveCanvas) {
           };
         };
 
-      canvasDraw.on('path:created', function() {
-        updateComplexity();
-      });
+      // canvasDraw.on('path:created', function() {
+      //   updateComplexity();
+      // });
 
       // Undo & Redo Opts
       var undoButton = document.getElementById('undo-btn');
