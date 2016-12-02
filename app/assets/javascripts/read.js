@@ -445,7 +445,7 @@ function readGame(ResponsiveCanvas) {
 		}, 1000);
 
 		setTimeout(function() {
-			var audio = new Audio('audio/Swish.m4a');
+			var audio = new Audio('audio/brooom1.mp3');
 			audio.play();
 		}, 1500);
 	};
