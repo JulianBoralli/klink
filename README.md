@@ -6,8 +6,8 @@ Recognizing that children learn through repetition and feedback, Klink is a coll
 
 ## Tech Stack:
 Ruby on Rails,
-Fabric JS.
-JavaScript.
+Fabric JS,
+JavaScript,
 HTML and CSS
 
 ## Contributors:
