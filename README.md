@@ -1,4 +1,4 @@
-![alt tag](http://imgur.com/SctCHdi)
+![alt tag](http://i.imgur.com/SctCHdi.png)
 
 ### Klink
 
